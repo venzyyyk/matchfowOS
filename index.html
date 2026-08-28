@@ -865,8 +865,6 @@ function vCfg(){
     ${T.status==='live'?'<button class="btn" data-act="close" type="button">Закрыть турнир и расставить места</button>':''}
     <button class="btn" data-act="new" type="button">Новый турнир (сбросить сетку)</button>
     <button class="btn bad" data-act="wipe" type="button">Удалить всех игроков и данные</button></div></div></div>
-  <div class="card"><div class="card-h"><span class="h-sec">Как это хранится</span></div><div class="card-b">
-   <div class="note">Базы нет: всё живёт прямо в этой странице и сохраняется при каждом действии судьи. Кто открыл ссылку — видит тот же турнир. Менять что-либо может только тот, у кого есть доступ на редактирование.</div></div></div>
  </div></div>`;
 }
 const numOr=(v,def)=>{const n=parseFloat(String(v).replace(',','.'));return isNaN(n)?def:n};
