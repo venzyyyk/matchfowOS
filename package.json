@@ -1,7 +1,10 @@
 {
   "name": "matchflow-os",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "MatchFlow OS — турнирная система VHC: заявки, жеребьёвка, судейство",
-  "engines": { "node": ">=18" }
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "mongodb": "^6.10.0"
+  }
 }
