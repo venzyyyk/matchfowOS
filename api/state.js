@@ -19,8 +19,9 @@ module.exports = async (req, res) => {
       if (!S.isJudge(req)) return res.status(401).json({ error: 'pin' });
       const b = S.body(req);
       if (b.check) return res.status(200).json({ ok: true });
-      if (!b.state || typeof b.state !== 'object' || !b.state.t || !Array.isArray(b.state.players))
-        return res.status(400).json({ error: 'bad_state' });
+      const ok = b.state && typeof b.state === 'object' && Array.isArray(b.state.players) &&
+        (Array.isArray(b.state.tours) || b.state.t);
+      if (!ok) return res.status(400).json({ error: 'bad_state' });
 
       const cur = await S.read();
       if (typeof b.rev === 'number' && cur.rev > b.rev)
