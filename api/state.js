@@ -26,9 +26,12 @@ module.exports = async (req, res) => {
       if (typeof b.rev === 'number' && cur.rev > b.rev)
         return res.status(409).json({ rev: cur.rev, state: cur.state });
 
-      const next = { rev: cur.rev + 1, state: b.state, at: Date.now() };
-      await S.write(next);
-      return res.status(200).json({ rev: next.rev });
+      const w = await S.write(cur.rev, b.state);
+      if (!w.ok) {
+        const fresh = await S.read();
+        return res.status(409).json({ rev: fresh.rev, state: fresh.state });
+      }
+      return res.status(200).json({ rev: w.rev });
     }
 
     res.setHeader('Allow', 'GET, POST');
