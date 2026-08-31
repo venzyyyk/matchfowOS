@@ -69,7 +69,9 @@ h1,h2,h3{margin:0;font-family:var(--disp);font-weight:600;letter-spacing:-.02em;
 .main{grid-column:2;overflow:auto;min-width:0}
 .wrap{padding:20px 22px 70px;max-width:1500px}
 .judgebar{grid-column:2;display:none}
-body.adm .judgebar{display:flex;align-items:center;gap:10px;padding:7px 16px;background:linear-gradient(90deg,rgba(255,122,26,.16),transparent);border-bottom:1px solid rgba(255,122,26,.3);font-size:12px}
+body.adm .judgebar{display:flex;align-items:center;gap:10px;padding:7px 16px;background:linear-gradient(90deg,rgba(255,122,26,.16),transparent);border-bottom:1px solid rgba(255,122,26,.3);font-size:12px;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.judgebar::-webkit-scrollbar{display:none}
+.judgebar>*{flex:none}
 body.adm .app{grid-template-rows:var(--top) auto 1fr}
 body.adm .judgebar{grid-row:2} body.adm .main{grid-row:3} body.adm .rail{grid-row:1/4}
 
@@ -222,7 +224,9 @@ select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50
  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:var(--top) 1fr}
  .rail{position:fixed;left:0;right:0;bottom:0;top:auto;grid-row:auto!important;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line);padding:4px 2px;background:rgba(10,9,9,.97);backdrop-filter:blur(10px)}
  .rail .logo,.rail-sp{display:none}
- .navb{width:auto;flex:1;padding:6px 0}
+ .navb{width:auto;flex:1 1 0;min-width:0;padding:6px 2px;overflow:hidden}
+ .navb span{font-size:8.5px;letter-spacing:.02em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .navb svg{width:17px;height:17px}
  .navb.on::before{left:14px;right:14px;top:-4px;bottom:auto;width:auto;height:2px}
  .topbar,.main,.judgebar{grid-column:1}
  .wrap{padding:14px 13px 92px}
@@ -243,13 +247,15 @@ select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50
 </style>
 
 <div id="root"></div>
-<script id="app-state" type="application/json">{"v": 3, "build": "20260831-1034", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": []}</script>
+<script id="app-state" type="application/json">{"v": 4, "build": "20260831-1101", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
 <script id="app-code">
 'use strict';
 /* ============================================================
-   MATCHFLOW OS · VENARION HUMAN CORE — этап 1
-   Мультитурниры, 9 статусов, ручная сетка, MF-ID, замена по ID,
-   фора и стол при запуске матча.
+   MATCHFLOW OS · VENARION HUMAN CORE — этап 2
+   Этап 1: мультитурниры, 8 статусов, ручная сетка, MF-ID,
+           замена по ID, фора и стол при запуске матча.
+   Этап 2: MATCH RATING (Elo/Fargo), RELIABILITY, карьера игрока,
+           спортивный паспорт, таблица рейтинга, видео-столы.
    ============================================================ */
 
 const DEF_CATS=[
@@ -275,11 +281,12 @@ let ST=JSON.parse(document.getElementById('app-state').textContent);
 let ADMIN=sessionStorage.getItem('mfos-adm')==='1';
 let CAP=null,LOCAL=false,SYNC='ok',pubT=null;
 let MODE='local',REV=0,PIN=sessionStorage.getItem('mfos-pin')||'',pollT=null;
-const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:''};
+const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:''};
 
 /* ---------- МИГРАЦИЯ СТАРОГО СОСТОЯНИЯ ---------- */
 function migrate(s){
- if(s.v>=3) return s;
+ if(s.v>=4){s.hist=s.hist||[];return s}
+ if(s.v===3){s.v=4;s.hist=s.hist||[];return s}
  const t=s.t||{};
  const tour={id:'t1',name:t.name||'Турнир',sub:t.sub||'',disc:t.disc||'Вільна піраміда',
   venue:t.venue||'',dates:t.dates||'',fee:t.fee||'',prize:t.prize||'',
@@ -291,7 +298,7 @@ function migrate(s){
   players.push({id:p.id,mid:p.mid||null,name:p.name,city:p.city||'',club:p.club||'',contact:p.contact||'',cat:p.cat|0});
   tour.entries.push({p:p.id,st:p.st||'new',seed:p.seed||null,w:p.w||0,l:p.l||0,place:p.place||null});
  });
- return {v:3,cats:s.cats||DEF_CATS,players,tours:[tour],cur:'t1',
+ return {v:4,cats:s.cats||DEF_CATS,players,tours:[tour],cur:'t1',hist:[],
   pin:s.pin||'2604',midPrefix:s.midPrefix||'123',midSeq:s.midSeq||0,arch:s.arch||[]};
 }
 ST=migrate(ST);
@@ -308,6 +315,7 @@ const E=()=>{const t=T();return t?t.entries:[]};
 const ent=pid=>E().find(e=>e.p===pid);
 const initials=n=>String(n).trim().split(/\s+/).map(x=>x[0]||'').join('').slice(0,2).toUpperCase();
 const short=n=>{const s=String(n).trim().split(/\s+/);return s.length>1?s[1]+' '+s[0][0]+'.':n};
+const nmOf=id=>{if(id==='BYE')return 'свободный проход';const p=P(id);return p?short(p.name):'—'};
 const now=()=>new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'});
 const uid=p=>p+Math.random().toString(36).slice(2,8);
 const approved=()=>E().filter(e=>e.st==='ok');
@@ -337,6 +345,75 @@ function pline(id,sub){
  return `<span class="pl"><span class="av" style="background:${c}22;color:${c};border:1px solid ${c}44">${esc(initials(p.name))}</span>
   <span style="min-width:0"><span class="nm">${esc(p.name)}</span>${sub?`<span class="sub" style="display:block">${esc(sub)}</span>`:''}</span></span>`;
 }
+
+/* ============================================================
+   MATCH RATING — реальная сила игрока (этап 2)
+   Философия Elo/Fargo: обыграл сильного — большой прирост,
+   обыграл намного слабее — маленький; проиграл слабому — больно.
+   ============================================================ */
+const RBASE=1000,RSTEP=55,RMIN=300;
+/* стартовый рейтинг = от разряда, середина шкалы разрядов = RBASE */
+const r0=p=>Math.round(RBASE+(((p&&p.cat)|0)-(CATS().length-1)/2)*RSTEP);
+const RT=p=>p?(typeof p.r==='number'?p.r:r0(p)):0;
+/* надёжность: сколько матчей система про игрока знает */
+const relOf=p=>Math.min(99,Math.round(100*(1-Math.exp(-(((p&&p.rm)|0))/18))));
+const kOf=p=>40-24*(relOf(p)/100);           /* новичок двигается быстро, ветеран — медленно */
+const expect=(ra,rb)=>1/(1+Math.pow(10,(rb-ra)/400));
+const relTag=p=>{const r=relOf(p);return r>=80?'ok':r>=45?'st':''};
+
+/* записать результат матча в рейтинг */
+function rate(id){
+ const t=T(),m=MM(id);
+ if(!m||m.bye||m.rated)return;
+ const w=winId(m),l=losId(m);
+ if(!w||!l||w==='BYE'||l==='BYE')return;
+ const pw=P(w),pl=P(l);if(!pw||!pl)return;
+ if(typeof pw.r!=='number')pw.r=r0(pw);
+ if(typeof pl.r!=='number')pl.r=r0(pl);
+ const bw=pw.r,bl=pl.r;
+ const race=t.race||5,gap=Math.abs(m.sa-m.sb);
+ const mf=Math.max(.8,Math.min(1.3,.85+.45*(gap/race)));   /* разгромная победа весит чуть больше */
+ const K=(kOf(pw)+kOf(pl))/2;
+ const d=Math.max(1,Math.round(K*mf*(1-expect(bw,bl))));
+ pw.r=bw+d;pl.r=Math.max(RMIN,bl-d);
+ pw.rm=(pw.rm|0)+1;pl.rm=(pl.rm|0)+1;
+ m.rated={w,l,d,bw,bl};
+ ST.hist=ST.hist||[];
+ ST.hist.unshift({tid:t.id,tn:t.name,mid:id,lab:labOf(id),w,l,
+  sw:Math.max(m.sa,m.sb),sl:Math.min(m.sa,m.sb),d,rw:pw.r,rl:pl.r,at:Date.now()});
+ if(ST.hist.length>1500)ST.hist.pop();
+ return d;
+}
+function unrate(id){
+ const m=MM(id),x=m&&m.rated;if(!x)return;
+ const pw=P(x.w),pl=P(x.l);
+ if(pw){pw.r=x.bw;pw.rm=Math.max(0,(pw.rm|0)-1)}
+ if(pl){pl.r=x.bl;pl.rm=Math.max(0,(pl.rm|0)-1)}
+ ST.hist=(ST.hist||[]).filter(h=>!(h.tid===T().id&&h.mid===id));
+ m.rated=null;
+}
+/* карьера игрока по всей истории, а не по одному турниру */
+function career(pid){
+ const h=(ST.hist||[]).filter(x=>x.w===pid||x.l===pid);
+ const n=h.length,wins=h.filter(x=>x.w===pid).length;
+ let form=0;h.slice(0,10).forEach(x=>form+=x.w===pid?x.d:-x.d);
+ let best=0,cur=0;
+ for(let i=h.length-1;i>=0;i--){if(h[i].w===pid){cur++;if(cur>best)best=cur}else cur=0}
+ let streak=0,sw=n&&h[0].w===pid;
+ for(let i=0;i<n;i++){if((h[i].w===pid)===sw)streak++;else break}
+ return {n,wins,losses:n-wins,wr:n?Math.round(wins*1000/n)/10:0,form,best,streak,sw,h};
+}
+/* сколько рейтинга разыгрывается: сколько получит A при победе / сколько получит B */
+function stake(m){
+ const t=T(),pa=P(m.a),pb=P(m.b);
+ if(!pa||!pb)return '—';
+ const ra=RT(pa),rb=RT(pb),K=(kOf(pa)+kOf(pb))/2,mf=1.07;
+ const da=Math.max(1,Math.round(K*mf*(1-expect(ra,rb))));
+ const db=Math.max(1,Math.round(K*mf*(1-expect(rb,ra))));
+ return '+'+da+' / +'+db;
+}
+const ranked=()=>ST.players.slice().sort((a,b)=>RT(b)-RT(a)||(b.rm|0)-(a.rm|0)||a.name.localeCompare(b.name,'uk'));
+const rankOf=pid=>ranked().findIndex(p=>p.id===pid)+1;
 
 /* ---------- ГЕНЕРАТОР СЕТКИ ---------- */
 function buildSpec(N){
@@ -470,19 +547,23 @@ function callTable(id,tbl,hTo,hN){
 function finish(id){
  const m=MM(id),t=T();if(m.st==='done')return;
  if(m.sa===m.sb)return toast('Ничьих не бывает');
- m.st='done';m.at=now();m.tbl=null;m.n=++t.seq;
+ m.st='done';m.at=now();m.ptbl=m.tbl;m.tbl=null;m.n=++t.seq;
  const w=winId(m),l=losId(m),ew=ent(w),el=ent(l);
  if(ew)ew.w=(ew.w||0)+1; if(el)el.l=(el.l||0)+1;
+ const d=rate(id);
  advance(id);
- feed(`<b>${esc(short(P(w).name))}</b> обыграл ${esc(short(P(l).name))} — <span class="num">${m.sa}:${m.sb}</span> · ${labOf(id)}`);
- toast(`Результат внесён: ${short(P(w).name)} ${m.sa}:${m.sb}`);
+ feed(`<b>${esc(short(P(w).name))}</b> обыграл ${esc(short(P(l).name))} — <span class="num">${Math.max(m.sa,m.sb)}:${Math.min(m.sa,m.sb)}</span> · ${labOf(id)}${d?` · рейтинг <span class="num" style="color:var(--ok,#7ED9A0)">+${d}</span> / <span class="num" style="color:var(--bad,#E2695E)">−${d}</span>`:''}`);
+ toast(`Результат внесён: ${short(P(w).name)} ${Math.max(m.sa,m.sb)}:${Math.min(m.sa,m.sb)}${d?` · +${d} рейтинга`:''}`);
  save();render();openMatch(id);
 }
 function undo(id){
  const m=MM(id),t=T();if(m.st!=='done'||m.bye)return;
  const w=winId(m),l=losId(m),ew=ent(w),el=ent(l);
  if(ew)ew.w=Math.max(0,(ew.w||0)-1); if(el)el.l=Math.max(0,(el.l||0)-1);
- m.st='live';m.tbl=null;
+ unrate(id);
+ m.st='live';
+ const busy=ids().filter(i=>i!==id&&MM(i).st==='live').map(i=>MM(i).tbl);
+ m.tbl=(m.ptbl&&busy.indexOf(m.ptbl)<0)?m.ptbl:null;
  spec().spec.forEach(s=>{const x=t.br.m[s[0]];
   if(s[3]&&s[3].split(':')[0]===id)x.a=null;
   if(s[4]&&s[4].split(':')[0]===id)x.b=null});
@@ -502,8 +583,9 @@ function closeTour(){
  const pl=places();
  pl.forEach((id,i)=>{const e=ent(id);if(e)e.place=i+1});
  t.status='done';
+ const ch=P(pl[0]);if(ch)ch.tw=(ch.tw|0)+1;
  ST.arch=ST.arch||[];
- ST.arch.unshift({name:t.name,date:t.dates,podium:pl.slice(0,3).map(id=>P(id)?P(id).name:'—')});
+ ST.arch.unshift({name:t.name,date:t.dates,tid:t.id,podium:pl.slice(0,3).map(id=>P(id)?P(id).name:'—')});
  feed(`Турнир завершён. Победитель — <b>${esc(P(pl[0])?P(pl[0]).name:'—')}</b>`);
  toast('Турнир закрыт');save();go('tour');
 }
@@ -527,7 +609,7 @@ function swapById(a,b){
 function newTour(){
  const id=uid('t');
  ST.tours.unshift({id,name:'Новый турнир',sub:'',disc:'Вільна піраміда',venue:'',dates:'',
-  fee:'',prize:'',race:5,tables:4,video:'',status:'planned',pub:false,
+  fee:'',prize:'',race:5,tables:4,video:'',vt:'',status:'planned',pub:false,
   entries:[],br:null,seq:0,feed:[{t:now(),txt:'Турнир создан'}]});
  ST.cur=id;toast('Турнир создан');save();go('cfg');
 }
@@ -702,11 +784,13 @@ const IC={
  bracket:'<path d="M3 5h5l2 3M3 19h5l2-3M10 8h5v8h-5M15 12h6"/>',
  board:'<rect x="2.5" y="5.5" width="19" height="13" rx="2"/><circle cx="8" cy="12" r="1.6"/><circle cx="15.5" cy="9.6" r="1.6"/>',
  people:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M16 5.5a3 3 0 0 1 0 5.6M17.5 20c0-2.4-.8-3.9-2-4.8"/>',
+ rating:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
  cfg:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>'
 };
-const NAV=()=>[['tours','Турниры'],['tour','Турнир'],['bracket','Сетка'],['board','Табло'],['people','Игроки']].concat(ADMIN?[['cfg','Судейская']]:[]);
+const NAV=()=>[['tours','Турниры'],['tour','Турнир'],['bracket','Сетка'],['board','Табло'],['rating','Рейтинг'],['people','Игроки']].concat(ADMIN?[['cfg','Судейская']]:[]);
+const vtOf=t=>String((t&&t.vt)||'').split(/[^0-9]+/).filter(Boolean).map(Number);
 const liveM=()=>T()&&T().br?ids().filter(i=>MM(i).st==='live'):[];
-const queueM=()=>T()&&T().br?ids().filter(i=>{const m=MM(i);return m.st==='pending'&&m.a&&m.b}):[];
+const queueM=()=>T()&&T().br?ids().filter(i=>{const m=MM(i);return m.st==='pending'&&m.a&&m.b&&m.a!=='BYE'&&m.b!=='BYE'}):[];
 const freeT=()=>{const b=liveM().map(i=>MM(i).tbl),o=[];for(let t=1;t<=T().tables;t++)if(b.indexOf(t)<0)o.push(t);return o};
 const doneN=()=>T()&&T().br?ids().filter(i=>MM(i).st==='done').length:0;
 function tbdText(id,side){
@@ -914,18 +998,19 @@ function vBoard(){
  const cards=[];
  for(let n=1;n<=t.tables;n++){
   const id=live.find(i=>MM(i).tbl===n);
+  const cam=vtOf(t).indexOf(n)>=0?'<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)" title="Стол с трансляцией">● LIVE CAM</span>':'';
   if(!id){const nx=q[fr.indexOf(n)];
-   cards.push(`<div class="tbl" style="min-height:210px"><div class="th"><span class="tno">Стол ${n}</span><span class="sp"></span><span class="chip ok">свободен</span></div>
-    <div class="free" style="flex:1;display:grid;place-items:center">${nx?`${esc(short(P(MM(nx).a).name))} — ${esc(short(P(MM(nx).b).name))}<div class="dim" style="font-size:11px;margin-top:4px">${labOf(nx)}</div>`:'Нет матчей в очереди'}</div>
+   cards.push(`<div class="tbl" style="min-height:210px"><div class="th"><span class="tno">Стол ${n}</span>${cam}<span class="sp"></span><span class="chip ok">свободен</span></div>
+    <div class="free" style="flex:1;display:grid;place-items:center">${nx?`${esc(nmOf(MM(nx).a))} — ${esc(nmOf(MM(nx).b))}<div class="dim" style="font-size:11px;margin-top:4px">${labOf(nx)}</div>`:'Нет матчей в очереди'}</div>
     ${nx&&ADMIN?`<button class="btn pri" data-call="${nx}" type="button">Запустить на стол ${n}</button>`:''}</div>`);continue}
   const m=MM(id);
   const side=(pid,sc,other)=>{const p=P(pid),c=catOf(p).c,h=m.h&&m.h.to===pid?`<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)">фора +${m.h.n}</span>`:'';
    return `<div class="side" style="padding:11px 0;border-top:1px solid var(--line)">
     <span class="av" style="width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;background:${c}22;color:${c};border:1px solid ${c}44">${esc(initials(p.name))}</span>
     <span style="min-width:0"><div style="font-family:var(--disp);font-size:14px;font-weight:600">${esc(p.name)}</div>
-     <div class="row" style="gap:8px;margin-top:3px">${catBadge(p,12)}${h}</div></span>
+     <div class="row" style="gap:8px;margin-top:3px">${catBadge(p,12)}<span class="num dim" style="font-size:11px">${RT(p)}</span>${h}</div></span>
     <span class="sp"></span><span class="sc ${sc>other?'lead':''}" style="font-size:34px">${sc}</span></div>`};
-  cards.push(`<div class="tbl busy" style="min-height:210px"><div class="th"><span class="tno">Стол ${n}</span>
+  cards.push(`<div class="tbl busy" style="min-height:210px"><div class="th"><span class="tno">Стол ${n}</span>${cam}
     <span class="chip live"><span class="dot"></span>в игре</span><span class="sp"></span><span class="dim" style="font-size:11.5px">${labOf(id)}</span></div>
    ${side(m.a,m.sa,m.sb)}${side(m.b,m.sb,m.sa)}
    <div class="row" style="gap:14px">${pips(m.sa)}<span class="dim" style="font-size:11px">партии</span>${pips(m.sb)}</div>
@@ -947,6 +1032,51 @@ function vBoard(){
 }
 
 /* ---------- ИГРОКИ ---------- */
+/* ---------- РЕЙТИНГ ---------- */
+const relBar=p=>{const r=relOf(p);
+ return `<span class="row" style="gap:7px"><span style="width:54px;height:5px;border-radius:3px;background:rgba(255,214,170,.12);overflow:hidden;display:inline-block">
+  <span style="display:block;height:100%;width:${r}%;background:${r>=80?'#7ED9A0':r>=45?'#F0983F':'#8AA6B6'}"></span></span>
+  <span class="num dim" style="font-size:11.5px">${r}%</span></span>`};
+const formTag=f=>f>0?`<span class="num" style="color:#7ED9A0">+${f}</span>`:f<0?`<span class="num" style="color:#E2695E">${f}</span>`:'<span class="dim">—</span>';
+
+function vRating(){
+ const list=ranked(),played=list.filter(p=>(p.rm|0)>0).length;
+ const q=(S.rq||'').toLowerCase().trim();
+ return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">MATCHFLOW RATING</div>
+   <h1 class="h-page" style="margin-top:5px">Рейтинг силы</h1></div><span class="sp"></span>
+   <span class="chip">${played} из ${list.length} с матчами</span></div>
+ <div class="card" style="margin-bottom:14px"><div class="card-b" style="padding-top:14px">
+  <div class="row wr" style="gap:22px;align-items:flex-start">
+   <div style="flex:1;min-width:240px"><div class="h-sec">Как это считается</div>
+    <p class="mut" style="margin-top:7px;font-size:12.5px;line-height:1.65">
+     Только результаты матчей — ни персонажей, ни бонусов. Обыграл сильного — большой прирост,
+     обыграл заведомо слабее — маленький. Проиграл сильному — потеря небольшая, проиграл слабому — заметная.
+     Разгромный счёт весит чуть больше, чем победа на последнем шаре.</p></div>
+   <div style="flex:1;min-width:240px"><div class="h-sec">Надёжность</div>
+    <p class="mut" style="margin-top:7px;font-size:12.5px;line-height:1.65">
+     Показывает, насколько рейтингу можно верить. У новичка он прыгает на десятки пунктов за матч,
+     у игрока с сотней матчей — на единицы. 18 сыгранных матчей ≈ 63%, 40 ≈ 89%.
+     Стартовое значение берётся от разряда.</p></div></div></div></div>
+ <div class="card"><div class="card-h"><span class="h-sec">Таблица</span><span class="sp"></span>
+   <input class="inp" id="rq" placeholder="Поиск игрока" style="max-width:220px;padding:6px 10px" value="${esc(S.rq||'')}"></div>
+  <div class="card-b" style="padding-top:12px"><div class="scrollx"><table class="t" id="rtab">
+  <thead><tr><th style="width:44px">№</th><th>Игрок</th><th>Разряд</th><th style="text-align:right">Рейтинг</th>
+   <th>Надёжность</th><th style="text-align:center">Матчи</th><th style="text-align:center">W — L</th>
+   <th style="text-align:right">Форма</th><th style="text-align:center">Титулы</th></tr></thead>
+  <tbody>${list.map((p,i)=>{const c=career(p.id),hid=q&&(p.name+' '+(p.club||'')+' '+(p.mid||'')).toLowerCase().indexOf(q)<0;
+   return `<tr ${hid?'style="display:none"':''}>
+   <td class="num" style="color:${i<3?'var(--amber-2)':'var(--dim)'};font-weight:${i<3?'700':'400'}">${i+1}</td>
+   <td class="clk" data-p="${p.id}">${pline(p.id,p.club||'')}</td>
+   <td>${catBadge(p,13)}</td>
+   <td class="num" style="text-align:right;font-size:15px;font-weight:700;color:var(--amber-2)">${RT(p)}</td>
+   <td>${relBar(p)}</td>
+   <td class="num" style="text-align:center">${c.n||'<span class="dim">0</span>'}</td>
+   <td class="num" style="text-align:center">${c.n?c.wins+' — '+c.losses:'<span class="dim">—</span>'}</td>
+   <td style="text-align:right">${formTag(c.form)}</td>
+   <td style="text-align:center">${(p.tw|0)?`<span class="chip gold">${p.tw}</span>`:'<span class="dim">—</span>'}</td></tr>`}).join('')}
+  </tbody></table></div></div></div>`;
+}
+
 function vPeople(){
  const list=ST.players.slice().sort((a,b)=>(b.cat|0)-(a.cat|0)||String(a.name).localeCompare(String(b.name),'uk'));
  const inT=id=>{const e=ent(id);return e?e.st:null};
@@ -956,17 +1086,23 @@ function vPeople(){
    <input class="inp" id="q" placeholder="Поиск: фамилия, клуб, ID" style="max-width:280px" value="${esc(S.q)}">
    ${ADMIN?'<button class="btn" data-act="swap" type="button">Замена по ID</button><button class="btn pri" data-act="addp" type="button">+ Добавить</button>':''}</div>
  <div class="card"><div class="card-b" style="padding-top:14px">${list.length?`<div class="scrollx"><table class="t" id="ptab">
-  <thead><tr><th>ID</th><th>Игрок</th><th>Статус</th><th>Клуб</th><th>Город</th><th>Контакт</th><th>В турнире</th>${ADMIN?'<th></th>':''}</tr></thead>
+  <thead><tr><th>ID</th><th>Игрок</th><th>Статус</th><th style="text-align:right">Рейтинг</th><th>Клуб</th><th>Город</th><th>Контакт</th><th>В турнире</th>${ADMIN?'<th></th>':''}</tr></thead>
   <tbody>${list.map(p=>`<tr data-row="${esc((p.name+' '+(p.club||'')+' '+(p.city||'')+' '+(p.mid||'')).toLowerCase())}">
    <td class="num dim">${esc(p.mid||'—')}</td>
    <td class="clk" data-p="${p.id}">${pline(p.id,'')}</td>
    <td>${ADMIN?`<select class="inp" style="padding:5px 8px;min-width:150px" data-cat="${p.id}">
      ${CATS().map((c,i)=>`<option value="${i}" ${i===(p.cat|0)?'selected':''}>${esc(c.code)}</option>`).join('')}</select>`:catBadge(p)}</td>
+   <td class="num" style="text-align:right;color:var(--amber-2);font-weight:600">${RT(p)}<span class="dim" style="font-weight:400"> · ${relOf(p)}%</span></td>
    <td class="mut">${esc(p.club||'')}</td><td class="mut">${esc(p.city||'')}</td><td class="mut">${esc(p.contact||'')}</td>
    <td>${lab(inT(p.id))}</td>
    ${ADMIN?`<td style="text-align:right;white-space:nowrap">${inT(p.id)?'':`<button class="btn sm ok" data-act="join:${p.id}" type="button">В турнир</button>`}
     <button class="btn sm bad" data-act="del:${p.id}" type="button">✕</button></td>`:''}</tr>`).join('')}</tbody></table></div>`
   :'<div class="empty">Игроков пока нет</div>'}</div></div>`;
+}
+function filterRating(){
+ const q=(S.rq||'').toLowerCase().trim();
+ document.querySelectorAll('#rtab tbody tr').forEach(tr=>{
+  tr.style.display=!q||(tr.textContent||'').toLowerCase().indexOf(q)>=0?'':'none'});
 }
 function filterPeople(){
  const q=(S.q||'').toLowerCase().trim();
@@ -978,22 +1114,54 @@ function filterPeople(){
 function vPlayer(){
  const p=P(S.player);
  if(!p)return '<div class="card"><div class="empty">Игрок не найден</div></div>';
- const c=catOf(p).c,e=ent(p.id),t=T();
+ const c=catOf(p).c,e=ent(p.id),t=T(),cr=career(p.id),rk=rankOf(p.id);
  const mine=t&&t.br?ids().filter(i=>MM(i).a===p.id||MM(i).b===p.id):[];
+ const cell=(k,v,acc)=>`<div style="padding:10px 0;border-bottom:1px solid rgba(255,214,170,.06)">
+   <div class="h-sec" style="font-size:9.5px">${k}</div>
+   <div class="num" style="margin-top:4px;font-size:17px;font-weight:700;color:${acc||'var(--ink)'}">${v}</div></div>`;
  return `<div class="row wr" style="gap:12px;margin-bottom:14px"><button class="btn sm ghost" data-nav="people" type="button">← К игрокам</button>
+  <button class="btn sm ghost" data-nav="rating" type="button">Рейтинг</button>
   <span class="sp"></span>${ADMIN?`<button class="btn sm" data-act="edit:${p.id}" type="button">Изменить</button>`:''}</div>
  <div class="hero" style="margin-bottom:14px"><div class="row wr" style="gap:18px">
   <div class="av" style="width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font-family:var(--mono);font-size:21px;font-weight:700;background:${c}1f;color:${c};border:1px solid ${c}55">${esc(initials(p.name))}</div>
   <div style="flex:1;min-width:220px"><h1 class="h-page">${esc(p.name)}</h1>
    <div class="row wr" style="gap:9px;margin-top:8px">${catBadge(p,16)}
     <span class="mut">${esc([p.club,p.city].filter(Boolean).join(', '))}</span>
+    ${cr.n?`<span class="chip st">№${rk} в рейтинге</span>`:''}
     ${e&&e.seed?`<span class="chip">посев №${e.seed}</span>`:''}
     ${e&&e.st==='new'?'<span class="chip live">заявка не подтверждена</span>':''}
     ${e&&e.place?`<span class="chip gold">${e.place} место</span>`:''}</div></div>
   <div style="text-align:right"><div class="num" style="font-family:var(--disp);font-size:24px;font-weight:600;color:var(--amber-2)">${esc(p.mid||'—')}</div>
    <div class="h-sec">MATCHFLOW ID</div></div>
  </div></div>
- <div class="split"><div class="card"><div class="card-h"><span class="h-sec">Матчи турнира</span></div><div class="card-b">
+
+ <div class="card" style="margin-bottom:14px"><div class="card-h"><span class="h-sec">SPORT · спортивный паспорт</span><span class="sp"></span>
+   ${cr.n?`<span class="chip ${cr.sw?'ok':''}">${cr.sw?'серия побед':'серия поражений'}: ${cr.streak}</span>`:'<span class="chip" style="opacity:.6">матчей ещё нет</span>'}</div>
+  <div class="card-b" style="padding-top:6px">
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:0 18px">
+   ${cell('RATING',RT(p),'var(--amber-2)')}
+   ${cell('RELIABILITY',relOf(p)+'%')}
+   ${cell('CATEGORY','<span style="font-size:13px;color:'+c+'">'+esc(catOf(p).code)+'</span>')}
+   ${cell('MATCHES',cr.n)}
+   ${cell('WINS',cr.wins)}
+   ${cell('WIN RATE',cr.n?cr.wr+'%':'—')}
+   ${cell('CURRENT FORM',cr.n?(cr.form>0?'+'+cr.form:cr.form):'—',cr.form>0?'#7ED9A0':cr.form<0?'#E2695E':'var(--ink)')}
+   ${cell('BEST SERIES',cr.best||'—')}
+   ${cell('TOURNAMENT WINS',(p.tw|0)||'—',(p.tw|0)?'var(--amber-2)':'var(--ink)')}
+  </div>
+  <div class="row" style="gap:9px;margin-top:12px">${relBar(p)}
+   <span class="dim" style="font-size:11.5px">${relOf(p)>=80?'рейтинг устоялся':relOf(p)>=45?'рейтинг ещё уточняется':'нужно больше матчей'}</span></div>
+  </div></div>
+
+ <div class="split"><div class="card"><div class="card-h"><span class="h-sec">История матчей</span><span class="sp"></span><span class="chip">${cr.n}</span></div><div class="card-b">
+   ${cr.n?cr.h.slice(0,14).map(x=>{const win=x.w===p.id,opp=P(win?x.l:x.w);
+    return `<div class="row qrow" style="padding:9px 0;border-bottom:1px solid rgba(255,214,170,.05)">
+     <span style="flex:1;min-width:0">${opp?pline(opp.id,x.tn+' · '+x.lab):'<span class="dim">—</span>'}</span>
+     <span class="num" style="font-weight:700;width:54px;text-align:center">${win?x.sw+':'+x.sl:x.sl+':'+x.sw}</span>
+     <span class="num" style="width:46px;text-align:right;color:${win?'#7ED9A0':'#E2695E'}">${win?'+':'−'}${x.d}</span>
+     ${win?'<span class="chip ok">победа</span>':'<span class="chip">поражение</span>'}</div>`}).join('')
+   :'<div class="empty">Рейтинговых матчей ещё нет</div>'}</div></div>
+  <div class="card"><div class="card-h"><span class="h-sec">Текущий турнир</span></div><div class="card-b">
    ${mine.length?mine.map(id=>{const m=MM(id),opp=m.a===p.id?m.b:m.a,my=m.a===p.id?m.sa:m.sb,th=m.a===p.id?m.sb:m.sa;
     const stx=m.st==='done'?(my>th?'<span class="chip ok">победа</span>':'<span class="chip">поражение</span>')
      :m.st==='live'?'<span class="chip live"><span class="dot"></span>идёт</span>':'<span class="chip">впереди</span>';
@@ -1001,11 +1169,9 @@ function vPlayer(){
      <span class="num dim" style="width:36px">${id}</span>
      <span style="flex:1;min-width:0">${opp?pline(opp,labOf(id)):'<span class="dim">соперник определяется</span>'}</span>
      <span class="num" style="font-weight:700;width:54px;text-align:center">${m.st==='pending'?'—':my+':'+th}</span>${stx}</div>`}).join('')
-   :'<div class="empty">Матчей ещё нет</div>'}</div></div>
-  <div class="card"><div class="card-h"><span class="h-sec">Карточка</span></div><div class="card-b">
-   ${[['ID',p.mid||'—'],['Статус',catOf(p).code],['Клуб',p.club||'—'],['Город',p.city||'—'],['Контакт',p.contact||'—'],
-      ['На турнире',e?(e.w||0)+' — '+(e.l||0):'не участвует']]
-     .map(r=>`<div class="row" style="justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,214,170,.05)"><span class="dim">${r[0]}</span><span>${esc(r[1])}</span></div>`).join('')}
+   :'<div class="empty">В текущем турнире не играет</div>'}
+   <div style="margin-top:12px">${[['ID',p.mid||'—'],['Клуб',p.club||'—'],['Город',p.city||'—'],['Контакт',p.contact||'—']]
+     .map(r=>`<div class="row" style="justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,214,170,.05)"><span class="dim">${r[0]}</span><span>${esc(r[1])}</span></div>`).join('')}</div>
   </div></div></div>`;
 }
 function editForm(id){
@@ -1046,6 +1212,7 @@ function vCfg(){
    <div class="f2">${f('fee','Взнос',t.fee||'')}${f('prize','Призовой фонд',t.prize||'')}</div>
    <div class="f2">${f('race','До скольких побед',t.race,'number')}${f('tables','Столов',t.tables,'number')}</div>
    ${f('video','Ссылка на видео-регламент',t.video||'')}
+   ${f('vt','Столы с трансляцией (номера через запятую)',t.vt||'')}
    ${f('pin','Код судьи',ST.pin)}
    <button class="btn pri" data-act="savecfg" type="button">Сохранить</button></div></div></div>
  </div>
@@ -1070,7 +1237,7 @@ const numOr=(v,def)=>{const n=parseFloat(String(v).replace(',','.'));return isNa
 function saveCfg(){
  const t=T(),g=id=>{const n=$('#c-'+id);return n?n.value.trim():''};
  t.name=g('name')||t.name;t.sub=g('sub');t.disc=g('disc')||t.disc;t.venue=g('venue');t.dates=g('dates');
- t.fee=g('fee');t.prize=g('prize');t.video=g('video');
+ t.fee=g('fee');t.prize=g('prize');t.video=g('video');t.vt=g('vt');
  t.race=Math.max(1,Math.min(15,Math.round(numOr(g('race'),t.race))));
  t.tables=Math.max(1,Math.min(12,Math.round(numOr(g('tables'),t.tables))));
  ST.pin=g('pin')||ST.pin;
@@ -1100,14 +1267,14 @@ function openMatch(id){
   if(!pid||pid==='BYE')return `<div class="score-row"><span class="dim">${pid==='BYE'?'свободный проход':tbdText(id,key)}</span></div>`;
   const p=P(pid),h=m.h&&m.h.to===pid?`<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)">фора +${m.h.n}</span>`:'';
   return `<div class="score-row ${sc>other?'lead':''}"><div style="flex:1;min-width:0">${pline(pid,[p.mid,p.club].filter(Boolean).join(' · '))}
-    <div class="row" style="gap:8px;margin-top:7px">${catBadge(p,12)}${h}</div>${pips(sc)}</div>
+    <div class="row" style="gap:8px;margin-top:7px">${catBadge(p,12)}<span class="num dim" style="font-size:11px">рейтинг ${RT(p)} · ${relOf(p)}%</span>${h}</div>${pips(sc)}</div>
    ${ADMIN&&m.st!=='done'?`<div class="row" style="gap:8px"><button class="sbtn" data-sc="${key}|-1" type="button">−</button>
      <span class="sval">${sc}</span><button class="sbtn" data-sc="${key}|1" type="button">+</button></div>`
     :`<span class="sval">${m.st==='pending'?'—':sc}</span>`}</div>`;
  };
  $('#dr-b').innerHTML=`<div class="row wr" style="gap:7px;margin-bottom:12px">
    <span class="chip ${m.st==='live'?'live':m.st==='done'?'ok':''}">${m.st==='live'?'<span class="dot"></span>стол '+m.tbl:m.st==='done'?(m.bye?'авто-проход':'завершён '+esc(m.at||'')):'ожидает вызова'}</span>
-   <span class="chip">до ${t.race}</span><span class="chip st">${esc(t.disc)}</span></div>
+   <span class="chip">до ${t.race}</span><span class="chip st">${esc(t.disc)}</span>${both&&m.st!=='done'?`<span class="chip" title="Сколько рейтинга разыгрывается">на кону ${stake(m)}</span>`:''}${both&&m.st==='done'&&m.rated?`<span class="chip ok">рейтинг ±${m.rated.d}</span>`:''}</div>
   <div class="grid" style="gap:10px">${row(m.a,m.sa,m.sb,'a')}${row(m.b,m.sb,m.sa,'b')}</div>`;
  let foot='<button class="btn" data-x="1" type="button">Закрыть</button>';
  if(ADMIN&&both){
@@ -1122,7 +1289,7 @@ function openMatch(id){
 const closeDrawer=()=>{S.openM=null;$('#drawer').classList.remove('on');if(!$('#modal').classList.contains('on'))$('#scrim').classList.remove('on')};
 
 /* ============================== РЕНДЕР ============================== */
-const VIEWS={tours:vTours,tour:vTour,bracket:vBracket,board:vBoard,people:vPeople,player:vPlayer,cfg:vCfg};
+const VIEWS={tours:vTours,tour:vTour,bracket:vBracket,board:vBoard,rating:vRating,people:vPeople,player:vPlayer,cfg:vCfg};
 function shell(){
  document.getElementById('root').innerHTML=`<div class="app">
   <nav class="rail" id="rail"></nav>
@@ -1164,6 +1331,7 @@ function render(){
  setSync(SYNC);
  if(S.view==='bracket')requestAnimationFrame(drawLinks);
  if(S.view==='people')filterPeople();
+ if(S.view==='rating')filterRating();
 }
 function go(v){S.view=v;S.hot=null;const m=$('#main');if(m)m.scrollTop=0;render()}
 
@@ -1197,7 +1365,8 @@ document.addEventListener('change',e=>{
  const row=s.closest('tr');if(row){const av=row.querySelector('.av'),col=CATS()[p.cat].c;
   if(av){av.style.background=col+'22';av.style.color=col;av.style.borderColor=col+'44'}}
 });
-document.addEventListener('input',e=>{if(e.target.id==='q'){S.q=e.target.value;filterPeople()}});
+document.addEventListener('input',e=>{if(e.target.id==='q'){S.q=e.target.value;filterPeople()}
+ if(e.target.id==='rq'){S.rq=e.target.value;filterRating()}});
 function act(a){
  const i=a.indexOf(':'),k=i<0?a:a.slice(0,i),arg=i<0?'':a.slice(i+1);
  const t=T();
