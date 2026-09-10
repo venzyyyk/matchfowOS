@@ -238,6 +238,14 @@ select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50
  .hero{padding:15px}.h-page{font-size:19px}
 }
 
+
+.arts{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px}
+.art{display:grid;place-items:center;height:32px;border-radius:8px;border:1px solid var(--line);
+ background:var(--surface-2);font-family:var(--mono);font-size:10px;color:var(--ink-3);opacity:.45;cursor:default;
+ letter-spacing:.02em;transition:.15s}
+.art.got{opacity:1;font-weight:600}
+.art.got:hover{transform:translateY(-1px)}
+a.btn{text-decoration:none}
 .card.cur{border-color:rgba(245,144,43,.45)}
 .tsel{cursor:pointer;border:1px solid var(--line);font:inherit}
 .tsel:hover{border-color:var(--line-2)}
@@ -247,15 +255,17 @@ select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50
 </style>
 
 <div id="root"></div>
-<script id="app-state" type="application/json">{"v": 4, "build": "20260831-1101", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
+<script id="app-state" type="application/json">{"v": 5, "build": "20260910-0935", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
 <script id="app-code">
 'use strict';
 /* ============================================================
-   MATCHFLOW OS · VENARION HUMAN CORE — этап 2
+   MATCHFLOW OS · VENARION HUMAN CORE — этапы 1-3
    Этап 1: мультитурниры, 8 статусов, ручная сетка, MF-ID,
            замена по ID, фора и стол при запуске матча.
    Этап 2: MATCH RATING (Elo/Fargo), RELIABILITY, карьера игрока,
            спортивный паспорт, таблица рейтинга, видео-столы.
+   Этап 3: VSE, CORE, достижения, 64 артефакта, тройной зачёт,
+           связка с VHC по MATCHFLOW ID  (см. code_c.js).
    ============================================================ */
 
 const DEF_CATS=[
@@ -281,12 +291,12 @@ let ST=JSON.parse(document.getElementById('app-state').textContent);
 let ADMIN=sessionStorage.getItem('mfos-adm')==='1';
 let CAP=null,LOCAL=false,SYNC='ok',pubT=null;
 let MODE='local',REV=0,PIN=sessionStorage.getItem('mfos-pin')||'',pollT=null;
-const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:''};
+const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:'',rtab:'sport'};
 
 /* ---------- МИГРАЦИЯ СТАРОГО СОСТОЯНИЯ ---------- */
 function migrate(s){
- if(s.v>=4){s.hist=s.hist||[];return s}
- if(s.v===3){s.v=4;s.hist=s.hist||[];return s}
+ if(s.v>=5){s.hist=s.hist||[];return s}
+ if(s.v>=3){s.v=5;s.hist=s.hist||[];return s}
  const t=s.t||{};
  const tour={id:'t1',name:t.name||'Турнир',sub:t.sub||'',disc:t.disc||'Вільна піраміда',
   venue:t.venue||'',dates:t.dates||'',fee:t.fee||'',prize:t.prize||'',
@@ -298,7 +308,7 @@ function migrate(s){
   players.push({id:p.id,mid:p.mid||null,name:p.name,city:p.city||'',club:p.club||'',contact:p.contact||'',cat:p.cat|0});
   tour.entries.push({p:p.id,st:p.st||'new',seed:p.seed||null,w:p.w||0,l:p.l||0,place:p.place||null});
  });
- return {v:4,cats:s.cats||DEF_CATS,players,tours:[tour],cur:'t1',hist:[],
+ return {v:5,cats:s.cats||DEF_CATS,players,tours:[tour],cur:'t1',hist:[],
   pin:s.pin||'2604',midPrefix:s.midPrefix||'123',midSeq:s.midSeq||0,arch:s.arch||[]};
 }
 ST=migrate(ST);
@@ -550,8 +560,11 @@ function finish(id){
  m.st='done';m.at=now();m.ptbl=m.tbl;m.tbl=null;m.n=++t.seq;
  const w=winId(m),l=losId(m),ew=ent(w),el=ent(l);
  if(ew)ew.w=(ew.w||0)+1; if(el)el.l=(el.l||0)+1;
+ const be1=evo(w),be2=evo(l);
  const d=rate(id);
+ announceEvo(w,be1);announceEvo(l,be2);
  advance(id);
+ resolveByes();   /* свободные проходы могли уйти в нижнюю сетку */
  feed(`<b>${esc(short(P(w).name))}</b> обыграл ${esc(short(P(l).name))} — <span class="num">${Math.max(m.sa,m.sb)}:${Math.min(m.sa,m.sb)}</span> · ${labOf(id)}${d?` · рейтинг <span class="num" style="color:var(--ok,#7ED9A0)">+${d}</span> / <span class="num" style="color:var(--bad,#E2695E)">−${d}</span>`:''}`);
  toast(`Результат внесён: ${short(P(w).name)} ${Math.max(m.sa,m.sb)}:${Math.min(m.sa,m.sb)}${d?` · +${d} рейтинга`:''}`);
  save();render();openMatch(id);
@@ -612,6 +625,395 @@ function newTour(){
   fee:'',prize:'',race:5,tables:4,video:'',vt:'',status:'planned',pub:false,
   entries:[],br:null,seq:0,feed:[{t:now(),txt:'Турнир создан'}]});
  ST.cur=id;toast('Турнир создан');save();go('cfg');
+}
+/* ============================================================
+   MATCHFLOW OS — этап 3 · VENARION HUMAN CORE
+   VSE (эволюция игрока), CORE (пробуждение персонажа),
+   достижения, 64 артефакта, тройной зачёт, связка с VHC.
+
+   Порядок вычислений (без круговых зависимостей):
+   матчи → достижения → VSE → CORE → артефакты
+   ============================================================ */
+
+/* ---------- уровни эволюции ---------- */
+const VSE_BANDS=[
+ {lo:0, hi:30, k:'INITIAL',       ru:'Начало',       c:'#7F7669'},
+ {lo:30,hi:60, k:'EVOLUTION',     ru:'Эволюция',     c:'#7BA3C4'},
+ {lo:60,hi:80, k:'STABILIZATION', ru:'Стабилизация', c:'#4FA8D8'},
+ {lo:80,hi:90, k:'APEX',          ru:'Пик',          c:'#F5902B'},
+ {lo:90,hi:95, k:'CONTROL',       ru:'Контроль',     c:'#E8C24F'},
+ {lo:95,hi:102,k:'TRANSCENDENCE', ru:'Превосхождение',c:'#F2E6C9'}
+];
+const bandOf=v=>VSE_BANDS.find(b=>v>=b.lo&&v<b.hi)||VSE_BANDS[0];
+const bandIx=v=>VSE_BANDS.indexOf(bandOf(v));
+
+/* ---------- ядра ---------- */
+const CORES=[
+ {k:'HUMAN',         ru:'Человек',        c:'#7F7669', d:'Ядро ещё не пробудилось'},
+ {k:'JOKER CORE',    ru:'Джокер',         c:'#B76BE8', d:'Непредсказуем: бьёт сильных и падает от слабых'},
+ {k:'PREDATOR CORE', ru:'Хищник',         c:'#E2554A', d:'Охотится на тех, кто выше рейтингом'},
+ {k:'VENOM LEGION',  ru:'Легион',         c:'#3FBE7A', d:'Не отпускает: побеждает разгромно'},
+ {k:'KARNAGE ORDER', ru:'Орден Карнажа',  c:'#D93A5C', d:'Идёт напролом: много матчей за турнир'},
+ {k:'RIOT FORCE',    ru:'Мятеж',          c:'#FF7A1A', d:'Возвращается из нижней сетки'},
+ {k:'SPYRON CORE',   ru:'Спайрон',        c:'#4FA8D8', d:'Расчёт: почти не проигрывает слабее себя'},
+ {k:'WIZARD',        ru:'Волшебник',      c:'#7B6BE8', d:'Решает матч на последнем шаре'},
+ {k:'GHOST',         ru:'Призрак',        c:'#9FB0BA', d:'Появляется редко — и забирает своё'},
+ {k:'NELUMIA',       ru:'Нелюмия',        c:'#E86BA8', d:'Растёт быстрее всех'},
+ {k:'INFINITY CORE', ru:'Бесконечность',  c:'#E8C24F', d:'Играет и играет: путь длиною в сотни матчей'},
+ {k:'APEX VIRION',   ru:'Апекс Вирион',   c:'#F2E6C9', d:'Вершина: титулы и высшая эволюция'}
+];
+const coreOf=k=>CORES.find(c=>c.k===k)||CORES[0];
+const CORE_MIN=8;          /* матчей до пробуждения ядра */
+
+/* ---------- достижения (событийные, не зависят от VSE и CORE) ---------- */
+const ACHS=[
+ {k:'FIRST BLOOD', ru:'Первая кровь',    d:'Первая победа в MATCHFLOW'},
+ {k:'GIANT KILLER',ru:'Убийца гигантов', d:'Победа над соперником выше на 60+ рейтинга'},
+ {k:'TITAN FALL',  ru:'Падение титана',  d:'Победа над соперником выше на 150+ рейтинга'},
+ {k:'PERFECT',     ru:'Сухая',           d:'Победа всухую'},
+ {k:'CLUTCH',      ru:'На последнем шаре',d:'Победа с перевесом в одну партию'},
+ {k:'COMEBACK',    ru:'Возвращение',     d:'Победа в матче нижней сетки'},
+ {k:'SURVIVOR',    ru:'Живучий',         d:'Три победы подряд в нижней сетке'},
+ {k:'CHAMPION',    ru:'Чемпион',         d:'Победа в турнире'},
+ {k:'PODIUM',      ru:'Пьедестал',       d:'Призовое место'},
+ {k:'FINALIST',    ru:'Финалист',        d:'Выход в гранд-финал'},
+ {k:'STREAK 3',    ru:'Серия из трёх',   d:'Три победы подряд'},
+ {k:'STREAK 5',    ru:'Серия из пяти',   d:'Пять побед подряд'},
+ {k:'STREAK 7',    ru:'Серия из семи',   d:'Семь побед подряд'},
+ {k:'IRONMAN',     ru:'Железный',        d:'Десять матчей в одном турнире'},
+ {k:'VETERAN',     ru:'Ветеран',         d:'25 матчей в системе'},
+ {k:'CENTURION',   ru:'Центурион',       d:'100 матчей в системе'},
+ {k:'RISING',      ru:'Восхождение',     d:'+100 рейтинга от старта'},
+ {k:'ASCENT',      ru:'Прорыв',          d:'+250 рейтинга от старта'},
+ {k:'UNTOUCHED',   ru:'Без единого',     d:'Турнир без поражений (от трёх матчей)'},
+ {k:'NEMESIS',     ru:'Немезида',        d:'Три победы над одним соперником'}
+];
+
+/* ---------- 64 артефакта ----------
+   f — семейство (ядро, к которому артефакт относится по смыслу)
+   n — что нужно сделать; считается по функции need(x) над сводкой   */
+const ARTS=[
+ /* общие — 9 */
+ {c:'A01',f:'HUMAN',ru:'Начало пути',      d:'Сыграть первый рейтинговый матч',      v:x=>x.n>=1},
+ {c:'A02',f:'HUMAN',ru:'Первая кровь',     d:'Первая победа',                        v:x=>x.wins>=1},
+ {c:'A03',f:'HUMAN',ru:'Десятка',          d:'10 матчей',                            v:x=>x.n>=10},
+ {c:'A04',f:'HUMAN',ru:'Полсотни',         d:'50 матчей',                            v:x=>x.n>=50},
+ {c:'A05',f:'HUMAN',ru:'Эволюция',         d:'Выйти на уровень STABILIZATION',       v:x=>x.bix>=2},
+ {c:'A06',f:'HUMAN',ru:'Пик',              d:'Уровень APEX (VSE 80+)',               v:x=>x.vse>=80},
+ {c:'A07',f:'HUMAN',ru:'Контроль',         d:'Уровень CONTROL (VSE 90+)',            v:x=>x.vse>=90},
+ {c:'A08',f:'HUMAN',ru:'Превосхождение',   d:'Уровень TRANSCENDENCE (VSE 95+)',      v:x=>x.vse>=95},
+ {c:'A09',f:'HUMAN',ru:'Пробуждение',      d:'Пробудить своё ядро',                  v:x=>x.core!=='HUMAN'},
+
+ /* JOKER — 5 */
+ {c:'J01',f:'JOKER CORE',ru:'Дикая карта',    d:'Одна победа вопреки рейтингу',      v:x=>x.upW>=1},
+ {c:'J02',f:'JOKER CORE',ru:'Орёл или решка', d:'Три победы вопреки рейтингу',       v:x=>x.upW>=3},
+ {c:'J03',f:'JOKER CORE',ru:'Хаос',           d:'Пять побед вопреки рейтингу',       v:x=>x.upW>=5},
+ {c:'J04',f:'JOKER CORE',ru:'Два лица',       d:'В одном турнире и апсет, и провал',  v:x=>x.twoFaces},
+ {c:'J05',f:'JOKER CORE',ru:'Гамбит Джокера', d:'Десять побед вопреки рейтингу',     v:x=>x.upW>=10},
+
+ /* PREDATOR — 5 */
+ {c:'P01',f:'PREDATOR CORE',ru:'След',        d:'Победа над соперником выше на 60+', v:x=>x.upW>=1},
+ {c:'P02',f:'PREDATOR CORE',ru:'Охота',       d:'Две таких победы',                  v:x=>x.upW>=2},
+ {c:'P03',f:'PREDATOR CORE',ru:'Стая',        d:'Пять таких побед',                  v:x=>x.upW>=5},
+ {c:'P04',f:'PREDATOR CORE',ru:'Титан',       d:'Победа над соперником выше на 150+',v:x=>x.titan>=1},
+ {c:'P05',f:'PREDATOR CORE',ru:'Вершина цепи',d:'Победа над первым номером рейтинга',v:x=>x.beatTop},
+
+ /* VENOM LEGION — 5 */
+ {c:'V01',f:'VENOM LEGION',ru:'Хватка',       d:'Победа всухую',                     v:x=>x.dry>=1},
+ {c:'V02',f:'VENOM LEGION',ru:'Яд',           d:'Три победы всухую',                 v:x=>x.dry>=3},
+ {c:'V03',f:'VENOM LEGION',ru:'Легион',       d:'Семь побед всухую',                 v:x=>x.dry>=7},
+ {c:'V04',f:'VENOM LEGION',ru:'Без воздуха',  d:'Три сухие победы подряд',           v:x=>x.dryRun>=3},
+ {c:'V05',f:'VENOM LEGION',ru:'Тотальность',  d:'Двенадцать побед всухую',           v:x=>x.dry>=12},
+
+ /* KARNAGE ORDER — 5 */
+ {c:'K01',f:'KARNAGE ORDER',ru:'Разгон',      d:'Пять матчей в одном турнире',       v:x=>x.maxT>=5},
+ {c:'K02',f:'KARNAGE ORDER',ru:'Мясорубка',   d:'Восемь матчей в одном турнире',     v:x=>x.maxT>=8},
+ {c:'K03',f:'KARNAGE ORDER',ru:'Орден',       d:'Двенадцать матчей в одном турнире', v:x=>x.maxT>=12},
+ {c:'K04',f:'KARNAGE ORDER',ru:'Три поля',    d:'Сыграть три турнира',               v:x=>x.tours>=3},
+ {c:'K05',f:'KARNAGE ORDER',ru:'Карнаж',      d:'Сыграть шесть турниров',            v:x=>x.tours>=6},
+
+ /* RIOT FORCE — 5 */
+ {c:'R01',f:'RIOT FORCE',ru:'Искра',          d:'Победа в нижней сетке',             v:x=>x.low>=1},
+ {c:'R02',f:'RIOT FORCE',ru:'Мятеж',          d:'Три победы в нижней сетке',         v:x=>x.low>=3},
+ {c:'R03',f:'RIOT FORCE',ru:'Восстание',      d:'Семь побед в нижней сетке',         v:x=>x.low>=7},
+ {c:'R04',f:'RIOT FORCE',ru:'Из пепла',       d:'Гранд-финал после нижней сетки',    v:x=>x.gfFromLow},
+ {c:'R05',f:'RIOT FORCE',ru:'Сила бунта',     d:'Двенадцать побед в нижней сетке',   v:x=>x.low>=12},
+
+ /* SPYRON — 5 */
+ {c:'S01',f:'SPYRON CORE',ru:'Расчёт',        d:'10 матчей без поражений от слабых', v:x=>x.n>=10&&x.upL===0},
+ {c:'S02',f:'SPYRON CORE',ru:'Схема',         d:'20 матчей без поражений от слабых', v:x=>x.n>=20&&x.upL===0},
+ {c:'S03',f:'SPYRON CORE',ru:'Спайрон',       d:'35 матчей без поражений от слабых', v:x=>x.n>=35&&x.upL===0},
+ {c:'S04',f:'SPYRON CORE',ru:'Чистый лист',   d:'Турнир без единого поражения',      v:x=>x.clean>=1},
+ {c:'S05',f:'SPYRON CORE',ru:'Абсолют',       d:'Стабильность 95 % при 15+ матчах',  v:x=>x.n>=15&&x.stab>=95},
+
+ /* WIZARD — 5 */
+ {c:'W01',f:'WIZARD',ru:'Последний шар',      d:'Победа с перевесом в одну партию',  v:x=>x.tight>=1},
+ {c:'W02',f:'WIZARD',ru:'Тонкая работа',      d:'Три таких победы',                  v:x=>x.tight>=3},
+ {c:'W03',f:'WIZARD',ru:'Волшебник',          d:'Семь таких побед',                  v:x=>x.tight>=7},
+ {c:'W04',f:'WIZARD',ru:'Ход мастера',        d:'Такая победа в финале или полуфинале',v:x=>x.tightBig},
+ {c:'W05',f:'WIZARD',ru:'Вне вероятностей',   d:'Двенадцать побед в одну партию',    v:x=>x.tight>=12},
+
+ /* GHOST — 5 */
+ {c:'G01',f:'GHOST',ru:'Тень',                d:'70 % побед при 10+ матчах',         v:x=>x.n>=10&&x.wr>=70},
+ {c:'G02',f:'GHOST',ru:'Бесшумно',            d:'70 % побед при 20+ матчах',         v:x=>x.n>=20&&x.wr>=70},
+ {c:'G03',f:'GHOST',ru:'Возвращение из тьмы', d:'Победа после паузы в 30+ дней',     v:x=>x.longGap>=1},
+ {c:'G04',f:'GHOST',ru:'Дважды никем',        d:'Две таких победы',                  v:x=>x.longGap>=2},
+ {c:'G05',f:'GHOST',ru:'Призрак',             d:'80 % побед при 15+ матчах',         v:x=>x.n>=15&&x.wr>=80},
+
+ /* NELUMIA — 5 */
+ {c:'N01',f:'NELUMIA',ru:'Росток',            d:'+50 рейтинга от старта',            v:x=>x.growth>=50},
+ {c:'N02',f:'NELUMIA',ru:'Стебель',           d:'+100 рейтинга от старта',           v:x=>x.growth>=100},
+ {c:'N03',f:'NELUMIA',ru:'Цветение',          d:'+200 рейтинга от старта',           v:x=>x.growth>=200},
+ {c:'N04',f:'NELUMIA',ru:'Нелюмия',           d:'+300 рейтинга от старта',           v:x=>x.growth>=300},
+ {c:'N05',f:'NELUMIA',ru:'Пять вверх',        d:'Пять побед подряд',                 v:x=>x.bestRun>=5},
+
+ /* INFINITY — 5 */
+ {c:'I01',f:'INFINITY CORE',ru:'Четверть',    d:'25 матчей',                         v:x=>x.n>=25},
+ {c:'I02',f:'INFINITY CORE',ru:'Половина',    d:'50 матчей',                         v:x=>x.n>=50},
+ {c:'I03',f:'INFINITY CORE',ru:'Сотня',       d:'100 матчей',                        v:x=>x.n>=100},
+ {c:'I04',f:'INFINITY CORE',ru:'Бесконечность',d:'200 матчей',                       v:x=>x.n>=200},
+ {c:'I05',f:'INFINITY CORE',ru:'Десять полей',d:'Сыграть десять турниров',           v:x=>x.tours>=10},
+
+ /* APEX VIRION — 5 */
+ {c:'X01',f:'APEX VIRION',ru:'Первый титул',  d:'Победа в турнире',                  v:x=>x.tw>=1},
+ {c:'X02',f:'APEX VIRION',ru:'Трижды',        d:'Три победы в турнирах',             v:x=>x.tw>=3},
+ {c:'X03',f:'APEX VIRION',ru:'Пять корон',    d:'Пять побед в турнирах',             v:x=>x.tw>=5},
+ {c:'X04',f:'APEX VIRION',ru:'Первый номер',  d:'Возглавить рейтинг силы',           v:x=>x.rank===1},
+ {c:'X05',f:'APEX VIRION',ru:'Апекс Вирион',  d:'Возглавить рейтинг эволюции',       v:x=>x.erank===1}
+];
+
+/* ---------- матчи игрока с восстановленными рейтингами до матча ---------- */
+function mrows(pid){
+ return (ST.hist||[]).filter(x=>x.w===pid||x.l===pid).map(x=>{
+  const win=x.w===pid;
+  const myB=win?x.rw-x.d:x.rl+x.d, opB=win?x.rl+x.d:x.rw-x.d;
+  const lab=String(x.lab||'');
+  return {at:x.at||0,tid:x.tid,tn:x.tn,lab,win,d:x.d,
+   my:win?x.sw:x.sl, op:win?x.sl:x.sw, oppId:win?x.l:x.w,
+   myB,opB,gap:opB-myB,
+   low:/ижн/.test(lab), gf:/ранд/.test(lab), big:/инал/.test(lab)};
+ });
+}
+const placesOf=pid=>(ST.tours||[]).map(t=>{const e=(t.entries||[]).find(x=>x.p===pid);return e&&e.place}).filter(Boolean);
+
+/* ---------- сводка по игроку: всё, на что смотрят достижения и артефакты ---------- */
+function summary(pid){
+ const p=P(pid),h=mrows(pid),n=h.length;
+ const wins=h.filter(r=>r.win).length;
+ const s={n,wins,losses:n-wins,wr:n?Math.round(wins*100/n):0,
+  upW:0,upL:0,titan:0,dry:0,tight:0,low:0,lowRun:0,dryRun:0,longGap:0,
+  bestRun:0,maxT:0,tours:0,clean:0,twoFaces:false,gfFromLow:false,tightBig:false,beatTop:false,
+  growth:p?RT(p)-r0(p):0, tw:p?(p.tw|0):0, places:placesOf(pid), gf:false, iron:false};
+ /* от старых к новым */
+ const asc=h.slice().reverse();
+ let run=0,dryRun=0,lowRun=0;
+ asc.forEach((r,i)=>{
+  if(r.win){
+   run++; if(run>s.bestRun)s.bestRun=run;
+   if(r.gap>=60)s.upW++;
+   if(r.gap>=150)s.titan++;
+   if(r.op===0){s.dry++;dryRun++;if(dryRun>s.dryRun)s.dryRun=dryRun}else dryRun=0;
+   if(r.my-r.op===1){s.tight++; if(r.big)s.tightBig=true}
+   if(r.low){s.low++;lowRun++;if(lowRun>s.lowRun)s.lowRun=lowRun}else lowRun=0;
+   const prev=asc[i-1];
+   if(prev&&r.at&&prev.at&&(r.at-prev.at)>30*864e5)s.longGap++;
+  }else{
+   run=0;dryRun=0;lowRun=0;
+   if(r.gap<=-60)s.upL++;
+  }
+  if(r.gf)s.gf=true;
+ });
+ /* по турнирам */
+ const byT={};
+ h.forEach(r=>{(byT[r.tid]=byT[r.tid]||[]).push(r)});
+ s.tours=Object.keys(byT).length;
+ Object.keys(byT).forEach(k=>{
+  const rs=byT[k],w=rs.filter(r=>r.win).length,l=rs.length-w;
+  if(rs.length>s.maxT)s.maxT=rs.length;
+  if(rs.length>=10)s.iron=true;
+  if(l===0&&rs.length>=3)s.clean++;
+  if(w>0&&l>0&&rs.some(r=>r.win&&r.gap>=60)&&rs.some(r=>!r.win&&r.gap<=-60))s.twoFaces=true;
+  if(rs.some(r=>r.gf)&&rs.some(r=>r.low))s.gfFromLow=true;
+ });
+ /* стабильность: доля матчей без поражений от заметно более слабых */
+ s.stab=n?Math.round(100*(1-s.upL/n)):0;
+ /* победы над одним и тем же соперником */
+ const vs={};h.forEach(r=>{if(r.win)vs[r.oppId]=(vs[r.oppId]||0)+1});
+ s.nemesis=Object.keys(vs).reduce((m,k)=>Math.max(m,vs[k]),0);
+ /* победа над первым номером рейтинга */
+ const top=ranked()[0];
+ s.beatTop=!!(top&&top.id!==pid&&h.some(r=>r.win&&r.oppId===top.id));
+ /* активность за 90 дней */
+ const cut=Date.now()-90*864e5;
+ s.recent=h.filter(r=>r.at&&r.at>=cut).length;
+ return s;
+}
+
+/* ---------- достижения ---------- */
+function achOf(s){
+ const got={};
+ const set=(k,c)=>{if(c>0)got[k]=c};
+ set('FIRST BLOOD',s.wins>=1?1:0);
+ set('GIANT KILLER',s.upW);
+ set('TITAN FALL',s.titan);
+ set('PERFECT',s.dry);
+ set('CLUTCH',s.tight);
+ set('COMEBACK',s.low);
+ set('SURVIVOR',s.lowRun>=3?1:0);
+ set('CHAMPION',s.tw);
+ set('PODIUM',s.places.filter(x=>x<=3).length);
+ set('FINALIST',s.gf?1:0);
+ set('STREAK 3',s.bestRun>=3?1:0);
+ set('STREAK 5',s.bestRun>=5?1:0);
+ set('STREAK 7',s.bestRun>=7?1:0);
+ set('IRONMAN',s.iron?1:0);
+ set('VETERAN',s.n>=25?1:0);
+ set('CENTURION',s.n>=100?1:0);
+ set('RISING',s.growth>=100?1:0);
+ set('ASCENT',s.growth>=250?1:0);
+ set('UNTOUCHED',s.clean);
+ set('NEMESIS',s.nemesis>=3?1:0);
+ return got;
+}
+
+/* ---------- VSE: шесть составляющих ---------- */
+function vseOf(s,achCount){
+ const cl=(x)=>Math.max(0,Math.min(100,x));
+ const c={
+  exp: cl(100*(1-Math.exp(-s.n/22))),
+  grow: cl(50+s.growth/6),
+  stab: s.n>=4?cl((s.stab-60)/40*100):0,
+  peak: cl(100*(s.peakGap||0)/250),
+  act: cl(100*(1-Math.exp(-s.recent/10))),
+  char: cl(100*achCount/ACHS.length)
+ };
+ const total=c.exp*.22+c.grow*.22+c.stab*.18+c.peak*.13+c.act*.10+c.char*.15;
+ const vse=s.n?Math.max(0,Math.min(101,Math.round(total*1.01))):0;
+ return {vse,c};
+}
+/* ---------- CORE: пробуждение по характеру игры, а не по силе ---------- */
+function coreFor(s,vse){
+ if(s.n<CORE_MIN)return 'HUMAN';
+ const n=s.n,w=Math.max(1,s.wins);
+ const sc={
+  'JOKER CORE':   (s.upW+s.upL)/n*1.15,
+  'PREDATOR CORE':s.upW/n*1.30,
+  'VENOM LEGION': s.dry/w*1.05,
+  'KARNAGE ORDER':Math.min(1,s.maxT/12)*.95,
+  'RIOT FORCE':   s.low/w*1.20,
+  'SPYRON CORE':  (s.stab/100)*(s.upL===0?1:.4)*.90,
+  'WIZARD':       s.tight/w*1.15,
+  'GHOST':        (s.wr/100)*(n<=16?1:.55)*.95,
+  'NELUMIA':      Math.min(1,Math.max(0,s.growth)/280)*1.10,
+  'INFINITY CORE':Math.min(1,n/90)*1.00,
+  'APEX VIRION':  (s.tw>0&&vse>=80)?(.6+Math.min(.5,s.tw*.15)):0
+ };
+ let best='HUMAN',bv=-1;
+ Object.keys(sc).forEach(k=>{if(sc[k]>bv){bv=sc[k];best=k}});
+ return bv<=0?'INFINITY CORE':best;
+}
+
+/* ---------- класс: по сильнейшей составляющей эволюции ---------- */
+const CLASSES={exp:'SENTINEL',grow:'ASCENDANT',stab:'ARCHITECT',peak:'HUNTER',act:'NOMAD',char:'COLLECTOR'};
+const CKEYS=['exp','grow','stab','peak','act','char'];
+/* класс = составляющая, по которой игрок сильнее всего отрывается от среднего по базе */
+let CAVG=null,CAVG_STAMP=null;
+function compAvg(){
+ const st=evoStamp();
+ if(CAVG_STAMP===st&&CAVG)return CAVG;
+ const sum={},cnt={};CKEYS.forEach(k=>{sum[k]=0;cnt[k]=0});
+ ST.players.forEach(p=>{
+  const s=summary(p.id);if(!s.n)return;
+  s.peakGap=mrows(p.id).reduce((m,r)=>r.win&&r.gap>m?r.gap:m,0);
+  const c=vseOf(s,Object.keys(achOf(s)).length).c;
+  CKEYS.forEach(k=>{sum[k]+=c[k];cnt[k]++});
+ });
+ CAVG={};CKEYS.forEach(k=>CAVG[k]=cnt[k]?sum[k]/cnt[k]:0);
+ CAVG_STAMP=st;return CAVG;
+}
+function classOf(c){
+ const a=compAvg();let k='exp',v=-1e9;
+ CKEYS.forEach(x=>{const d=(c[x]||0)-(a[x]||0);if(d>v){v=d;k=x}});
+ return CLASSES[k];
+}
+
+/* ---------- полный профиль эволюции ---------- */
+let EVO_CACHE={},EVO_STAMP=null;
+function evoStamp(){return (ST.hist?ST.hist.length:0)+'/'+ST.players.length+'/'+(ST.tours||[]).map(t=>t.status).join('')}
+function evo(pid){
+ const st=evoStamp();
+ if(EVO_STAMP!==st){EVO_CACHE={};EVO_STAMP=st}
+ if(EVO_CACHE[pid])return EVO_CACHE[pid];
+
+ const s=summary(pid);
+ /* лучший перепрыгнутый разрыв — для составляющей «пик» */
+ const h=mrows(pid);
+ s.peakGap=h.reduce((m,r)=>r.win&&r.gap>m?r.gap:m,0);
+
+ const ach=achOf(s);
+ const achCount=Object.keys(ach).length;
+ const {vse,c}=vseOf(s,achCount);
+ const core=coreFor(s,vse);
+ const cls=s.n?classOf(c):'—';
+
+ const ctx=Object.assign({},s,{vse,bix:bandIx(vse),core,
+   rank:0,erank:0});                       /* места подставим ниже */
+ const res={s,ach,achCount,vse,c,band:bandOf(vse),core,cls,ctx,arts:[]};
+ EVO_CACHE[pid]=res;
+
+ /* места в зачётах — считаем после того, как базовый профиль есть у всех */
+ ctx.rank=rankOf(pid);
+ ctx.erank=erankOf(pid);
+ res.arts=ARTS.filter(a=>{try{return a.v(ctx)}catch(e){return false}}).map(a=>a.c);
+ return res;
+}
+/* рейтинг эволюции: осторожно — считаем VSE без обращения к местам */
+function vseQuick(pid){
+ const s=summary(pid);s.peakGap=mrows(pid).reduce((m,r)=>r.win&&r.gap>m?r.gap:m,0);
+ return vseOf(s,Object.keys(achOf(s)).length).vse;
+}
+let ERANK=null,ERANK_STAMP=null;
+function erankList(){
+ const st=evoStamp();
+ if(ERANK_STAMP!==st||!ERANK){
+  ERANK=ST.players.slice().map(p=>({p,v:vseQuick(p.id)}))
+   .sort((a,b)=>b.v-a.v||RT(b.p)-RT(a.p)||String(a.p.name).localeCompare(String(b.p.name),'uk'));
+  ERANK_STAMP=st;
+ }
+ return ERANK;
+}
+const erankOf=pid=>erankList().findIndex(x=>x.p.id===pid)+1;
+
+/* ---------- лидеры по ядрам ---------- */
+function coreLeaders(){
+ const by={};
+ ST.players.forEach(p=>{
+  const e=evo(p.id);if(e.core==='HUMAN')return;
+  (by[e.core]=by[e.core]||[]).push({p,e});
+ });
+ Object.keys(by).forEach(k=>by[k].sort((a,b)=>b.e.vse-a.e.vse||RT(b.p)-RT(a.p)));
+ return by;
+}
+
+/* ---------- ссылка на вселенную ---------- */
+const vhcLink=p=>'https://vhc.com.ua/?mf='+encodeURIComponent(p&&p.mid||'');
+
+/* ---------- объявление о новых артефактах и пробуждении ядра ---------- */
+function announceEvo(pid,before){
+ const p=P(pid);if(!p||!before)return;
+ const a=evo(pid);
+ if(a.core!==before.core&&a.core!=='HUMAN'){
+  const c=coreOf(a.core);
+  feed(`<b>CORE AWAKENING</b> · ${esc(p.name)} — <span style="color:${c.c}">${esc(a.core)}</span>`);
+  toast('CORE AWAKENING: '+short(p.name)+' — '+a.core);
+ }
+ const fresh=a.arts.filter(x=>before.arts.indexOf(x)<0);
+ if(fresh.length){
+  const one=ARTS.find(x=>x.c===fresh[0]);
+  const cc=coreOf(one.f);
+  feed(`Артефакт <b style="color:${cc.c}">${esc(one.ru)}</b> — ${esc(p.name)} · ${a.arts.length}/64`
+    +(fresh.length>1?` <span class="dim">и ещё ${fresh.length-1}</span>`:''));
+ }
 }
 
 /* ---------- ХРАНЕНИЕ ---------- */
@@ -1039,12 +1441,22 @@ const relBar=p=>{const r=relOf(p);
   <span class="num dim" style="font-size:11.5px">${r}%</span></span>`};
 const formTag=f=>f>0?`<span class="num" style="color:#7ED9A0">+${f}</span>`:f<0?`<span class="num" style="color:#E2695E">${f}</span>`:'<span class="dim">—</span>';
 
+const RTABS=[['sport','Сила','WORLD SPORT RANKING'],['evo','Эволюция','WORLD EVOLUTION RANKING'],['core','Ядра','CORE RANKING']];
+function rtabBar(){
+ const t=S.rtab||'sport';
+ return `<div class="row wr" style="gap:7px;margin-bottom:16px">${RTABS.map(x=>
+  `<button class="tab ${t===x[0]?'on':''}" data-act="rtab:${x[0]}" type="button">${x[1]}</button>`).join('')}</div>`;
+}
 function vRating(){
+ const t=S.rtab||'sport';
+ if(t==='evo')return vEvo();
+ if(t==='core')return vCore();
  const list=ranked(),played=list.filter(p=>(p.rm|0)>0).length;
  const q=(S.rq||'').toLowerCase().trim();
- return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">MATCHFLOW RATING</div>
+ return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">WORLD SPORT RANKING</div>
    <h1 class="h-page" style="margin-top:5px">Рейтинг силы</h1></div><span class="sp"></span>
    <span class="chip">${played} из ${list.length} с матчами</span></div>
+ ${rtabBar()}
  <div class="card" style="margin-bottom:14px"><div class="card-b" style="padding-top:14px">
   <div class="row wr" style="gap:22px;align-items:flex-start">
    <div style="flex:1;min-width:240px"><div class="h-sec">Как это считается</div>
@@ -1075,6 +1487,79 @@ function vRating(){
    <td style="text-align:right">${formTag(c.form)}</td>
    <td style="text-align:center">${(p.tw|0)?`<span class="chip gold">${p.tw}</span>`:'<span class="dim">—</span>'}</td></tr>`}).join('')}
   </tbody></table></div></div></div>`;
+}
+
+
+/* ---------- ЗАЧЁТ ЭВОЛЮЦИИ ---------- */
+const coreBadge=(k,sz)=>{const c=coreOf(k);
+ return `<span class="chip" style="color:${c.c};border-color:${c.c}55;background:${c.c}14;font-size:${sz||11}px;letter-spacing:.1em">${esc(k)}</span>`};
+function vseBar(v){
+ const b=bandOf(v);
+ return `<span class="row" style="gap:8px"><span style="width:88px;height:6px;border-radius:4px;background:rgba(255,214,170,.12);overflow:hidden;display:inline-block">
+  <span style="display:block;height:100%;width:${Math.min(100,v)}%;background:${b.c}"></span></span>
+  <span class="num" style="font-size:13px;font-weight:700;color:${b.c}">${v}</span></span>`;
+}
+function vEvo(){
+ const list=erankList();
+ return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">WORLD EVOLUTION RANKING</div>
+   <h1 class="h-page" style="margin-top:5px">Рейтинг эволюции</h1></div><span class="sp"></span>
+   <span class="chip">${list.filter(x=>x.v>0).length} из ${list.length} в развитии</span></div>
+ ${rtabBar()}
+ <div class="card" style="margin-bottom:14px"><div class="card-b" style="padding-top:14px">
+  <div class="row wr" style="gap:22px;align-items:flex-start">
+   <div style="flex:1;min-width:250px"><div class="h-sec">VSE — эволюция игрока</div>
+    <p class="mut" style="margin-top:7px;font-size:12.5px;line-height:1.65">
+     Рейтинг силы отвечает на вопрос «кто сильнее». VSE отвечает на другой — «как меняется игрок».
+     Он складывается из опыта, роста рейтинга, стабильности, лучшей взятой высоты, активности и собранных достижений.
+     Слабый игрок, который растёт и не проваливается, поднимается по VSE выше зазвездившегося сильного.</p></div>
+   <div style="flex:1;min-width:250px"><div class="h-sec">Уровни</div>
+    <div class="grid" style="gap:6px;margin-top:8px">${VSE_BANDS.map(b=>
+     `<div class="row" style="gap:9px;font-size:12.5px"><span class="num dim" style="width:58px">${b.lo}–${b.hi>101?101:b.hi}</span>
+      <span style="color:${b.c};font-family:var(--disp);letter-spacing:.1em;font-size:11.5px">${b.k}</span>
+      <span class="dim">${b.ru}</span></div>`).join('')}</div></div></div></div></div>
+ <div class="card"><div class="card-h"><span class="h-sec">Таблица</span></div>
+  <div class="card-b" style="padding-top:12px"><div class="scrollx"><table class="t">
+  <thead><tr><th style="width:44px">№</th><th>Игрок</th><th>VSE</th><th>Уровень</th><th>Ядро</th>
+   <th>Класс</th><th style="text-align:center">Артефакты</th><th style="text-align:center">Достижения</th></tr></thead>
+  <tbody>${list.map((x,i)=>{const e=evo(x.p.id),b=e.band;
+   return `<tr>
+   <td class="num" style="color:${i<3?'var(--amber-2)':'var(--dim)'};font-weight:${i<3?'700':'400'}">${i+1}</td>
+   <td class="clk" data-p="${x.p.id}">${pline(x.p.id,x.p.club||'')}</td>
+   <td>${vseBar(e.vse)}</td>
+   <td style="color:${b.c};font-family:var(--disp);font-size:12px;letter-spacing:.1em">${b.k}</td>
+   <td>${coreBadge(e.core)}</td>
+   <td class="mut" style="font-size:12px;letter-spacing:.08em">${esc(e.cls)}</td>
+   <td class="num" style="text-align:center">${e.arts.length}<span class="dim">/64</span></td>
+   <td class="num" style="text-align:center">${e.achCount||'<span class="dim">0</span>'}</td></tr>`}).join('')}
+  </tbody></table></div></div></div>`;
+}
+
+/* ---------- ЗАЧЁТ ПО ЯДРАМ ---------- */
+function vCore(){
+ const by=coreLeaders(),awake=ST.players.filter(p=>evo(p.id).core!=='HUMAN').length;
+ const cards=CORES.filter(c=>c.k!=='HUMAN').map(c=>{
+  const rows=by[c.k]||[];
+  return `<div class="card" style="border-color:${rows.length?c.c+'44':'var(--line)'}">
+   <div class="card-h"><span style="font-family:var(--disp);font-size:14px;letter-spacing:.12em;color:${c.c}">${esc(c.k)}</span>
+    <span class="sp"></span>${rows.length?`<span class="chip" style="color:${c.c};border-color:${c.c}55">${rows.length}</span>`:'<span class="chip" style="opacity:.45">пусто</span>'}</div>
+   <div class="card-b">
+    <div class="dim" style="font-size:12px;margin-bottom:10px">${esc(c.d)}</div>
+    ${rows.length?rows.slice(0,5).map((r,i)=>`<div class="row qrow" style="padding:8px 0;border-bottom:1px solid rgba(255,214,170,.05)">
+      <span class="num" style="width:26px;color:${i===0?c.c:'var(--dim)'};font-weight:${i===0?'700':'400'}">${i+1}</span>
+      <span style="flex:1;min-width:0;padding-right:10px" class="clk" data-p="${r.p.id}">${pline(r.p.id,'')}</span>
+      <span class="num" style="color:${r.e.band.c};font-weight:700">${r.e.vse}</span></div>`).join('')
+     :'<div class="empty" style="padding:18px 0">Ядро ещё никто не пробудил</div>'}</div></div>`;
+ }).join('');
+ return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">CORE RANKING</div>
+   <h1 class="h-page" style="margin-top:5px">Зачёт по ядрам</h1></div><span class="sp"></span>
+   <span class="chip">${awake} пробуждённых</span></div>
+ ${rtabBar()}
+ <div class="card" style="margin-bottom:14px"><div class="card-b" style="padding-top:14px">
+  <p class="mut" style="font-size:12.5px;line-height:1.65;max-width:78ch">
+   Ядро не выдаётся за силу. Игрок начинает как <b style="color:var(--ink)">HUMAN</b>, играет,
+   система смотрит на характер его игры — и после ${CORE_MIN} рейтинговых матчей ядро пробуждается само.
+   Поэтому игрок из середины рейтинга силы может быть первым номером своего ядра в мире.</p></div></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(270px,1fr))">${cards}</div>`;
 }
 
 function vPeople(){
@@ -1114,7 +1599,7 @@ function filterPeople(){
 function vPlayer(){
  const p=P(S.player);
  if(!p)return '<div class="card"><div class="empty">Игрок не найден</div></div>';
- const c=catOf(p).c,e=ent(p.id),t=T(),cr=career(p.id),rk=rankOf(p.id);
+ const c=catOf(p).c,e=ent(p.id),t=T(),cr=career(p.id),rk=rankOf(p.id),ev=evo(p.id),erk=erankOf(p.id);
  const mine=t&&t.br?ids().filter(i=>MM(i).a===p.id||MM(i).b===p.id):[];
  const cell=(k,v,acc)=>`<div style="padding:10px 0;border-bottom:1px solid rgba(255,214,170,.06)">
    <div class="h-sec" style="font-size:9.5px">${k}</div>
@@ -1126,6 +1611,7 @@ function vPlayer(){
   <div class="av" style="width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font-family:var(--mono);font-size:21px;font-weight:700;background:${c}1f;color:${c};border:1px solid ${c}55">${esc(initials(p.name))}</div>
   <div style="flex:1;min-width:220px"><h1 class="h-page">${esc(p.name)}</h1>
    <div class="row wr" style="gap:9px;margin-top:8px">${catBadge(p,16)}
+    ${ev.core!=='HUMAN'?coreBadge(ev.core,11.5):''}
     <span class="mut">${esc([p.club,p.city].filter(Boolean).join(', '))}</span>
     ${cr.n?`<span class="chip st">№${rk} в рейтинге</span>`:''}
     ${e&&e.seed?`<span class="chip">посев №${e.seed}</span>`:''}
@@ -1152,6 +1638,78 @@ function vPlayer(){
   <div class="row" style="gap:9px;margin-top:12px">${relBar(p)}
    <span class="dim" style="font-size:11.5px">${relOf(p)>=80?'рейтинг устоялся':relOf(p)>=45?'рейтинг ещё уточняется':'нужно больше матчей'}</span></div>
   </div></div>
+
+ <div class="card" style="margin-bottom:14px;border-color:${ev.core!=='HUMAN'?coreOf(ev.core).c+'44':'var(--line)'}">
+  <div class="card-h"><span class="h-sec">EVOLUTION · VENARION HUMAN CORE</span><span class="sp"></span>
+   ${cr.n?`<span class="chip st">№${erk} в эволюции</span>`:''}
+   <a class="btn sm" href="${vhcLink(p)}" target="_blank" rel="noopener">VIEW VHC PROFILE →</a></div>
+  <div class="card-b" style="padding-top:6px">
+   <div class="row wr" style="gap:26px;align-items:flex-start">
+
+    <div style="min-width:200px">
+     <div class="h-sec" style="font-size:9.5px">VSE</div>
+     <div class="row" style="gap:12px;align-items:baseline;margin-top:2px">
+      <span class="num" style="font-size:40px;font-weight:700;color:${ev.band.c};line-height:1">${ev.vse}</span>
+      <span style="font-family:var(--disp);font-size:13px;letter-spacing:.14em;color:${ev.band.c}">${ev.band.k}</span></div>
+     <div class="dim" style="font-size:12px;margin-top:4px">${esc(ev.band.ru)}</div>
+     <div style="margin-top:12px;height:8px;border-radius:5px;background:rgba(255,214,170,.1);overflow:hidden;position:relative">
+      <div style="height:100%;width:${Math.min(100,ev.vse)}%;background:linear-gradient(90deg,${VSE_BANDS[0].c},${ev.band.c})"></div>
+      ${VSE_BANDS.slice(1).map(b=>`<span style="position:absolute;top:0;bottom:0;left:${b.lo}%;width:1px;background:rgba(10,9,9,.65)"></span>`).join('')}
+     </div>
+    </div>
+
+    <div style="min-width:190px">
+     <div class="h-sec" style="font-size:9.5px">CORE</div>
+     <div class="row" style="gap:10px;align-items:center;margin-top:6px">
+      <span style="width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none;
+        background:${coreOf(ev.core).c}1f;border:1px solid ${coreOf(ev.core).c}66">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2 21 12 12 22 3 12Z" fill="none" stroke="${coreOf(ev.core).c}" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="${coreOf(ev.core).c}" opacity=".8"/></svg></span>
+      <span style="min-width:0"><div style="font-family:var(--disp);font-size:15px;font-weight:600;letter-spacing:.08em;color:${coreOf(ev.core).c}">${esc(ev.core)}</div>
+       <div class="dim" style="font-size:11.5px">${esc(coreOf(ev.core).d)}</div></span></div>
+     ${ev.core==='HUMAN'?`<div class="note" style="margin-top:10px">До пробуждения ядра — ${Math.max(0,CORE_MIN-ev.s.n)} матч(ей)</div>`:''}
+     <div class="row" style="gap:16px;margin-top:12px">
+      <span><div class="h-sec" style="font-size:9.5px">CLASS</div><div class="num" style="font-size:14px;margin-top:2px">${esc(ev.cls)}</div></span>
+      <span><div class="h-sec" style="font-size:9.5px">ARTIFACTS</div><div class="num" style="font-size:14px;margin-top:2px;color:var(--amber-2)">${ev.arts.length}<span class="dim">/64</span></div></span>
+      <span><div class="h-sec" style="font-size:9.5px">ACHIEVEMENTS</div><div class="num" style="font-size:14px;margin-top:2px">${ev.achCount}</div></span></div>
+    </div>
+
+    <div style="flex:1;min-width:230px">
+     <div class="h-sec" style="font-size:9.5px">Из чего складывается VSE</div>
+     <div class="grid" style="gap:7px;margin-top:8px">${[['exp','Опыт'],['grow','Рост'],['stab','Стабильность'],['peak','Пик'],['act','Активность'],['char','Характер']]
+       .map(([k,lab])=>{const v=Math.round(ev.c[k]||0);
+        return `<div class="row" style="gap:9px;font-size:12px"><span class="dim" style="width:92px">${lab}</span>
+         <span style="flex:1;height:5px;border-radius:3px;background:rgba(255,214,170,.1);overflow:hidden;min-width:40px">
+          <span style="display:block;height:100%;width:${v}%;background:${ev.band.c}"></span></span>
+         <span class="num dim" style="width:30px;text-align:right">${v}</span></div>`}).join('')}</div>
+    </div>
+
+   </div>
+  </div>
+ </div>
+
+ <div class="split" style="margin-bottom:14px">
+  <div class="card"><div class="card-h"><span class="h-sec">Артефакты</span><span class="sp"></span>
+    <span class="chip ${ev.arts.length?'gold':''}">${ev.arts.length} / 64</span></div>
+   <div class="card-b">
+    <div class="arts">${ARTS.map(a=>{const got=ev.arts.indexOf(a.c)>=0,col=coreOf(a.f).c;
+      return `<span class="art ${got?'got':''}" title="${esc(a.ru)} — ${esc(a.d)}${got?'':' (не получен)'}"
+        style="${got?`color:${col};border-color:${col}77;background:${col}18`:''}">${a.c}</span>`}).join('')}</div>
+    ${ev.arts.length?`<div style="margin-top:14px">${ev.arts.slice(-6).reverse().map(cd=>{const a=ARTS.find(x=>x.c===cd),col=coreOf(a.f).c;
+      return `<div class="row" style="gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,214,170,.05)">
+       <span class="num" style="width:34px;color:${col}">${a.c}</span>
+       <span style="flex:1;min-width:0"><b style="font-size:13.5px">${esc(a.ru)}</b>
+        <span class="dim" style="display:block;font-size:11.5px">${esc(a.f)} · ${esc(a.d)}</span></span></div>`}).join('')}</div>`
+     :'<div class="empty" style="padding:16px 0">Артефактов пока нет</div>'}</div></div>
+
+  <div class="card"><div class="card-h"><span class="h-sec">Достижения</span><span class="sp"></span>
+    <span class="chip">${ev.achCount} / ${ACHS.length}</span></div>
+   <div class="card-b">${ACHS.map(a=>{const c=ev.ach[a.k]||0;
+     return `<div class="row" style="gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,214,170,.05);opacity:${c?1:.4}">
+      <span style="width:9px;height:9px;flex:none;border:1.5px solid ${c?'#7ED9A0':'var(--ink-3)'};border-radius:2px;transform:rotate(45deg);background:${c?'rgba(126,217,160,.25)':'transparent'}"></span>
+      <span style="flex:1;min-width:0"><b style="font-size:13.5px">${esc(a.ru)}</b>
+       <span class="dim" style="display:block;font-size:11.5px">${esc(a.d)}</span></span>
+      ${c>1?`<span class="num" style="color:var(--amber-2)">×${c}</span>`:''}</div>`}).join('')}</div></div>
+ </div>
 
  <div class="split"><div class="card"><div class="card-h"><span class="h-sec">История матчей</span><span class="sp"></span><span class="chip">${cr.n}</span></div><div class="card-b">
    ${cr.n?cr.h.slice(0,14).map(x=>{const win=x.w===p.id,opp=P(win?x.l:x.w);
@@ -1384,6 +1942,7 @@ function act(a){
  if(k==='demo')return confirmBox('Загрузить демо-набор?','Текущие турниры, составы и сетки будут заменены демонстрационными данными: VENOM OPEN, DRY LEAF + CITADEL, категории Billiarder. База игроков тоже перезапишется.',()=>{
    try{ST=migrate(JSON.parse(document.getElementById('app-state').textContent));toast('Демо-набор загружен');save();go('tours')}
    catch(e){toast('Не удалось прочитать демо-набор')}});
+ if(k==='rtab'){S.rtab=arg;S.rq='';return go('rating')}
  if(k==='savecfg')return saveCfg();
  if(k==='savecats')return saveCats();
  if(k==='catadd'){ST.cats=CATS().slice();ST.cats.push({code:'НОВЫЙ СТАТУС',c:'#9BB4C7'});save();return render()}
