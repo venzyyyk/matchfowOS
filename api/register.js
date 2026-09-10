@@ -37,6 +37,7 @@ async function attempt(b) {
     if (!t || t.status !== 'reg') return { code: 409, out: { error: 'closed' } };
     if (!Array.isArray(t.entries)) t.entries = [];
     if (t.entries.length >= 400) return { code: 409, out: { error: 'full' } };
+    if (Array.isArray(st.players) && st.players.length >= 3000) return { code: 409, out: { error: 'full' } };
     const dup = t.entries.some(e => {
       const p = (st.players || []).find(x => x.id === e.p);
       return p && String(p.name).toLowerCase() === name.toLowerCase() && e.st === 'new';
@@ -72,12 +73,17 @@ module.exports = async (req, res) => {
   try {
     const b = S.body(req);
     if (clean(b.name, 80).length < 3) return res.status(400).json({ error: 'name' });
+
+    /* защита от заваливания заявками: пять с одного источника за десять минут */
+    const rl = await S.hit('reg', req, 5, 10 * 60 * 1000);
+    if (!rl.ok) return res.status(429).json({ error: 'too_many', retry: rl.retry });
+
     for (let i = 0; i < 3; i++) {
       const r = await attempt(b);
       if (r) return res.status(r.code).json(r.out);
     }
     return res.status(409).json({ error: 'busy' });
   } catch (e) {
-    return res.status(500).json({ error: String((e && e.message) || e) });
+    return S.oops(res, e);
   }
 };
