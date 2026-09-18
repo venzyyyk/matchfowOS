@@ -306,9 +306,51 @@ body.adm .m-s[data-seat][data-pid]{cursor:grab}
 .m-s.drop{background:rgba(245,144,43,.2);box-shadow:inset 0 0 0 1px var(--amber)}
 body.dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
 body.dragging *{cursor:grabbing!important}
-.ghost{position:fixed;left:0;top:0;z-index:90;pointer-events:none;
+.dgh{position:fixed;left:0;top:0;z-index:90;pointer-events:none;
  padding:6px 11px;border-radius:9px;border:1px solid var(--amber);background:var(--ground-2);
  color:var(--ink);font-size:12.5px;font-weight:600;box-shadow:var(--sh)}
+
+/* ── эфир ── */
+.air-v{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+.air-v iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.air-bad{display:grid;place-items:center;height:100%;text-align:center;color:var(--ink-2);font-size:13px;padding:16px}
+.air-board{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;
+ border-top:1px solid var(--line);background:var(--surface-2)}
+.air-board.empty-b{display:flex}
+.air-p{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 12px;padding:11px 14px;min-width:0}
+.air-p.lead{background:linear-gradient(90deg,var(--amber-dim),transparent)}
+.air-p.lead .air-sc{color:var(--amber-2)}
+.air-nm{font-family:var(--disp);font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.air-sub{grid-column:1;font-size:11px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.air-sc{grid-column:2;grid-row:1/span 2;font-family:var(--mono);font-size:30px;font-weight:700;line-height:1}
+.air-mid{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding:0 10px;white-space:nowrap}
+
+/* ── оверлей для OBS ── */
+body.overlay-mode{background:transparent!important;margin:0;overflow:hidden}
+body.overlay-mode .app,body.overlay-mode .rail,body.overlay-mode .topbar{display:none!important}
+body.chroma-bg{background:#00B140!important}
+.ov{font-family:var(--body);padding:14px;display:inline-block;max-width:100%}
+.ov-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;
+ border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.45);border:1px solid rgba(255,214,170,.22)}
+.ov-p{padding:12px 18px;background:rgba(12,10,9,.94);display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0}
+.ov-p.r{text-align:right;align-items:flex-end}
+.ov-p.l.lead{background:linear-gradient(270deg,rgba(245,144,43,.3),rgba(12,10,9,.94) 62%)}
+.ov-p.r.lead{background:linear-gradient(90deg,rgba(245,144,43,.3),rgba(12,10,9,.94) 62%)}
+.ov-p.lead .ov-nm{color:#FFF6EA}
+.ov-nm{font-family:var(--disp);font-size:24px;font-weight:600;color:#F3ECE3;letter-spacing:-.01em;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw}
+.ov-sub{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#A79C90;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw}
+.ov-sc{display:flex;align-items:center;gap:10px;padding:10px 22px;background:rgba(6,5,5,.97)}
+.ov-sc b{font-family:var(--mono);font-size:42px;font-weight:700;color:#FFB662;line-height:1}
+.ov-sc i{font-family:var(--mono);font-size:26px;color:#6E6459;font-style:normal}
+.ov-foot{margin-top:7px;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+ color:#CDBFAF;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+.ov.idle .ov-wait{padding:14px 22px;border-radius:12px;background:rgba(12,10,9,.9);color:#A79C90;
+ font-size:14px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,214,170,.18)}
+@media (max-width:620px){
+ .ov-nm{font-size:17px;max-width:32vw}.ov-sc b{font-size:30px}.ov-sc{padding:8px 14px}
+ .air-board{grid-template-columns:minmax(0,1fr)}.air-mid{display:none}
+}
 .card.cur{border-color:rgba(245,144,43,.45)}
 .tsel{cursor:pointer;border:1px solid var(--line);font:inherit}
 .tsel:hover{border-color:var(--line-2)}
@@ -318,7 +360,7 @@ body.dragging *{cursor:grabbing!important}
 </style>
 
 <div id="root"></div>
-<script id="app-state" type="application/json">{"v": 5, "build": "20260918-1855", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
+<script id="app-state" type="application/json">{"v": 5, "build": "20260918-1927", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
 <script id="app-code">
 'use strict';
 /* ============================================================
@@ -354,6 +396,8 @@ let ST=JSON.parse(document.getElementById('app-state').textContent);
 let ADMIN=sessionStorage.getItem('mfos-adm')==='1';
 let CAP=null,LOCAL=false,SYNC='ok',pubT=null;
 let MODE='local',REV=0,PIN=sessionStorage.getItem('mfos-pin')||'',pollT=null;
+let BOOTED=false,DIRTY=false;      /* BOOTED: режим хранения определён · DIRTY: есть несохранённое */
+const LOCAL_PIN='2604';           /* только для работы без сервера; на сервере код в JUDGE_PIN */
 const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:'',rtab:'sport',seat:false,hand:null};
 
 /* ---------- МИГРАЦИЯ СТАРОГО СОСТОЯНИЯ ---------- */
@@ -372,7 +416,7 @@ function migrate(s){
   tour.entries.push({p:p.id,st:p.st||'new',seed:p.seed||null,w:p.w||0,l:p.l||0,place:p.place||null});
  });
  return {v:5,cats:s.cats||DEF_CATS,players,tours:[tour],cur:'t1',hist:[],
-  pin:s.pin||'2604',midPrefix:s.midPrefix||'123',midSeq:s.midSeq||0,arch:s.arch||[]};
+  midPrefix:s.midPrefix||'123',midSeq:s.midSeq||0,arch:s.arch||[]};
 }
 ST=migrate(ST);
 
@@ -1210,6 +1254,143 @@ function announceEvo(pid,before){
     +(fresh.length>1?` <span class="dim">и ещё ${fresh.length-1}</span>`:''));
  }
 }
+/* ============================================================
+   ТРАНСЛЯЦИИ
+   Стрим привязывается к столу. Дальше он живёт в трёх местах:
+   «Эфир» — плитки видео со счётом, табло — отметка LIVE CAM,
+   оверлей — чистая плашка для OBS по адресу ?overlay=<стол>.
+   ============================================================ */
+
+/* ссылка зрителя → ссылка плеера */
+function streamEmbed(url){
+ const u=String(url||'').trim();
+ if(!u)return '';
+ if(!/^https?:\/\//i.test(u))return '';
+ const host=location.hostname||'localhost';
+ let m;
+ /* уже готовый плеер — берём как есть */
+ if(/\/embed\/|player\.twitch\.tv|player\.kick\.com|\/video_ext\.php|rutube\.ru\/play\//i.test(u))return u;
+ if((m=u.match(/youtu\.be\/([\w-]{6,})/i)))            return 'https://www.youtube.com/embed/'+m[1]+'?autoplay=1&mute=1&playsinline=1';
+ if((m=u.match(/youtube\.com\/live\/([\w-]{6,})/i)))   return 'https://www.youtube.com/embed/'+m[1]+'?autoplay=1&mute=1&playsinline=1';
+ if((m=u.match(/youtube\.com\/shorts\/([\w-]{6,})/i))) return 'https://www.youtube.com/embed/'+m[1]+'?autoplay=1&mute=1&playsinline=1';
+ if((m=u.match(/[?&]v=([\w-]{6,})/i)))                 return 'https://www.youtube.com/embed/'+m[1]+'?autoplay=1&mute=1&playsinline=1';
+ if((m=u.match(/youtube\.com\/channel\/(UC[\w-]+)/i))) return 'https://www.youtube.com/embed/live_stream?channel='+m[1]+'&autoplay=1&mute=1';
+ if((m=u.match(/twitch\.tv\/([\w_]{3,})/i)))           return 'https://player.twitch.tv/?channel='+m[1]+'&parent='+host+'&muted=true&autoplay=true';
+ if((m=u.match(/kick\.com\/([\w_-]{3,})/i)))           return 'https://player.kick.com/'+m[1]+'?autoplay=true&muted=true';
+ if((m=u.match(/rutube\.ru\/video\/([\w]+)/i)))        return 'https://rutube.ru/play/embed/'+m[1];
+ if(/vk(video)?\.(com|ru)\//i.test(u))                 return u;    /* у ВК ссылка на плеер копируется целиком */
+ return '';
+}
+const streamKind=url=>{
+ const u=String(url||'');
+ if(/youtu/i.test(u))return 'YouTube';
+ if(/twitch/i.test(u))return 'Twitch';
+ if(/kick\.com/i.test(u))return 'Kick';
+ if(/rutube/i.test(u))return 'Rutube';
+ if(/vk(video)?\./i.test(u))return 'VK';
+ return 'Видео';
+};
+/* {номер стола: ссылка} у турнира */
+const streamsOf=t=>{
+ const out={};const s=(t&&t.str)||{};
+ Object.keys(s).forEach(k=>{const n=parseInt(k,10);if(n>0&&String(s[k]).trim())out[n]=String(s[k]).trim()});
+ return out;
+};
+const hasStreams=t=>Object.keys(streamsOf(t)).length>0;
+
+/* матч, который прямо сейчас идёт на этом столе (по всем турнирам) */
+function liveOnTable(tbl){
+ const keep=ST.cur;let res=null;
+ (ST.tours||[]).forEach(t=>{
+  if(res||!t.br)return;
+  ST.cur=t.id;
+  try{ids().forEach(i=>{const m=MM(i);if(!res&&m.st==='live'&&+m.tbl===+tbl)res={t,id:i,m,lab:labOf(i)}})}catch(e){}
+ });
+ ST.cur=keep;
+ return res;
+}
+
+/* ---------- ЭФИР ---------- */
+function vAir(){
+ const t=T(),str=streamsOf(t),nums=Object.keys(str).map(Number).sort((a,b)=>a-b);
+ if(!nums.length)return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">Прямая трансляция</div>
+   <h1 class="h-page" style="margin-top:5px">Эфир</h1></div></div>
+  <div class="card"><div class="empty" style="padding:56px 20px">
+   Ни к одному столу не подключён стрим.${ADMIN?'<br><br>Судейская → карточка турнира → «Трансляции»: вставьте ссылку на YouTube, Twitch или Kick для нужного стола.':''}</div></div>`;
+
+ const tile=n=>{
+  const src=streamEmbed(str[n]),cur=liveOnTable(n);
+  const head=cur?`<span class="chip live"><span class="dot"></span>в эфире</span>
+    <span class="dim" style="font-size:11.5px">${esc(cur.t.name)} · ${esc(cur.lab)}</span>`
+   :'<span class="chip">стол свободен</span>';
+  const board=cur?(()=>{
+   const m=cur.m,pa=P(m.a),pb=P(m.b),race=cur.t.race;
+   const side=(p,sc,other,h)=>`<div class="air-p ${sc>other?'lead':''}">
+     <span class="air-nm">${esc(p?p.name:'—')}</span>
+     <span class="air-sub">${p?esc([catOf(p).code,p.club].filter(Boolean).join(' · ')):''}${h?` · <b style="color:var(--amber-2)">фора +${h}</b>`:''}</span>
+     <span class="air-sc">${sc}</span></div>`;
+   return `<div class="air-board">
+    ${side(pa,m.sa,m.sb,m.h&&m.h.to===m.a?m.h.n:0)}
+    <div class="air-mid">до ${race}</div>
+    ${side(pb,m.sb,m.sa,m.h&&m.h.to===m.b?m.h.n:0)}</div>`;
+  })():'<div class="air-board empty-b"><div class="dim" style="padding:14px;text-align:center;width:100%">Матч ещё не запущен</div></div>';
+  return `<div class="card" style="overflow:hidden;padding:0">
+   <div class="card-h" style="padding:11px 14px"><span class="h-sec">Стол ${n}</span>
+    <span class="sp"></span>${head}</div>
+   <div class="air-v">${src
+     ? `<iframe src="${esc(src)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="origin"></iframe>`
+     : `<div class="air-bad">Ссылку не удалось разобрать.<br><span class="dim">${esc(str[n])}</span></div>`}</div>
+   ${board}
+   <div class="row" style="gap:8px;padding:10px 14px;border-top:1px solid var(--line)">
+    <span class="dim" style="font-size:11.5px">${esc(streamKind(str[n]))}</span><span class="sp"></span>
+    <a class="btn sm ghost" href="${esc(str[n])}" target="_blank" rel="noopener">Открыть у себя</a>
+    ${ADMIN?`<a class="btn sm" href="?overlay=${n}" target="_blank" rel="noopener">Оверлей для OBS</a>`:''}</div>
+  </div>`;
+ };
+ return `<div class="row wr" style="margin-bottom:14px;gap:12px"><div><div class="h-sec">Прямая трансляция</div>
+   <h1 class="h-page" style="margin-top:5px">Эфир · ${esc(t.name)}</h1></div><span class="sp"></span>
+   <span class="chip ${nums.some(n=>liveOnTable(n))?'live':''}">${nums.length} ${nums.length===1?'стол':'столов'} в сети</span></div>
+  ${ADMIN?`<div class="note" style="margin-bottom:12px">Счёт под видео обновляется сам, пока судья вносит результаты. Для стриминговой программы возьмите «Оверлей для OBS» — это прозрачная плашка со счётом.</div>`:''}
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(420px,1fr))">${nums.map(tile).join('')}</div>`;
+}
+
+/* ---------- ОВЕРЛЕЙ ДЛЯ OBS ---------- */
+function overlayHtml(tbl,opt){
+ const cur=liveOnTable(tbl);
+ if(!cur)return `<div class="ov idle"><div class="ov-wait">Стол ${esc(tbl)} · ожидание матча</div></div>`;
+ const m=cur.m,t=cur.t,pa=P(m.a),pb=P(m.b);
+ const side=(p,sc,other,h,cls)=>`<div class="ov-p ${cls} ${sc>other?'lead':''}">
+   <span class="ov-nm">${esc(p?p.name:'—')}</span>
+   <span class="ov-sub">${p?esc([catOf(p).code,p.club||p.city].filter(Boolean).join(' · ')):''}${h?` · фора +${h}`:''}</span>
+  </div>`;
+ return `<div class="ov ${opt.chroma?'chroma':''}">
+  <div class="ov-row">
+   ${side(pa,m.sa,m.sb,m.h&&m.h.to===m.a?m.h.n:0,'l')}
+   <div class="ov-sc"><b>${m.sa}</b><i>:</i><b>${m.sb}</b></div>
+   ${side(pb,m.sb,m.sa,m.h&&m.h.to===m.b?m.h.n:0,'r')}
+  </div>
+  <div class="ov-foot">${esc(t.name)} · ${esc(cur.lab)} · до ${t.race} побед · Стол ${esc(tbl)}</div>
+ </div>`;
+}
+function bootOverlay(tbl,opt){
+ document.body.classList.add('overlay-mode');
+ if(opt.chroma)document.body.classList.add('chroma-bg');
+ const root=document.getElementById('root');
+ const paint=()=>{root.innerHTML=overlayHtml(tbl,opt)};
+ paint();
+ (async function loop(){
+  for(;;){
+   try{
+    const r=await fetch('/api/state?since='+REV,{cache:'no-store'});
+    if(r.ok){const j=await r.json();
+     if(j&&j.state&&(j.rev||0)>REV){REV=j.rev;ST=migrate(j.state);paint()}
+     else if(j&&typeof j.rev==='number'&&!REV){REV=j.rev}
+    }
+   }catch(e){}
+   await new Promise(x=>setTimeout(x,3000));
+  }
+ })();
+}
 
 /* ---------- ХРАНЕНИЕ ---------- */
 const safeUrl=u=>{const v=String(u||'').trim();return /^https?:\/\//i.test(v)?v:''};
@@ -1254,7 +1435,16 @@ async function pushState(){
  const out=Object.assign({},ST);if(MODE==='server')delete out.pin;
  const r=await api('/api/state',{method:'POST',body:JSON.stringify({state:out,rev:REV})});
  if(r.ok&&r.body){REV=r.body.rev;setSync('ok');return}
- if(r.status===401){setSync('ro');toast('Код судьи не принят — изменения не сохранены');return}
+ if(r.status===401){
+  ADMIN=false;PIN='';DIRTY=true;
+  sessionStorage.removeItem('mfos-adm');sessionStorage.removeItem('mfos-pin');
+  document.body.classList.remove('adm');setSync('ro');render();
+  toast('Сервер не принял код судьи. Войдите заново — изменения не потеряются');
+  return pinForm();
+ }
+ if(r.status===429){setSync('ro');DIRTY=true;
+  toast('Слишком много попыток входа. Подождите и повторите');return}
+ if(r.status===413){setSync('ro');toast('Данные турнира слишком большие для сохранения');return}
  if(r.status===409&&r.body&&r.body.state){ST=migrate(r.body.state);REV=r.body.rev;setSync('conflict');toast('Кто-то изменил раньше — забрал свежую версию');render();return}
  setSync('ro');toast('Не удалось сохранить, проверьте связь');
 }
@@ -1327,15 +1517,21 @@ function pinForm(){
 }
 async function tryPin(){
  const v=($('#pin').value||'').trim();
+ if(!v)return;
+ if(!BOOTED){                       /* иначе код проверится локально и судья войдёт «без ключа» */
+  toast('Секунду, подключаюсь к серверу…');
+  for(let i=0;i<50&&!BOOTED;i++)await new Promise(r=>setTimeout(r,100));
+ }
  if(MODE==='server'){
   PIN=v;const r=await api('/api/state',{method:'POST',body:JSON.stringify({check:1})});
   if(r.status===429){PIN='';return toast('Слишком много попыток. Подождите '+Math.ceil(((r.body&&r.body.retry)||600)/60)+' мин')}
   if(!r.ok){PIN='';return toast('Неверный код')}
   sessionStorage.setItem('mfos-pin',v);
- }else if(v!==String(ST.pin))return toast('Неверный код');
+ }else if(v!==String(ST.pin||LOCAL_PIN))return toast('Неверный код');
  ADMIN=true;sessionStorage.setItem('mfos-adm','1');document.body.classList.add('adm');
  closeModal();toast('Режим судьи включён');render();
  if(MODE==='server'){REV=0;pull()}   /* судье сервер отдаёт полное состояние: с контактами */
+ if(DIRTY){DIRTY=false;toast('Вошли — досохраняю изменения');save()}
 }
 function confirmBox(title,text,fn){
  modal(title,`<div class="note">${esc(text)}</div>`,
@@ -1395,9 +1591,12 @@ const IC={
  board:'<rect x="2.5" y="5.5" width="19" height="13" rx="2"/><circle cx="8" cy="12" r="1.6"/><circle cx="15.5" cy="9.6" r="1.6"/>',
  people:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5M16 5.5a3 3 0 0 1 0 5.6M17.5 20c0-2.4-.8-3.9-2-4.8"/>',
  rating:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ air:'<path d="M12 13.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4M5.6 5.1a9 9 0 0 0 0 12.8M18.4 5.1a9 9 0 0 1 0 12.8M8.5 8.4a4.5 4.5 0 0 0 0 6.2M15.5 8.4a4.5 4.5 0 0 1 0 6.2"/>',
  cfg:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>'
 };
-const NAV=()=>[['tours','Турниры'],['tour','Турнир'],['bracket','Сетка'],['board','Табло'],['rating','Рейтинг'],['people','Игроки']].concat(ADMIN?[['cfg','Судейская']]:[]);
+const NAV=()=>[['tours','Турниры'],['tour','Турнир'],['bracket','Сетка'],['board','Табло']]
+ .concat(hasStreams(T())||ADMIN?[['air','Эфир']]:[])
+ .concat([['rating','Рейтинг'],['people','Игроки']]).concat(ADMIN?[['cfg','Судейская']]:[]);
 const vtOf=t=>String((t&&t.vt)||'').split(/[^0-9]+/).filter(Boolean).map(Number);
 const liveM=()=>T()&&T().br?ids().filter(i=>MM(i).st==='live'):[];
 const queueM=()=>T()&&T().br?ids().filter(i=>{const m=MM(i);return m.st==='pending'&&m.a&&m.b&&m.a!=='BYE'&&m.b!=='BYE'}):[];
@@ -1620,7 +1819,7 @@ function dragMove(e){
  if(!DG.live){
   if(Math.abs(e.clientX-DG.x0)+Math.abs(e.clientY-DG.y0)<9)return;
   DG.live=true;document.body.classList.add('dragging');
-  const g=document.createElement('div');g.className='ghost';g.textContent=nmOf(DG.pid);
+  const g=document.createElement('div');g.className='dgh';g.textContent=nmOf(DG.pid);
   document.body.appendChild(g);DG.ghost=g;
  }
  e.preventDefault();
@@ -1693,7 +1892,8 @@ function vBoard(){
  const cards=[];
  for(let n=1;n<=t.tables;n++){
   const id=live.find(i=>MM(i).tbl===n);
-  const cam=vtOf(t).indexOf(n)>=0?'<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)" title="Стол с трансляцией">● LIVE CAM</span>':'';
+  const cam=streamsOf(t)[n]?'<span class="chip clk" data-nav="air" style="padding:1px 6px;font-size:10px;color:var(--amber-2);cursor:pointer" title="Смотреть эфир">● LIVE CAM</span>'
+   :(vtOf(t).indexOf(n)>=0?'<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)">● LIVE CAM</span>':'');
   if(!id){const nx=q[fr.indexOf(n)];
    cards.push(`<div class="tbl" style="min-height:210px"><div class="th"><span class="tno">Стол ${n}</span>${cam}<span class="sp"></span><span class="chip ok">свободен</span></div>
     <div class="free" style="flex:1;display:grid;place-items:center">${nx?`${esc(nmOf(MM(nx).a))} — ${esc(nmOf(MM(nx).b))}<div class="dim" style="font-size:11px;margin-top:4px">${labOf(nx)}</div>`:'Нет матчей в очереди'}</div>
@@ -2063,8 +2263,8 @@ function vCfg(){
    <div class="f2">${f('fee','Взнос',t.fee||'')}${f('prize','Призовой фонд',t.prize||'')}</div>
    <div class="f2">${f('race','До скольких побед',t.race,'number')}${f('tables','Столов',t.tables,'number')}</div>
    ${f('video','Ссылка на видео-регламент',t.video||'')}
-   ${f('vt','Столы с трансляцией (номера через запятую)',t.vt||'')}
-   ${MODE==='server'?'':f('pin','Код судьи (только для локального режима)',ST.pin||'')}
+   ${streamFields(t)}
+   ${MODE==='server'?'':f('pin','Код судьи (только для локального режима)',ST.pin||LOCAL_PIN)}
    <button class="btn pri" data-act="savecfg" type="button">Сохранить</button></div></div></div>
  </div>
  <div class="grid">
@@ -2084,11 +2284,35 @@ function vCfg(){
    <button class="btn bad" data-act="deltour" type="button">Удалить турнир</button></div></div></div>
  </div></div>`;
 }
+/* поле «ссылка на стрим» для каждого стола */
+function streamFields(t){
+ const str=streamsOf(t),n=Math.max(1,Math.min(16,t.tables|0||4));
+ const rows=[];
+ for(let i=1;i<=n;i++)rows.push(`<div class="row" style="gap:8px;align-items:center">
+   <span class="dim" style="width:64px;flex:none;font-size:12px">Стол ${i}</span>
+   <input class="inp" id="str-${i}" placeholder="ссылка на YouTube / Twitch / Kick" value="${esc(str[i]||'')}" style="flex:1">
+   ${str[i]?`<a class="btn sm ghost" href="?overlay=${i}" target="_blank" rel="noopener" title="Оверлей для OBS">OBS</a>`:''}
+  </div>`);
+ return `<div class="fld"><label>Трансляции по столам</label>
+  <div class="grid" style="gap:7px">${rows.join('')}</div>
+  <div class="note" style="margin-top:8px">Вставьте адрес эфира — тот, по которому его смотрят зрители.
+   Стол со ссылкой появится в разделе «Эфир» и отметится на табло. Кнопка OBS даёт прозрачную плашку со счётом
+   для стриминговой программы: добавьте её как Browser Source.</div></div>`;
+}
+function saveStreams(t){
+ const out={};
+ document.querySelectorAll('[id^="str-"]').forEach(n=>{
+  const i=parseInt(n.id.slice(4),10),v=(n.value||'').trim();
+  if(i>0&&v)out[i]=v;
+ });
+ t.str=out;
+ t.vt=Object.keys(out).join(',');     /* табло по-прежнему читает vt */
+}
 const numOr=(v,def)=>{const n=parseFloat(String(v).replace(',','.'));return isNaN(n)?def:n};
 function saveCfg(){
  const t=T(),g=id=>{const n=$('#c-'+id);return n?n.value.trim():''};
  t.name=g('name')||t.name;t.sub=g('sub');t.disc=g('disc')||t.disc;t.venue=g('venue');t.dates=g('dates');
- t.fee=g('fee');t.prize=g('prize');t.video=g('video');t.vt=g('vt');
+ t.fee=g('fee');t.prize=g('prize');t.video=g('video');saveStreams(t);
  t.race=Math.max(1,Math.min(15,Math.round(numOr(g('race'),t.race))));
  t.tables=Math.max(1,Math.min(12,Math.round(numOr(g('tables'),t.tables))));
  if(MODE!=='server')ST.pin=g('pin')||ST.pin;
@@ -2203,7 +2427,7 @@ function openMatch(id){
 const closeDrawer=()=>closeModal();
 
 /* ============================== РЕНДЕР ============================== */
-const VIEWS={tours:vTours,tour:vTour,bracket:vBracket,board:vBoard,rating:vRating,people:vPeople,player:vPlayer,cfg:vCfg};
+const VIEWS={tours:vTours,tour:vTour,bracket:vBracket,board:vBoard,air:vAir,rating:vRating,people:vPeople,player:vPlayer,cfg:vCfg};
 function shell(){
  document.getElementById('root').innerHTML=`<div class="app">
   <nav class="rail" id="rail"></nav>
@@ -2352,6 +2576,17 @@ document.addEventListener('mouseover',e=>{if(S.view!=='bracket')return;
 window.addEventListener('resize',()=>{if(S.view==='bracket')drawLinks()});
 
 /* ---------- СТАРТ ---------- */
+const QS=new URLSearchParams(location.search);
+const OVT=QS.get('overlay');
+if(OVT!==null&&OVT!==''){
+ (async function(){
+  try{const r=await fetch('/api/state',{cache:'no-store'});
+   if(r.ok){const j=await r.json();MODE='server';
+    if(j&&j.state){ST=migrate(j.state);REV=j.rev||0}}}catch(e){}
+  BOOTED=true;
+  bootOverlay(OVT,{chroma:QS.get('chroma')==='1'});
+ })();
+}else{
 shell();
 document.body.classList.toggle('adm',ADMIN);
 $('#scrim').addEventListener('click',()=>{closeModal();closeDrawer()});
@@ -2359,19 +2594,20 @@ S.view=T()&&T().status==='running'?'tour':'tours';
 render();
 (async function boot(){
  try{if(typeof claude!=='undefined'&&claude&&typeof claude.use==='function')CAP=await claude.use('artifact')}catch(e){CAP=null}
- if(CAP){MODE='artifact';setSync('ok');return}
+ if(CAP){MODE='artifact';BOOTED=true;setSync('ok');return}
  try{
   const r=await fetch('/api/state',{cache:'no-store'});
   if(r.ok){const j=await r.json();MODE='server';
    if(j&&j.state){ST=migrate(j.state);REV=j.rev||0}
    if(PIN){const c=await api('/api/state',{method:'POST',body:JSON.stringify({check:1})});
     if(!c.ok){PIN='';ADMIN=false;sessionStorage.removeItem('mfos-adm');sessionStorage.removeItem('mfos-pin')}}
-   setSync('ok');render();startPoll();return}
+   BOOTED=true;setSync('ok');render();startPoll();return}
  }catch(e){}
- MODE='local';LOCAL=true;
+ MODE='local';LOCAL=true;BOOTED=true;
  try{const ls=localStorage.getItem('mfos');if(ls){const o=JSON.parse(ls);
   if(o&&o.players&&o.build===ST.build)ST=migrate(o);
   else if(o&&o.players)localStorage.removeItem('mfos')}}catch(e){}
  setSync('local');render();
 })();
+}
 </script>
