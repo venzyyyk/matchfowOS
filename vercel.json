@@ -12,7 +12,7 @@
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.ytimg.com https://static-cdn.jtvnw.net; connect-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.twitch.tv https://player.kick.com https://rutube.ru https://vk.com https://vkvideo.ru https://vk.ru; frame-ancestors 'self' https://obsproject.com; base-uri 'none'; form-action 'none'; object-src 'none'"
         }
       ]
     }
