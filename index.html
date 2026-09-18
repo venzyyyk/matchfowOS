@@ -246,6 +246,43 @@ select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50
 .art.got{opacity:1;font-weight:600}
 .art.got:hover{transform:translateY(-1px)}
 a.btn{text-decoration:none}
+
+/* ── окно матча ── */
+.modal.match{width:min(780px,calc(100% - 20px))}
+.md-f{display:flex;gap:8px;padding:0 18px 18px;flex-wrap:wrap}
+.md-f:empty{display:none}
+.mx-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);
+ padding-bottom:12px;border-bottom:1px solid var(--line)}
+.mx-body{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)}
+.mx-vr{background:var(--line)}
+.mx-side{padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-width:0;
+ border-radius:var(--r-m)}
+.mx-side.lead{background:linear-gradient(180deg,var(--amber-dim),transparent 70%)}
+.mx-av{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex:none}
+.mx-av svg{display:block;margin-bottom:-6px}
+.mx-name{font-family:var(--disp);font-size:21px;font-weight:600;line-height:1.14;letter-spacing:-.01em;
+ word-break:break-word;cursor:pointer}
+.mx-name .second{display:block}
+.mx-name:hover{color:var(--amber-2)}
+.mx-geo{font-size:12.5px;color:var(--ink-2)}
+.mx-score{font-family:var(--mono);font-size:54px;font-weight:700;line-height:1;margin-top:2px}
+.mx-rt{font-family:var(--mono);font-size:11px}
+.mx-routes{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+ padding:11px 2px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-2)}
+.mx-routes b{color:var(--ink);font-weight:600}
+.mx-meta{text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+ padding-top:9px;border-top:1px solid var(--line)}
+@media (max-width:620px){
+ .mx-body{grid-template-columns:minmax(0,1fr)}
+ .mx-vr{height:1px;width:auto}
+ .mx-side{padding:13px 10px;gap:6px}
+ .mx-av{width:60px;height:60px}
+ .mx-name{font-size:18px}
+ .mx-name .second{display:inline;margin-left:5px}
+ .mx-score{font-size:42px}
+ .mx-routes{justify-content:center;text-align:center;gap:6px}
+ .mx-routes span{flex:1 1 100%}
+}
 .card.cur{border-color:rgba(245,144,43,.45)}
 .tsel{cursor:pointer;border:1px solid var(--line);font:inherit}
 .tsel:hover{border-color:var(--line-2)}
@@ -255,7 +292,7 @@ a.btn{text-decoration:none}
 </style>
 
 <div id="root"></div>
-<script id="app-state" type="application/json">{"v": 5, "build": "20260910-1021", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
+<script id="app-state" type="application/json">{"v": 5, "build": "20260918-1811", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
 <script id="app-code">
 'use strict';
 /* ============================================================
@@ -422,6 +459,38 @@ function stake(m){
  const db=Math.max(1,Math.round(K*mf*(1-expect(rb,ra))));
  return '+'+da+' / +'+db;
 }
+/* Полный пересчёт рейтинга по истории матчей: от стартовых значений и заново.
+   Нужен, когда из истории что-то убрали (например, удалили турнир). */
+function recalcRatings(){
+ ST.players.forEach(p=>{p.r=r0(p);p.rm=0});
+ const asc=(ST.hist||[]).slice().reverse();
+ asc.forEach(h=>{
+  const pw=P(h.w),pl=P(h.l);if(!pw||!pl)return;
+  const bw=pw.r,bl=pl.r;
+  const race=Math.max(1,h.sw||5),gap=Math.max(0,(h.sw||0)-(h.sl||0));
+  const mf=Math.max(.8,Math.min(1.3,.85+.45*(gap/race)));
+  const K=(kOf(pw)+kOf(pl))/2;
+  const d=Math.max(1,Math.round(K*mf*(1-expect(bw,bl))));
+  pw.r=bw+d;pl.r=Math.max(RMIN,bl-d);
+  pw.rm=(pw.rm|0)+1;pl.rm=(pl.rm|0)+1;
+  h.d=d;h.rw=pw.r;h.rl=pl.r;
+ });
+}
+/* удалить турнир целиком: состав, сетка, лента и его матчи в рейтинге */
+function delTour(){
+ const t=T();
+ if(!t)return;
+ if(ST.tours.length<2)return toast('Это единственный турнир — сначала создайте другой');
+ const champ=(t.entries||[]).find(e=>e.place===1);
+ if(champ){const p=P(champ.p);if(p&&(p.tw|0)>0)p.tw=p.tw-1}
+ ST.hist=(ST.hist||[]).filter(h=>h.tid!==t.id);
+ ST.arch=(ST.arch||[]).filter(x=>x.tid!==t.id);
+ ST.tours=ST.tours.filter(x=>x.id!==t.id);
+ ST.cur=ST.tours[0].id;
+ SP=null;SPfor=null;
+ recalcRatings();
+ toast('Турнир удалён');save();go('tours');
+}
 const ranked=()=>ST.players.slice().sort((a,b)=>RT(b)-RT(a)||(b.rm|0)-(a.rm|0)||a.name.localeCompare(b.name,'uk'));
 const rankOf=pid=>ranked().findIndex(p=>p.id===pid)+1;
 
@@ -467,8 +536,16 @@ function labGen(id){
  if(s[1]==='W'){const r=N>>s[2];return r===1?'финала верхней':r===2?'полуфинала':'1/'+r+' финала'}
  return s[2]===spec().lbR?'финала нижней':'нижней R'+s[2];
 }
+/* куда уходит победитель (side='w') или проигравший (side='l') этого матча */
+const goesTo=(id,side)=>{const s=spec().spec.find(x=>x[3]===id+':'+side||x[4]===id+':'+side);return s?s[0]:null};
+/* какое место занимают выбывшие в туре r нижней сетки */
+function lbPlace(r){
+ const sp=spec();let elim=0;
+ for(let x=1;x<=r;x++)elim+=sp.spec.filter(s=>s[1]==='L'&&s[2]===x).length;
+ return sp.N-elim+1;
+}
 function seedOrder(N){let a=[1,2];while(a.length<N){const n=a.length*2,b=[];a.forEach(s=>{b.push(s);b.push(n+1-s)});a=b}return a}
-const sizeFor=n=>n<=4?4:n<=8?8:n<=16?16:32;
+const sizeFor=n=>{let N=4;while(N<n&&N<1024)N*=2;return N};   /* потолка нет: 4, 8, 16 … 1024 */
 const winId=m=>m.st==='done'?(m.sa>m.sb?m.a:m.b):null;
 const losId=m=>m.st==='done'?(m.sa>m.sb?m.b:m.a):null;
 function feed(txt){const t=T();t.feed.unshift({t:now(),txt});if(t.feed.length>60)t.feed.pop()}
@@ -546,7 +623,7 @@ function callTable(id,tbl,hTo,hN){
  const m=MM(id),t=T();
  if(!m.a||!m.b)return toast('Соперники ещё не определены');
  if(!tbl)return toast('Нет свободных столов');
- m.st='live';m.tbl=+tbl;m.at=now();
+ m.st='live';m.tbl=+tbl;m.at=now();m.t0=Date.now();m.t1=null;
  m.h=(hTo&&+hN>0)?{to:hTo,n:Math.min(t.race-1,+hN)}:null;
  m.sa=m.h&&m.h.to===m.a?m.h.n:0;
  m.sb=m.h&&m.h.to===m.b?m.h.n:0;
@@ -557,7 +634,7 @@ function callTable(id,tbl,hTo,hN){
 function finish(id){
  const m=MM(id),t=T();if(m.st==='done')return;
  if(m.sa===m.sb)return toast('Ничьих не бывает');
- m.st='done';m.at=now();m.ptbl=m.tbl;m.tbl=null;m.n=++t.seq;
+ m.st='done';m.at=now();m.t1=Date.now();m.ptbl=m.tbl;m.tbl=null;m.n=++t.seq;
  const w=winId(m),l=losId(m),ew=ent(w),el=ent(l);
  if(ew)ew.w=(ew.w||0)+1; if(el)el.l=(el.l||0)+1;
  const be1=evo(w),be2=evo(l);
@@ -574,7 +651,7 @@ function undo(id){
  const w=winId(m),l=losId(m),ew=ent(w),el=ent(l);
  if(ew)ew.w=Math.max(0,(ew.w||0)-1); if(el)el.l=Math.max(0,(el.l||0)-1);
  unrate(id);
- m.st='live';
+ m.st='live';m.t1=null;
  const busy=ids().filter(i=>i!==id&&MM(i).st==='live').map(i=>MM(i).tbl);
  m.tbl=(m.ptbl&&busy.indexOf(m.ptbl)<0)?m.ptbl:null;
  spec().spec.forEach(s=>{const x=t.br.m[s[0]];
@@ -1064,7 +1141,9 @@ async function pushState(){
  setSync('ro');toast('Не удалось сохранить, проверьте связь');
 }
 async function pull(){
- if(pubT||$('#modal').classList.contains('on'))return;
+ if(pubT)return;
+ const md=$('#modal');
+ if(md.classList.contains('on')&&!md.classList.contains('match'))return;   /* формы не трогаем, окно матча живёт */
  const r=await api('/api/state?since='+REV);
  if(!r.ok||!r.body)return;
  if(r.body.state&&r.body.rev>REV){REV=r.body.rev;ST=migrate(r.body.state);render();
@@ -1074,11 +1153,14 @@ function startPoll(){clearInterval(pollT);pollT=setInterval(pull,5000)}
 
 /* ---------- МОДАЛКИ ---------- */
 function modal(title,body,foot){
+ S.openM=null;
  $('#md-t').textContent=title;
  $('#md-b').innerHTML=body+(foot?`<div class="row" style="gap:8px;margin-top:4px">${foot}</div>`:'');
+ $('#md-f').innerHTML='';
+ $('#modal').classList.remove('match');
  $('#modal').classList.add('on');$('#scrim').classList.add('on');
 }
-const closeModal=()=>{$('#modal').classList.remove('on');if(!$('#drawer').classList.contains('on'))$('#scrim').classList.remove('on')};
+const closeModal=()=>{S.openM=null;const n=$('#modal');n.classList.remove('on','match');$('#scrim').classList.remove('on')};
 function regForm(auto){
  const t=T();
  if(!auto&&!regOpen(t))return toast('Регистрация на этот турнир закрыта');
@@ -1315,7 +1397,7 @@ function vTour(){
      <div class="grid" style="gap:8px">
       <button class="btn core" data-act="draw:status" type="button" ${ok.length<3?'disabled':''}>Жеребьёвка по статусам · сетка ${N}</button>
       <button class="btn" data-act="draw:random" type="button" ${ok.length<3?'disabled':''}>Случайная жеребьёвка</button>
-      <div class="row" style="gap:8px"><select class="inp" id="emptyN" style="flex:1"><option value="4">4</option><option value="8">8</option><option value="16" selected>16</option><option value="32">32</option></select>
+      <div class="row" style="gap:8px"><select class="inp" id="emptyN" style="flex:1"><option value="0">по числу заявок</option><option value="4">4</option><option value="8">8</option><option value="16" selected>16</option><option value="32">32</option><option value="64">64</option><option value="128">128</option><option value="256">256</option><option value="512">512</option></select>
        <button class="btn" data-act="empty" type="button">Пустая сетка</button></div></div></div></div>`:''}
    </div></div>`;
  }
@@ -1779,9 +1861,7 @@ function vCfg(){
    <div class="f2">${f('race','До скольких побед',t.race,'number')}${f('tables','Столов',t.tables,'number')}</div>
    ${f('video','Ссылка на видео-регламент',t.video||'')}
    ${f('vt','Столы с трансляцией (номера через запятую)',t.vt||'')}
-   ${MODE==='server'
-     ?`<div class="note">Код судьи хранится на сервере (переменная <b>JUDGE_PIN</b> в Vercel) и в браузер не отдаётся. Менять его — там же.</div>`
-     :f('pin','Код судьи (только для локального режима)',ST.pin||'')}
+   ${MODE==='server'?'':f('pin','Код судьи (только для локального режима)',ST.pin||'')}
    <button class="btn pri" data-act="savecfg" type="button">Сохранить</button></div></div></div>
  </div>
  <div class="grid">
@@ -1798,7 +1878,7 @@ function vCfg(){
    ${t.br?'<button class="btn" data-act="rebuild" type="button">Пересобрать сетку заново</button>':''}
    <button class="btn" data-act="newtour" type="button">Создать ещё один турнир</button>
    <button class="btn" data-act="demo" type="button">Загрузить демо-набор (Харків)</button>
-   <button class="btn bad" data-act="wipe" type="button">Удалить всех игроков и турниры</button></div></div></div>
+   <button class="btn bad" data-act="deltour" type="button">Удалить турнир</button></div></div></div>
  </div></div>`;
 }
 const numOr=(v,def)=>{const n=parseFloat(String(v).replace(',','.'));return isNaN(n)?def:n};
@@ -1823,38 +1903,101 @@ function saveCats(){
 }
 
 /* ---------- СУДЕЙСКИЙ ПЛАНШЕТ ---------- */
+/* ============================================================
+   ОКНО МАТЧА — как в tournamentservice, только живое и редактируемое
+   ============================================================ */
+const silhouette=(c,sz)=>`<svg viewBox="0 0 64 64" width="${sz}" height="${sz}" aria-hidden="true">
+ <circle cx="32" cy="21" r="12.5" fill="${c}" opacity=".5"/>
+ <path d="M4 63c0-13.2 12.6-21 28-21s28 7.8 28 21z" fill="${c}" opacity=".5"/></svg>`;
+
+const two=n=>String(n).padStart(2,'0');
+function stamp(ms){const d=new Date(ms);
+ return two(d.getDate())+'.'+two(d.getMonth()+1)+'.'+d.getFullYear()+' '+two(d.getHours())+':'+two(d.getMinutes())}
+const hhmm=ms=>{const d=new Date(ms);return two(d.getHours())+':'+two(d.getMinutes())};
+function dur(a,b){if(!a)return '';const s=Math.max(0,Math.round(((b||Date.now())-a)/1000));
+ return Math.floor(s/3600)+':'+two(Math.floor(s/60)%60)}
+
+/* куда уходит победитель / проигравший, словами */
+function routeOf(id,side){
+ const sp=sp1(id);
+ if(sp[1]==='F')return side==='w'?'1 место':'2 место';
+ const nx=goesTo(id,side);
+ if(nx)return 'Встреча #'+nx;
+ if(side==='l')return sp[1]==='L'?('Место '+lbPlace(sp[2])):'выбывание';
+ return '—';
+}
+
 function openMatch(id){
  const t=T();
  if(!t||!t.br||!t.br.m[id])return;
- const m=MM(id),both=m.a&&m.b&&m.a!=='BYE'&&m.b!=='BYE';
+ const m=MM(id),race=t.race;
+ const both=m.a&&m.b&&m.a!=='BYE'&&m.b!=='BYE';
  S.openM=id;
- $('#dr-k').textContent=id+' · '+labOf(id);
- $('#dr-t').textContent=both?short(P(m.a).name)+' — '+short(P(m.b).name):'Соперники определяются';
- const pips=n=>`<div class="pips">${Array.from({length:t.race},(_,i)=>`<span class="pip ${i<n?'f':''}"></span>`).join('')}</div>`;
- const row=(pid,sc,other,key)=>{
-  if(!pid||pid==='BYE')return `<div class="score-row"><span class="dim">${pid==='BYE'?'свободный проход':tbdText(id,key)}</span></div>`;
-  const p=P(pid),h=m.h&&m.h.to===pid?`<span class="chip" style="padding:1px 6px;font-size:10px;color:var(--amber-2)">фора +${m.h.n}</span>`:'';
-  return `<div class="score-row ${sc>other?'lead':''}"><div style="flex:1;min-width:0">${pline(pid,[p.mid,p.club].filter(Boolean).join(' · '))}
-    <div class="row" style="gap:8px;margin-top:7px">${catBadge(p,12)}<span class="num dim" style="font-size:11px">рейтинг ${RT(p)} · ${relOf(p)}%</span>${h}</div>${pips(sc)}</div>
-   ${ADMIN&&m.st!=='done'?`<div class="row" style="gap:8px"><button class="sbtn" data-sc="${key}|-1" type="button">−</button>
-     <span class="sval">${sc}</span><button class="sbtn" data-sc="${key}|1" type="button">+</button></div>`
-    :`<span class="sval">${m.st==='pending'?'—':sc}</span>`}</div>`;
+
+ const pips=n=>`<div class="pips" style="justify-content:center">${Array.from({length:race},(_,i)=>`<span class="pip ${i<n?'f':''}"></span>`).join('')}</div>`;
+
+ const sideHtml=(pid,sc,other,key)=>{
+  if(!pid||pid==='BYE'){
+   return `<div class="mx-side"><div class="mx-av" style="background:var(--surface-2)">${silhouette('#6B7A85',72)}</div>
+    <div class="mx-name dim" style="font-size:16px">${pid==='BYE'?'свободный проход':esc(tbdText(id,key))}</div>
+    <div class="mx-score dim">—</div></div>`;
+  }
+  const p=P(pid);
+  if(!p)return `<div class="mx-side"><div class="mx-name dim">—</div></div>`;
+  const c=catOf(p).c,lead=m.st!=='pending'&&sc>other;
+  const parts=String(p.name).trim().split(/\s+/);
+  const fam=parts[0]||p.name, rest=parts.slice(1).join(' ');
+  const geo=[p.country||'Україна',p.city].filter(Boolean).join(', ');
+  const h=m.h&&m.h.to===pid?`<span class="chip" style="padding:1px 7px;font-size:10px;color:var(--amber-2);border-color:rgba(245,144,43,.4)">фора +${m.h.n}</span>`:'';
+  return `<div class="mx-side ${lead?'lead':''}">
+   <div class="mx-av" style="background:${c}14;border:1px solid ${c}33">${silhouette(c,72)}</div>
+   <div class="mx-name clk" data-p="${pid}">${esc(fam)}${rest?`<span class="second">${esc(rest)}</span>`:''}</div>
+   <div class="mx-geo">🇺🇦 ${esc(geo)}</div>
+   <div class="row" style="gap:7px;justify-content:center;flex-wrap:wrap">${catBadge(p,12)}${h}</div>
+   <div class="mx-score" style="${lead?'color:var(--amber-2)':''}">${m.st==='pending'?'—':sc}</div>
+   ${m.st!=='pending'?pips(sc):''}
+   ${ADMIN&&m.st==='live'?`<div class="row" style="gap:9px;justify-content:center;margin-top:2px">
+     <button class="sbtn" data-sc="${key}|-1" type="button" aria-label="минус">−</button>
+     <button class="sbtn" data-sc="${key}|1" type="button" aria-label="плюс">+</button></div>`:''}
+   <div class="mx-rt dim">${RT(p)} <span style="opacity:.6">рейтинг</span></div>
+  </div>`;
  };
- $('#dr-b').innerHTML=`<div class="row wr" style="gap:7px;margin-bottom:12px">
-   <span class="chip ${m.st==='live'?'live':m.st==='done'?'ok':''}">${m.st==='live'?'<span class="dot"></span>стол '+m.tbl:m.st==='done'?(m.bye?'авто-проход':'завершён '+esc(m.at||'')):'ожидает вызова'}</span>
-   <span class="chip">до ${t.race}</span><span class="chip st">${esc(t.disc)}</span>${both&&m.st!=='done'?`<span class="chip" title="Сколько рейтинга разыгрывается">на кону ${stake(m)}</span>`:''}${both&&m.st==='done'&&m.rated?`<span class="chip ok">рейтинг ±${m.rated.d}</span>`:''}</div>
-  <div class="grid" style="gap:10px">${row(m.a,m.sa,m.sb,'a')}${row(m.b,m.sb,m.sa,'b')}</div>`;
+
+ const stChip=m.st==='live'?`<span class="chip live"><span class="dot"></span>идёт · стол ${m.tbl||'—'}</span>`
+  :m.st==='done'?`<span class="chip ok">${m.bye?'авто-проход':'завершён'}</span>`
+  :`<span class="chip">ожидает вызова</span>`;
+
+ const metaBits=[];
+ if(m.tbl||m.ptbl)metaBits.push('Стол '+(m.tbl||m.ptbl));
+ if(m.t0)metaBits.push(stamp(m.t0)+(m.t1?' — '+hhmm(m.t1):(m.st==='live'?' — идёт':'')));
+ if(m.t0)metaBits.push(dur(m.t0,m.t1));
+ else if(m.at)metaBits.push(esc(m.at));
+
+ $('#md-t').textContent='Встреча #'+id;
+ $('#md-b').innerHTML=`
+  <div class="mx-h"><span>${esc(labOf(id))} · до ${race} побед</span><span class="sp"></span>${stChip}
+   ${both&&m.st!=='done'?`<span class="chip" title="Сколько рейтинга разыгрывается">на кону ${stake(m)}</span>`:''}
+   ${m.rated?`<span class="chip ok">рейтинг ±${m.rated.d}</span>`:''}</div>
+  <div class="mx-body">
+   ${sideHtml(m.a,m.sa,m.sb,'a')}<div class="mx-vr"></div>${sideHtml(m.b,m.sb,m.sa,'b')}
+  </div>
+  <div class="mx-routes">
+   <span>Победитель <b>→ ${esc(routeOf(id,'w'))}</b></span>
+   <span>Проигравший <b>→ ${esc(routeOf(id,'l'))}</b></span>
+  </div>
+  ${metaBits.length?`<div class="mx-meta">${metaBits.map(esc).join(' · ')}</div>`:''}`;
+
  let foot='<button class="btn" data-x="1" type="button">Закрыть</button>';
  if(ADMIN&&both){
   if(m.st==='done'&&!m.bye)foot+='<button class="btn" data-act="undo" type="button">Отменить результат</button>';
-  else if(m.st==='live'){const can=m.sa>=t.race||m.sb>=t.race;
-   foot+=`<button class="btn ${can?'gold':''}" data-act="fin" type="button" ${can?'':'disabled'}>${can?'Завершить матч':'Счёт до '+t.race}</button>`}
+  else if(m.st==='live'){const can=m.sa>=race||m.sb>=race;
+   foot+=`<button class="btn ${can?'gold':''}" data-act="fin" type="button" ${can?'':'disabled'}>${can?'Завершить матч':'Счёт до '+race}</button>`}
   else if(m.st==='pending')foot+=`<button class="btn core" data-call="${id}" type="button">На стол…</button>`;
  }
- $('#dr-f').innerHTML=foot;
- $('#drawer').classList.add('on');$('#scrim').classList.add('on');
+ $('#md-f').innerHTML=foot;
+ $('#modal').classList.add('on','match');$('#scrim').classList.add('on');
 }
-const closeDrawer=()=>{S.openM=null;$('#drawer').classList.remove('on');if(!$('#modal').classList.contains('on'))$('#scrim').classList.remove('on')};
+const closeDrawer=()=>closeModal();
 
 /* ============================== РЕНДЕР ============================== */
 const VIEWS={tours:vTours,tour:vTour,bracket:vBracket,board:vBoard,rating:vRating,people:vPeople,player:vPlayer,cfg:vCfg};
@@ -1869,13 +2012,8 @@ function shell(){
   <div class="judgebar" id="jbar"></div>
   <main class="main" id="main"><div class="wrap" id="view"></div></main></div>
  <div class="scrim" id="scrim"></div>
- <aside class="drawer" id="drawer" role="dialog" aria-label="Карточка матча">
-  <div class="dr-h"><div style="flex:1;min-width:0"><div class="h-sec" id="dr-k">МАТЧ</div>
-   <div style="font-family:var(--disp);font-size:15px;font-weight:600" id="dr-t">—</div></div>
-   <button class="xb" data-x="1" type="button" aria-label="Закрыть">✕</button></div>
-  <div class="dr-b" id="dr-b"></div><div class="dr-f" id="dr-f"></div></aside>
  <div class="modal" id="modal" role="dialog"><div class="md-h"><h3 style="flex:1;font-size:15px" id="md-t"></h3>
-   <button class="xb" data-x="1" type="button" aria-label="Закрыть">✕</button></div><div class="md-b" id="md-b"></div></div>
+   <button class="xb" data-x="1" type="button" aria-label="Закрыть">✕</button></div><div class="md-b" id="md-b"></div><div class="md-f" id="md-f"></div></div>
  <div class="toast" id="toast"></div>`;
 }
 function render(){
@@ -1905,6 +2043,7 @@ function go(v){S.view=v;S.hot=null;const m=$('#main');if(m)m.scrollTop=0;render(
 
 /* ---------- СОБЫТИЯ ---------- */
 document.addEventListener('click',e=>{
+ if(e.target.id==='scrim'&&$('#modal').classList.contains('match'))return closeModal();
  const t=e.target.closest('[data-nav],[data-m],[data-p],[data-call],[data-act],[data-x],[data-sc],[data-tour],[data-tq],[data-slot],[data-empty],#pinb,#r-go,#pin-go');
  if(!t)return;
  if(t.id==='pinb')return pinForm();
@@ -1942,7 +2081,9 @@ function act(a){
  if(k==='addp')return regForm(true);
  if(k==='swap')return swapForm();
  if(k==='draw')return draw(arg||'status');
- if(k==='empty'){const n=+($('#emptyN')?$('#emptyN').value:16)||16;return emptyBracket(n)}
+ if(k==='empty'){let n=+($('#emptyN')?$('#emptyN').value:16)||0;
+   if(!n)n=sizeFor(Math.max(3,approved().length));
+   return emptyBracket(n)}
  if(k==='rebuild')return confirmBox('Пересобрать сетку?','Текущая сетка и все результаты этого турнира будут стёрты. Состав останется.',()=>{
    t.br=null;t.seq=0;t.status='closed';feed('Сетка сброшена судьёй');toast('Сетка сброшена');save();go('tour')});
  if(k==='close')return closeTour();
@@ -1975,10 +2116,11 @@ function act(a){
     ST.tours.forEach(tt=>{tt.entries=tt.entries.filter(e=>e.p!==arg);
      if(tt.br)Object.keys(tt.br.m).forEach(kk=>{const m=tt.br.m[kk];if(m.a===arg)m.a=null;if(m.b===arg)m.b=null})});
     toast('Удалён');save();go(S.view==='player'?'people':S.view)});return}
- if(k==='wipe')return confirmBox('Удалить всё?','Все игроки, заявки, сетки и турниры будут стёрты. Отменить нельзя.',()=>{
-   ST.players=[];ST.tours=[{id:'t1',name:'Новый турнир',sub:'',disc:'Вільна піраміда',venue:'',dates:'',fee:'',prize:'',
-    race:5,tables:4,video:'',status:'reg',pub:true,entries:[],br:null,seq:0,feed:[{t:now(),txt:'Данные очищены'}]}];
-   ST.cur='t1';ST.midSeq=0;ST.arch=[];toast('Готово');save();go('tour')});
+ if(k==='deltour'){const t=T();
+   if(ST.tours.length<2)return toast('Это единственный турнир — сначала создайте другой');
+   return confirmBox('Удалить турнир?',
+     '«'+t.name+'» будет удалён вместе с составом, сеткой и лентой. База игроков останется, но сыгранные здесь матчи уйдут из рейтинга — он пересчитается. Отменить нельзя.',
+     ()=>delTour())}
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer()}
  if(e.key==='Enter'&&document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.m)document.activeElement.click()});
