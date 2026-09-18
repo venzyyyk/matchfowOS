@@ -283,6 +283,32 @@ a.btn{text-decoration:none}
  .mx-routes{justify-content:center;text-align:center;gap:6px}
  .mx-routes span{flex:1 1 100%}
 }
+
+/* ── панель расстановки ── */
+.seatbar{margin-bottom:12px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-l);background:var(--surface)}
+.seatbar.on{border-color:rgba(255,122,26,.42);background:linear-gradient(180deg,rgba(255,122,26,.07),var(--surface))}
+.bench{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.bench.empty-b{opacity:.55}
+.bench-h{font-family:var(--disp);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.bench-in{display:flex;flex-wrap:wrap;gap:6px;max-height:168px;overflow:auto}
+.bchip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;
+ border:1px solid var(--line-2);background:var(--surface-2);font-size:12.5px;white-space:nowrap;
+ cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.bchip i{width:7px;height:7px;border-radius:50%;flex:none}
+.bchip:hover{border-color:var(--amber);background:var(--amber-dim)}
+.bchip.inhand{border-color:var(--amber);background:var(--amber-dim);box-shadow:0 0 0 2px rgba(245,144,43,.22)}
+.bench.drop{outline:2px dashed var(--amber);outline-offset:4px;border-radius:var(--r-m)}
+
+/* места в сетке, когда их можно двигать */
+.m-s[data-seat]{touch-action:none}
+body.adm .m-s[data-seat][data-pid]{cursor:grab}
+.m-s.inhand{background:var(--amber-dim);box-shadow:inset 2px 0 0 var(--amber)}
+.m-s.drop{background:rgba(245,144,43,.2);box-shadow:inset 0 0 0 1px var(--amber)}
+body.dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
+body.dragging *{cursor:grabbing!important}
+.ghost{position:fixed;left:0;top:0;z-index:90;pointer-events:none;
+ padding:6px 11px;border-radius:9px;border:1px solid var(--amber);background:var(--ground-2);
+ color:var(--ink);font-size:12.5px;font-weight:600;box-shadow:var(--sh)}
 .card.cur{border-color:rgba(245,144,43,.45)}
 .tsel{cursor:pointer;border:1px solid var(--line);font:inherit}
 .tsel:hover{border-color:var(--line-2)}
@@ -292,7 +318,7 @@ a.btn{text-decoration:none}
 </style>
 
 <div id="root"></div>
-<script id="app-state" type="application/json">{"v": 5, "build": "20260918-1811", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
+<script id="app-state" type="application/json">{"v": 5, "build": "20260918-1855", "cats": [{"code": "STARTING (AMATUER)", "c": "#6B7A85"}, {"code": "NEW BIE (AMATUER)", "c": "#78909E"}, {"code": "21-40 чол. (AMATUER)", "c": "#8AA6B6"}, {"code": "41-60 чол. (AMATUER)", "c": "#9CBCC9"}, {"code": "2 юнацький розряд (ADEPT)", "c": "#B4C8CE"}, {"code": "III розряд (EXPERT)", "c": "#D3C6AE"}, {"code": "II розряд (EXPERT)", "c": "#E0B584"}, {"code": "I розряд (EXPERT)", "c": "#F0983F"}, {"code": "КМСУ ж. (PROFESSIONAL)", "c": "#FF7A1A"}, {"code": "КМСУ чол. (PROFESSIONAL)", "c": "#FFE9BF"}], "players": [{"id": "p1", "mid": "123-001", "name": "Герасименко Владислав", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 6, "r": 1083, "rm": 0, "tw": 0}, {"id": "p2", "mid": "123-002", "name": "Виноградов Костянтин", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p3", "mid": "123-003", "name": "Поляков Артур", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 9, "r": 1248, "rm": 0, "tw": 0}, {"id": "p4", "mid": "123-004", "name": "Видашенко Михайло", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p5", "mid": "123-005", "name": "Коваленко Олександр", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p6", "mid": "123-006", "name": "Почепецький Станіслав", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 3, "r": 918, "rm": 0, "tw": 0}, {"id": "p7", "mid": "123-007", "name": "Дьяченко Олексій", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 5, "r": 1028, "rm": 0, "tw": 0}, {"id": "p8", "mid": "123-008", "name": "Шевченко Руслан", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 8, "r": 1193, "rm": 0, "tw": 0}, {"id": "p9", "mid": "123-009", "name": "Немцев Михайло", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 4, "r": 973, "rm": 0, "tw": 0}, {"id": "p10", "mid": "123-010", "name": "Трифонов Денис", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 7, "r": 1138, "rm": 0, "tw": 0}, {"id": "p11", "mid": "123-011", "name": "Бабенко Ян", "city": "Харків", "club": "DRY LEAF", "contact": "", "cat": 1, "r": 808, "rm": 0, "tw": 0}, {"id": "p12", "mid": "123-012", "name": "Лахмєткін Арсеній", "city": "Харків", "club": "CITADEL", "contact": "", "cat": 0, "r": 753, "rm": 0, "tw": 0}], "tours": [{"id": "t1", "name": "VENOM OPEN XXII", "sub": "RIOT FORCE", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "жовтень 2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "vt": "1,2", "status": "reg", "pub": true, "entries": [{"p": "p1", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p2", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p3", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p4", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p5", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p6", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p7", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p8", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p9", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p10", "st": "ok", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p11", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}, {"p": "p12", "st": "new", "seed": null, "w": 0, "l": 0, "place": null}], "br": null, "seq": 0, "feed": [{"t": "10:00", "txt": "Турнір відкрито: йде реєстрація"}]}, {"id": "t2", "name": "GRAND AMATEUR CUP 2026", "sub": "Only twelve levels", "disc": "Комбінована піраміда", "venue": "CITADEL · Харків", "dates": "листопад 2026", "fee": "", "prize": "", "race": 4, "tables": 4, "video": "", "status": "announced", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t3", "name": "GRAND PRIX FINAL", "sub": "Ліга сильних гравців Харкова", "disc": "Динамічна піраміда", "venue": "DRY LEAF · Харків", "dates": "грудень 2026", "fee": "", "prize": "", "race": 5, "tables": 4, "video": "", "status": "planned", "pub": true, "entries": [], "br": null, "seq": 0, "feed": []}, {"id": "t4", "name": "VENOM OPEN XXI", "sub": "RIOT FORCE — ПЕРША БІЛЬ", "disc": "Вільна піраміда з продовженням", "venue": "DRY LEAF + CITADEL · Харків", "dates": "13.08 — 17.08.2026", "fee": "", "prize": "", "race": 5, "tables": 6, "video": "", "status": "done", "pub": true, "entries": [], "br": null, "seq": 0, "feed": [{"t": "18:40", "txt": "Турнір завершено"}]}], "cur": "t1", "pin": "2604", "midPrefix": "123", "midSeq": 12, "arch": [], "hist": []}</script>
 <script id="app-code">
 'use strict';
 /* ============================================================
@@ -328,7 +354,7 @@ let ST=JSON.parse(document.getElementById('app-state').textContent);
 let ADMIN=sessionStorage.getItem('mfos-adm')==='1';
 let CAP=null,LOCAL=false,SYNC='ok',pubT=null;
 let MODE='local',REV=0,PIN=sessionStorage.getItem('mfos-pin')||'',pollT=null;
-const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:'',rtab:'sport'};
+const S={view:'tours',player:null,openM:null,hot:null,q:'',slot:null,tq:'',rq:'',rtab:'sport',seat:false,hand:null};
 
 /* ---------- МИГРАЦИЯ СТАРОГО СОСТОЯНИЯ ---------- */
 function migrate(s){
@@ -361,7 +387,7 @@ const T=()=>ST.tours.find(t=>t.id===ST.cur)||ST.tours[0];
 const E=()=>{const t=T();return t?t.entries:[]};
 const ent=pid=>E().find(e=>e.p===pid);
 const initials=n=>String(n).trim().split(/\s+/).map(x=>x[0]||'').join('').slice(0,2).toUpperCase();
-const short=n=>{const s=String(n).trim().split(/\s+/);return s.length>1?s[1]+' '+s[0][0]+'.':n};
+const short=n=>{const s=String(n).trim().split(/\s+/);return s.length>1?s[0]+' '+s[1][0]+'.':n};   /* Фамилия И. */
 const nmOf=id=>{if(id==='BYE')return 'свободный проход';const p=P(id);return p?short(p.name):'—'};
 const now=()=>new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'});
 const uid=p=>p+Math.random().toString(36).slice(2,8);
@@ -608,16 +634,108 @@ function emptyBracket(N){
  feed(`Создана пустая сетка на ${N} — игроки вносятся вручную`);
  toast('Пустая сетка создана');save();go('bracket');
 }
+/* ---------- РУЧНАЯ РАССТАНОВКА ----------
+   Места, которые можно занять руками, — только первый круг верхней сетки.
+   Всё остальное определяется результатами.                                */
+const isSeat=id=>{const s=sp1(id);return s[1]==='W'&&s[2]===1};
+const canSeat=id=>{const m=MM(id);return m.st==='pending'||(m.st==='done'&&m.bye)};
+
+/* распустить авто-проход, если судья ставит в такой матч живого игрока */
+function unbye(id){
+ const m=MM(id),t=T();
+ if(!m||m.st!=='done'||!m.bye)return;
+ m.st='pending';m.bye=0;m.sa=0;m.sb=0;m.n=null;m.tbl=null;m.t0=null;m.t1=null;
+ spec().spec.forEach(sp=>{
+  const x=t.br.m[sp[0]];
+  if(sp[3]&&sp[3].split(':')[0]===id)x.a=null;
+  if(sp[4]&&sp[4].split(':')[0]===id)x.b=null;
+  if((sp[3]&&sp[3].split(':')[0]===id)||(sp[4]&&sp[4].split(':')[0]===id))unbye(sp[0]);
+ });
+}
+/* посев = порядок мест в первом круге; кто не расставлен — без посева */
+function ensureSeeds(){
+ let n=0;const seated={};
+ ids().forEach(i=>{if(!isSeat(i))return;
+  ['a','b'].forEach(side=>{const pid=MM(i)[side];
+   if(pid&&pid!=='BYE'){seated[pid]=1;const e=ent(pid);if(e)e.seed=++n}})});
+ E().forEach(e=>{if(!seated[e.p])e.seed=null});
+}
+/* кто из состава ещё не стоит в сетке */
+function bench(){
+ const seated={};
+ ids().forEach(i=>{if(!isSeat(i))return;const m=MM(i);
+  if(m.a&&m.a!=='BYE')seated[m.a]=1; if(m.b&&m.b!=='BYE')seated[m.b]=1});
+ return approved().filter(e=>!seated[e.p]);
+}
+/* поставить конкретного игрока на конкретное место (или очистить) */
 function setSlot(mid,side,pid){
- const m=MM(mid);
+ if(!MM(mid))return;
+ if(!canSeat(mid))return toast('В этом матче уже есть результат — сначала отмените его');
+ unbye(mid);
+ const prev=MM(mid)[side];
  if(pid&&pid!=='BYE'){
-  ids().forEach(i=>{const x=MM(i);
-   if(sp1(i)[2]===1&&sp1(i)[1]==='W'){if(x.a===pid&&!(i===mid&&side==='a'))x.a=null;if(x.b===pid&&!(i===mid&&side==='b'))x.b=null}});
+  let from=null,fromSide=null;
+  ids().forEach(i=>{if(!isSeat(i)||i===mid)return;const x=MM(i);
+   if(x.a===pid){from=i;fromSide='a'} if(x.b===pid){from=i;fromSide='b'}});
+  if(from){
+   if(!canSeat(from))return toast('Этот игрок уже сыграл матч — сначала отмените результат');
+   unbye(from);
+   MM(from)[fromSide]=prev&&prev!=='BYE'?prev:null;      /* меняем местами */
+  }
  }
- m[side]=pid||null;
- const e=pid&&pid!=='BYE'?ent(pid):null;
- if(e&&!e.seed)e.seed=E().filter(x=>x.seed).length+1;
- save();render();
+ MM(mid)[side]=pid||null;
+ ensureSeeds();resolveByes();save();render();
+}
+/* перетаскивание: место → место, место → скамейка, скамейка → место */
+function seatMove(from,to){
+ /* from/to = 'W3|a' либо null (скамейка) */
+ const fi=from?from.split('|')[0]:null, fs=from?from.split('|')[1]:null;
+ const ti=to?to.split('|')[0]:null,   ts=to?to.split('|')[1]:null;
+ if(fi&&!canSeat(fi))return toast('В этом матче уже есть результат');
+ if(ti&&!canSeat(ti))return toast('В этом матче уже есть результат');
+ if(fi)unbye(fi); if(ti)unbye(ti);
+ const a=fi?MM(fi)[fs]:S.hand, b=ti?MM(ti)[ts]:null;
+ if(ti)MM(ti)[ts]=a||null;
+ if(fi)MM(fi)[fs]=(b&&b!=='BYE')?b:null;
+ ensureSeeds();resolveByes();save();render();
+}
+/* авто-добор: расставить оставшихся по свободным местам */
+function seatAuto(mode){
+ const free=[];
+ ids().forEach(i=>{if(!isSeat(i)||!canSeat(i))return;
+  ['a','b'].forEach(side=>{if(!MM(i)[side])free.push([i,side])})});
+ const list=bench().slice();
+ if(mode==='random'){for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const x=list[i];list[i]=list[j];list[j]=x}}
+ else list.sort((x,y)=>(P(y.p).cat|0)-(P(x.p).cat|0));
+ if(!list.length)return toast('Все из состава уже в сетке');
+ if(!free.length)return toast('Свободных мест в сетке нет');
+ list.forEach((e,i)=>{if(!free[i])return;unbye(free[i][0]);MM(free[i][0])[free[i][1]]=e.p});
+ ensureSeeds();resolveByes();
+ feed(`Расставлено в сетку: ${Math.min(list.length,free.length)} ${mode==='random'?'(случайно)':'(по статусам)'}`);
+ toast('Расставлено');save();render();
+}
+/* незанятые места первого круга превращаются в свободные проходы */
+function seatFill(){
+ let n=0;
+ ids().forEach(i=>{if(!isSeat(i)||!canSeat(i))return;
+  const m=MM(i);
+  if(!m.a){m.a='BYE';n++}
+  if(!m.b){m.b='BYE';n++}
+ });
+ if(!n)return toast('Пустых мест нет');
+ ensureSeeds();resolveByes();
+ feed('Пустые места закрыты свободными проходами: '+n);
+ toast('Проходов проставлено: '+n);save();render();
+}
+/* сколько мест ещё висит пустыми */
+const seatHoles=()=>{let n=0;ids().forEach(i=>{if(!isSeat(i)||!canSeat(i))return;
+ const m=MM(i);if(!m.a)n++;if(!m.b)n++});return n};
+
+/* снять всех со всех мест — сетка остаётся, состав возвращается на скамейку */
+function seatClear(){
+ ids().forEach(i=>{if(!isSeat(i))return;unbye(i)});
+ ids().forEach(i=>{if(!isSeat(i)||!canSeat(i))return;MM(i).a=null;MM(i).b=null});
+ ensureSeeds();save();render();toast('Сетка очищена, состав на скамейке');
 }
 function callTable(id,tbl,hTo,hN){
  const m=MM(id),t=T();
@@ -1297,14 +1415,16 @@ function feedHtml(n){
  return f.slice(0,n||10).map(x=>`<div class="fi"><span class="tm">${esc(x.t)}</span><span class="tx">${x.txt}</span></div>`).join('');
 }
 function matchCard(id){
- const m=MM(id),r1=sp1(id)[1]==='W'&&sp1(id)[2]===1;
+ const m=MM(id),r1=isSeat(id);
+ const seatable=ADMIN&&r1&&canSeat(id);
+ const at=key=>seatable?` data-seat="${id}|${key}"`:'';
  const side=(pid,sc,other,key)=>{
-  if(!pid)return `<div class="m-s tbd" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}><span class="seed"></span><span class="nm">${tbdText(id,key)}</span>${ADMIN&&r1?'<span class="g">+</span>':''}</div>`;
-  if(pid==='BYE')return `<div class="m-s tbd" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}><span class="seed"></span><span class="nm">свободный проход</span></div>`;
+  if(!pid)return `<div class="m-s tbd" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}${at(key)}><span class="seed"></span><span class="nm">${tbdText(id,key)}</span>${ADMIN&&r1?'<span class="g">+</span>':''}</div>`;
+  if(pid==='BYE')return `<div class="m-s tbd" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}${at(key)}><span class="seed"></span><span class="nm">свободный проход</span></div>`;
   const p=P(pid);if(!p)return `<div class="m-s tbd"><span class="nm">—</span></div>`;
   const done=m.st==='done',win=done&&sc>other;
   const h=m.h&&m.h.to===pid?`<span class="hcp">+${m.h.n}</span>`:'';
-  return `<div class="m-s ${done?(win?'w':'l'):'w'}" data-pid="${pid}" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}>
+  return `<div class="m-s ${done?(win?'w':'l'):'w'} ${S.hand===pid?'inhand':''}" data-pid="${pid}" ${ADMIN&&r1?`data-empty="${id}|${key}"`:''}${at(key)}>
    <span class="seed">${(ent(pid)&&ent(pid).seed)||''}</span>${catSvg(p,9)}
    <span class="nm">${esc(short(p.name))}</span>${h}
    <span class="g">${m.st==='pending'?'—':sc}</span></div>`;
@@ -1451,11 +1571,94 @@ function vBracket(){
  return `<div class="row wr" style="margin-bottom:12px;gap:12px">
   <div><div class="h-sec">${esc(t.name)}</div><h1 class="h-page" style="margin-top:5px">Двойное выбывание · ${t.br.N}</h1></div><span class="sp"></span>
   <div class="legend"><span><i style="background:var(--core)"></i>идёт</span><span><i style="background:var(--amber)"></i>победитель</span><span><i style="background:var(--surface-3)"></i>ожидает</span></div></div>
- ${ADMIN&&empty?`<div class="note" style="margin-bottom:12px;color:var(--amber-2)">Пустых мест в первом круге: ${empty}. Кликните по строке матча, чтобы поставить игрока.</div>`
-  :`<div class="note" style="margin-bottom:12px">Наведите курсор на фамилию — подсветится весь путь игрока по сетке.</div>`}
+ ${ADMIN?seatPanel(empty):`<div class="note" style="margin-bottom:12px">Наведите курсор на фамилию — подсветится весь путь игрока по сетке.</div>`}
  <div class="h-sec" style="margin:14px 0 8px">Верхняя сетка</div>${bsection('W')}
  <div class="h-sec" style="margin:20px 0 8px">Нижняя сетка · выбывание со второго поражения</div>${bsection('L')}`;
 }
+/* ---------- ПАНЕЛЬ РАССТАНОВКИ ---------- */
+function seatPanel(empty){
+ const bn=bench(),on=!!S.seat,holes=seatHoles();
+ const chip=e=>{const p=P(e.p);const c=catOf(p).c;
+  return `<span class="bchip ${S.hand===e.p?'inhand':''}" data-bench="${e.p}" data-pid="${e.p}" title="${esc(p.name)} · ${esc(catOf(p).code)}">
+   <i style="background:${c}"></i>${esc(short(p.name))}</span>`};
+ return `<div class="seatbar ${on?'on':''}">
+  <div class="row wr" style="gap:9px;align-items:center">
+   <button class="btn sm ${on?'core':''}" data-act="seatmode" type="button">${on?'✋ Перестановка включена':'✋ Перестановка'}</button>
+   <span class="dim" style="font-size:12px">Свободных мест: <b style="color:var(--ink)">${empty}</b> · не расставлены: <b style="color:var(--ink)">${bn.length}</b></span>
+   <span class="sp"></span>
+   <button class="btn sm" data-act="seatauto:status" type="button">Добрать по статусам</button>
+   <button class="btn sm" data-act="seatauto:random" type="button">Добрать случайно</button>
+   <button class="btn sm" data-act="seatfill" type="button">Пустые → проходы</button>
+   <button class="btn sm bad" data-act="seatclear" type="button">Снять всех</button>
+  </div>
+  ${holes&&!bn.length?`<div class="note" style="margin-top:9px;color:var(--amber-2)">
+    Пустых мест осталось <b>${holes}</b>. Пока они пустые, эти матчи не стартуют — нажмите
+    «Пустые → проходы», и соперники этих мест пройдут дальше автоматически.</div>`:''}
+  ${on?`<div class="note" style="margin-top:9px">${S.hand
+    ? '<b style="color:var(--amber-2)">'+esc(nmOf(S.hand))+'</b> в руке — ткните в место, куда поставить. Ещё раз по игроку — положить обратно.'
+    : 'Ткните игрока — он окажется «в руке», потом ткните место. Мышью можно просто перетащить. Клик по матчу карточку не откроет, пока режим включён.'}</div>`:''}
+  ${bn.length?`<div class="bench" id="bench">
+   <div class="bench-h">Не расставлены · ${bn.length}</div>
+   <div class="bench-in">${bn.map(chip).join('')}</div></div>`
+   :'<div class="bench empty-b" id="bench"><div class="bench-h">Скамейка пуста — весь состав в сетке</div></div>'}
+ </div>`;
+}
+
+/* ---------- ПЕРЕТАСКИВАНИЕ ---------- */
+let DG=null;
+const seatUnder=(x,y)=>{
+ const el=document.elementFromPoint(x,y);if(!el)return undefined;
+ const s=el.closest('[data-seat]');if(s)return s.dataset.seat;
+ if(el.closest('#bench'))return null;
+ return undefined;
+};
+function dragBegin(e,src,pid){
+ DG={src,pid,x0:e.clientX,y0:e.clientY,live:false,ghost:null};
+}
+function dragMove(e){
+ if(!DG)return;
+ if(!DG.live){
+  if(Math.abs(e.clientX-DG.x0)+Math.abs(e.clientY-DG.y0)<9)return;
+  DG.live=true;document.body.classList.add('dragging');
+  const g=document.createElement('div');g.className='ghost';g.textContent=nmOf(DG.pid);
+  document.body.appendChild(g);DG.ghost=g;
+ }
+ e.preventDefault();
+ DG.ghost.style.transform=`translate(${e.clientX+12}px,${e.clientY-14}px)`;
+ document.querySelectorAll('.drop').forEach(n=>n.classList.remove('drop'));
+ const el=document.elementFromPoint(e.clientX,e.clientY);
+ const tgt=el&&(el.closest('[data-seat]')||el.closest('#bench'));
+ if(tgt)tgt.classList.add('drop');
+}
+function dragEnd(e){
+ if(!DG)return;
+ const d=DG;DG=null;
+ document.body.classList.remove('dragging');
+ document.querySelectorAll('.drop').forEach(n=>n.classList.remove('drop'));
+ if(d.ghost)d.ghost.remove();
+ if(!d.live){                       /* короткий тык — берём в руку / кладём */
+  if(!S.seat)return;
+  if(S.hand===d.pid){S.hand=null;return render()}
+  if(S.hand){const h=S.hand;S.hand=null;return handDrop(d.src,h)}
+  S.hand=d.pid;return render();
+ }
+ const to=seatUnder(e.clientX,e.clientY);
+ if(to===undefined)return;
+ if(d.src===to)return;
+ S.hand=null;
+ seatMove(d.src,to);
+}
+/* положить то, что в руке, в место src (или на скамейку) */
+function handDrop(target,pid){
+ const cur=findSeat(pid);
+ if(target===null){if(cur)seatMove(cur,null);else render();return}
+ if(cur)return seatMove(cur,target);
+ const [i,side]=target.split('|');
+ setSlot(i,side,pid);
+}
+const findSeat=pid=>{let r=null;ids().forEach(i=>{if(!isSeat(i))return;const m=MM(i);
+ if(m.a===pid)r=i+'|a'; if(m.b===pid)r=i+'|b'});return r};
+
 function drawLinks(){
  const t=T();if(!t||!t.br)return;
  document.querySelectorAll('.bcanvas').forEach(cv=>{
@@ -2039,11 +2242,26 @@ function render(){
  if(S.view==='people')filterPeople();
  if(S.view==='rating')filterRating();
 }
-function go(v){S.view=v;S.hot=null;const m=$('#main');if(m)m.scrollTop=0;render()}
+function go(v){S.view=v;S.hot=null;S.hand=null;const m=$('#main');if(m)m.scrollTop=0;render()}
 
 /* ---------- СОБЫТИЯ ---------- */
+document.addEventListener('pointerdown',e=>{
+ if(!ADMIN||e.button===2)return;
+ const seat=e.target.closest('[data-seat]'),ben=e.target.closest('[data-bench]');
+ const node=seat||ben;if(!node)return;
+ const pid=node.dataset.pid;
+ if(seat&&!pid&&S.seat&&S.hand){const h=S.hand;S.hand=null;return handDrop(seat.dataset.seat,h)}
+ if(!pid)return;
+ dragBegin(e,seat?seat.dataset.seat:null,pid);
+});
+document.addEventListener('pointermove',dragMove,{passive:false});
+document.addEventListener('pointerup',dragEnd);
+document.addEventListener('pointercancel',()=>{if(DG){if(DG.ghost)DG.ghost.remove();DG=null;
+ document.body.classList.remove('dragging');document.querySelectorAll('.drop').forEach(n=>n.classList.remove('drop'))}});
+
 document.addEventListener('click',e=>{
  if(e.target.id==='scrim'&&$('#modal').classList.contains('match'))return closeModal();
+ if(S.seat&&ADMIN&&e.target.closest('[data-seat],[data-bench]'))return;   /* в режиме перестановки карточку не открываем */
  const t=e.target.closest('[data-nav],[data-m],[data-p],[data-call],[data-act],[data-x],[data-sc],[data-tour],[data-tq],[data-slot],[data-empty],#pinb,#r-go,#pin-go');
  if(!t)return;
  if(t.id==='pinb')return pinForm();
@@ -2094,6 +2312,10 @@ function act(a){
    try{ST=migrate(JSON.parse(document.getElementById('app-state').textContent));toast('Демо-набор загружен');save();go('tours')}
    catch(e){toast('Не удалось прочитать демо-набор')}});
  if(k==='rtab'){S.rtab=arg;S.rq='';return go('rating')}
+ if(k==='seatmode'){S.seat=!S.seat;S.hand=null;toast(S.seat?'Режим перестановки включён':'Режим перестановки выключен');return render()}
+ if(k==='seatauto')return seatAuto(arg||'status');
+ if(k==='seatfill')return seatFill();
+ if(k==='seatclear')return confirmBox('Снять всех из сетки?','Все игроки вернутся на скамейку, сетка останется пустой. Сыгранные матчи не тронутся.',()=>seatClear());
  if(k==='savecfg')return saveCfg();
  if(k==='savecats')return saveCats();
  if(k==='catadd'){ST.cats=CATS().slice();ST.cats.push({code:'НОВЫЙ СТАТУС',c:'#9BB4C7'});save();return render()}
