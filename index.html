@@ -362,6 +362,13 @@ body.chroma-bg{background:#00B140!important}
 .ballbox.hot .ballnum{color:var(--amber-2)}
 .ballplus{width:100%;font-size:16px;padding:13px 10px;justify-content:center}
 .mx-hint{font-size:12.5px;color:var(--ink-2);text-align:center;padding:9px 12px;border-radius:var(--r-m);background:var(--surface-2);margin-top:4px}
+.mx-enter{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding:12px;border:1px solid var(--line-2);border-radius:var(--r-m);background:var(--surface-2)}
+.mx-enter-lb{font-family:var(--disp);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);width:100%;text-align:center}
+.mx-enter .lsc{width:82px;height:60px;text-align:center;font-family:var(--mono);font-size:32px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-m);-moz-appearance:textfield}
+.mx-enter .lsc:focus{outline:none;border-color:var(--amber-2);box-shadow:0 0 0 3px rgba(245,144,43,.14)}
+.mx-enter .lsc::-webkit-outer-spin-button,.mx-enter .lsc::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.mx-enter .lsc-col{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--ink-3);font-style:normal}
+.mx-enter .btn{height:60px}
 .frames{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;font-size:12px;margin-top:6px}
 .fchip{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface-2)}
 .ballmini{display:inline-flex;align-items:baseline;gap:3px;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ink-2);
@@ -693,12 +700,13 @@ const rankOf=pid=>ranked().findIndex(p=>p.id===pid)+1;
 /* ---------- ФОРМАТЫ ----------
    Название формата судья может переписать (t.fmtName) — как принято у вас. */
 const FMTS=[
- {k:'de', ru:'Двойное выбывание',                 d:'Выбывание после двух поражений: верхняя и нижняя сетка, гранд-финал'},
+ {k:'de', ru:'До двух поражений',                 d:'Выбывание после двух поражений: верхняя и нижняя сетка, гранд-финал'},
  {k:'se', ru:'Олимпийская система',               d:'Проиграл — выбыл. Самая короткая сетка'},
  {k:'se3',ru:'Олимпийская + матч за 3 место',     d:'Как олимпийская, проигравшие полуфиналисты играют за бронзу'},
  {k:'rr', ru:'Круговая система',                  d:'Все со всеми в одной группе, места по очкам'},
  {k:'grp',ru:'Группы + плей-офф',                 d:'Сначала группы по кругу, лучшие выходят в сетку на выбывание'}
 ];
+const DISCIPLINES=['Вільна піраміда','Вільна піраміда з продовженням','Динамічна піраміда','Комбінована піраміда','Комбінована піраміда зі змінами','Класична піраміда до 51','Московська піраміда','Пул-8','Пул-9','Пул-10','Снукер'];
 const fmtOf=k=>FMTS.find(f=>f.k===k)||FMTS[0];
 const fmtName=t=>(t&&t.fmtName)||fmtOf((t&&t.fmt)||'de').ru;
 const bkind=t=>(t&&t.br&&t.br.kind)||'de';          /* вид сетки на выбывание: de | se | se3 */
@@ -841,6 +849,7 @@ function draw(mode){
   }
  }
  t.br={N,m,kind};t.seq=0;t.status='drawn';
+ if(!t.fmtName)t.fmtName=fmtOf(kind).ru+' · сетка '+N;      /* имя схемы подставляется само */
  resolveByes();ensureSeeds();
  feed(`Жеребьёвка: ${fmtName(t)}, сетка на ${N}, ${keep.length} участников, ${mode==='blind'?'слепой жребий':mode==='random'?'случайный посев':'посев по статусам'}`);
  toast(mode==='blind'?'Слепой жребий проведён':'Сетка создана');save();go('bracket');
@@ -883,7 +892,9 @@ function emptyBracket(N){
    (в пирамиде — 8) — партия засчитывается сама, шары обнуляются.
    Фол = +1 шар сопернику. Любое действие отменяется кнопкой ↶.
    ============================================================ */
-const ballsOf=t=>{const v=t&&t.balls;return v===0?0:Math.max(1,(v|0)||8)};   /* 0 — не считать шары */
+const scoreBy=t=>((t&&t.scoreBy)==='balls'?'balls':'games');   /* чем ведём счёт: партии или шары */
+const unitOf=t=>scoreBy(t)==='balls'?'шары':'партии';
+const ballsOf=t=>{if(!t||scoreBy(t)==='balls'||!t.ballframes)return 0;const v=t.balls;return v===0?0:Math.max(1,(v|0)||8)};   /* 0 — попартийный счёт шаров выключен */
 function ballAct(id,side,kind){                       /* kind: 'ball' | 'minus' | 'foul' */
  const t=T(),m=MM(id);if(!m||m.st!=='live')return;
  const B=ballsOf(t);if(!B)return;
@@ -1129,12 +1140,18 @@ function undo(id){
  feed(`Результат матча ${id} отменён судьёй`);
  toast('Результат отменён — счёт можно поправить');save();render();openMatch(id);
 }
+/* прямой ввод счёта в идущем матче: два поля, без попартийного «+1 шар» */
+function setLiveScore(id,sa,sb){
+ const m=MM(id),t=T();if(!m||m.st!=='live')return;
+ m.sa=Math.max(0,Math.min(999,sa|0));m.sb=Math.max(0,Math.min(999,sb|0));   /* без потолка — партии/шары как есть */
+ if(scoreBy(t)==='balls'){m.ba=0;m.bb=0}
+ save();render();if(S.openM===id)openMatch(id);
+}
 /* правка счёта уже завершённого матча */
 function editScore(id,sa,sb){
  const m=MM(id),t=T();if(!m)return;
- sa=Math.max(0,Math.min(t.race,sa|0));sb=Math.max(0,Math.min(t.race,sb|0));
+ sa=Math.max(0,Math.min(999,sa|0));sb=Math.max(0,Math.min(999,sb|0));
  if(sa===sb)return toast('Ничьих не бывает');
- if(sa<t.race&&sb<t.race)return toast('У победителя должно быть '+t.race+' партий');
  if(m.st!=='done'){m.sa=sa;m.sb=sb;save();render();if(S.openM===id)openMatch(id);return}
  const sameWin=(sa>sb)===(m.sa>m.sb);
  snap();
@@ -1381,7 +1398,8 @@ function newClub(){
    ТИТУЛ ИГРОКА: уровень + персонаж — «NEW BIE · RIOT»
    ============================================================ */
 const lvlOf=p=>String(catOf(p).code).replace(/\s*\(.*?\)\s*/g,'').trim();
-const charOf=p=>{try{return String(evo(p.id).core).split(' ')[0]}catch(e){return 'HUMAN'}};
+const charOf=p=>{if(p&&p.persona)return p.persona;try{return String(evo(p.id).core).split(' ')[0]}catch(e){return 'HUMAN'}};
+const PERSONAS=['Супер игрок','Джокер','Карнаж','Веном','Риот','Доктор мистик','Джокер кор'];
 const titleOf=p=>p?lvlOf(p)+' · '+charOf(p):'';
 
 /* ============================================================
@@ -1438,6 +1456,30 @@ function newTour(){
   fmt:'de',fmtName:'',club:(prev&&prev.club)||'',crew:{},regl:'',stage:'',
   entries:[],br:null,gs:null,seq:0,feed:[{t:now(),txt:'Турнир создан'}]});
  ST.cur=id;toast('Турнир создан');save();go('cfg');
+}
+/* прикрепить турнир к текущей серии — одно окно: название, дата/время, этап, дисциплина */
+function attachTourForm(){
+ const base=T();
+ modal('Прикрепить турнир',`
+  <div class="note">Создаётся отдельный турнир, связанный с текущим (общая серия/календарь). Настройки наследуются и правятся позже.</div>
+  <div class="fld"><label>Название</label><input class="inp" id="at-name" placeholder="напр. VENOM OPEN · Этап 2"></div>
+  <div class="f2"><div class="fld"><label>Дата и время</label><input class="inp" id="at-dates" placeholder="напр. 25.10.2026, 12:00" value="${esc(base?base.dates||'':'')}"></div>
+   <div class="fld"><label>Этап квалификации</label><input class="inp" id="at-stage" placeholder="напр. Стартовая квалификация"></div></div>
+  <div class="f2"><div class="fld"><label>Дисциплина</label><input class="inp" id="at-disc" list="at-disc-list" value="${esc(base?base.disc||'':'')}"><datalist id="at-disc-list">${DISCIPLINES.map(d=>`<option value="${esc(d)}"></option>`).join('')}</datalist></div>
+   <div class="fld"><label>Партий до победы</label><input class="inp" id="at-race" type="number" min="1" max="15" value="${base?base.race:5}"></div></div>`,
+  `<button class="btn" data-x="1" type="button">Отмена</button><button class="btn core" id="at-go" type="button">Прикрепить</button>`);
+ setTimeout(()=>{const b=$('#at-go');if(b)b.onclick=()=>{
+   const base2=T(),id=uid('t');
+   ST.tours.unshift({id,name:($('#at-name').value||'').trim()||'Новый этап',sub:'',
+    disc:($('#at-disc').value||'').trim()||(base2?base2.disc:''),venue:base2?base2.venue:'',
+    dates:($('#at-dates').value||'').trim(),fee:'',prize:base2?base2.prize||'':'',
+    race:Math.max(1,Math.min(15,parseInt($('#at-race').value,10)||5)),tables:base2?base2.tables:4,balls:base2?base2.balls:8,
+    club:base2?base2.club||'':'',crew:Object.assign({},(base2&&base2.crew)||{}),regl:base2?base2.regl||'':'',
+    fmt:'de',fmtName:'',video:'',vt:'',str:{},stage:($('#at-stage').value||'').trim(),
+    chain:(base2&&(base2.chain||base2.id))||id,
+    status:'planned',pub:true,entries:[],br:null,gs:null,seq:0,feed:[{t:now(),txt:'Турнир прикреплён к серии'}]});
+   ST.cur=id;closeModal();toast('Турнир прикреплён');save();go('cfg');
+ }},30);
 }
 /* ============================================================
    MATCHFLOW OS — этап 3 · VENARION HUMAN CORE
@@ -2241,8 +2283,8 @@ function clubForm(id){
 /* формат турнира и жеребьёвка */
 function fmtForm(){
  const t=T(),ok=approved().length,N=sizeFor(Math.max(ok,3));
- modal('Формат и жеребьёвка',`
-  <div class="note">В составе ${ok}. Формат можно поменять в любой момент — сетка пересоберётся.</div>
+ modal('Задать схему турнира',`
+  <div class="note">В составе ${ok}. Схему можно поменять в любой момент — сетка пересоберётся.</div>
   <div class="fld"><label>Система розыгрыша</label>
    <select class="inp" id="fm-k">${FMTS.map(f=>`<option value="${f.k}" ${t.fmt===f.k?'selected':''}>${esc(f.ru)}</option>`).join('')}</select>
    <div class="dim" style="font-size:11.5px;margin-top:6px" id="fm-d">${esc(fmtOf(t.fmt).d)}</div></div>
@@ -2252,7 +2294,7 @@ function fmtForm(){
    <div class="f2"><div class="fld"><label>Сколько групп</label><input class="inp" id="fm-g" type="number" min="1" max="16" value="${(t.gs&&t.gs.g.length)||Math.max(1,Math.round(ok/4))}"></div>
     <div class="fld"><label>Выходят из группы</label><input class="inp" id="fm-adv" type="number" min="1" max="8" value="${(t.gs&&t.gs.adv)||2}"></div></div>
    <div class="fld"><label>Плей-офф после групп</label><select class="inp" id="fm-po">
-     <option value="se">Олимпийская</option><option value="se3">Олимпийская + за 3 место</option><option value="de">Двойное выбывание</option></select></div>
+     <option value="se">Олимпийская</option><option value="se3">Олимпийская + за 3 место</option><option value="de">До двух поражений</option></select></div>
   </div>
   <div class="fld"><label>Жеребьёвка</label><select class="inp" id="fm-m">
     <option value="status">По статусам (сильные разведены)</option>
@@ -2300,8 +2342,8 @@ function scoreForm(id){
  modal('Правка счёта · '+id,`
   <div class="note">Если победитель поменяется, все матчи, которые выросли из этого результата, будут сброшены и переиграны в протоколе. Рейтинг пересчитается сам.</div>
   <div class="row" style="gap:12px;align-items:flex-end">
-   <div class="fld" style="flex:1"><label>${esc(nmOf(m.a))}</label><input class="inp" id="sc-a" type="number" min="0" max="${t.race}" value="${m.sa}"></div>
-   <div class="fld" style="flex:1"><label>${esc(nmOf(m.b))}</label><input class="inp" id="sc-b" type="number" min="0" max="${t.race}" value="${m.sb}"></div></div>`,
+   <div class="fld" style="flex:1"><label>${esc(nmOf(m.a))}</label><input class="inp" id="sc-a" type="number" min="0" max="999" value="${m.sa}"></div>
+   <div class="fld" style="flex:1"><label>${esc(nmOf(m.b))}</label><input class="inp" id="sc-b" type="number" min="0" max="999" value="${m.sb}"></div></div>`,
   `<button class="btn" data-x="1" type="button">Отмена</button><button class="btn pri" id="sc-go" type="button">Сохранить счёт</button>`);
  setTimeout(()=>{const b=$('#sc-go');if(b)b.onclick=()=>{
    const a=parseInt($('#sc-a').value,10)||0,c=parseInt($('#sc-b').value,10)||0;closeModal();editScore(id,a,c)}},30);
@@ -2433,6 +2475,35 @@ function printDoc(kind){
  document.body.classList.add('printing');
  setTimeout(()=>{window.print();setTimeout(()=>{document.body.classList.remove('printing');z.innerHTML=''},600)},60);
 }
+/* протокол одной встречи — печать с авто-заполнением */
+function matchDoc(id){
+ const t=T(),m=MM(id);if(!m)return '<h2>Матч не найден</h2>';
+ const pa=P(m.a),pb=P(m.b),cr=crewRows(t);
+ const head=`<div class="pd-h"><div class="pd-t">${esc(t.name)}${t.stage?' · '+esc(t.stage):''}</div>
+   <div class="pd-s">${[t.disc,t.venue,t.dates].filter(Boolean).map(esc).join(' · ')}</div></div>`;
+ const tb=(cols,rows)=>`<table class="pd-tb"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+   <tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+ const pr=(lab,p,sc)=>[lab,esc(p?p.name:'—'),esc(p?titleOf(p):''),esc(p?[p.club,p.city].filter(Boolean).join(', '):''),esc(p?p.mid||'':''),'<b style="font-size:16px">'+sc+'</b>'];
+ return head+`<h2>Протокол встречи #${esc(id)} · ${esc(labOf(id))}</h2>
+  ${tb(['','Игрок','Уровень · персонаж','Клуб · город','MF-ID','Счёт'],[pr('A',pa,m.sa),pr('B',pb,m.sb)])}
+  ${tb(['Параметр','Значение'],[
+    ['Дисциплина',esc(t.disc||'')],['Система',esc(fmtName(t))],
+    ['Играют до',scoreBy(t)==='balls'?'счёт по шарам':t.race+' партий'],
+    ['Стол',esc(m.tbl||m.ptbl?tblName(t,m.tbl||m.ptbl):'—')],
+    ['Фора',m.h?('+'+m.h.n+' для '+esc(short(P(m.h.to).name))):'—'],
+    ['Начало',m.t0?hhmm(m.t0):'—'],['Конец',m.t1?hhmm(m.t1):'—'],['Длительность',elapsed(m)||'—'],
+    ['Победитель',m.st==='done'&&!m.bye?esc(short(P(winId(m)).name)):'—']])}
+  ${(m.fr&&m.fr.length)?`<h3>Партии</h3>${tb(['№','Счёт партии'],m.fr.map((f,i)=>[i+1,f[0]+':'+f[1]]))}`:''}
+  ${cr.length?`<h3>Судейская бригада</h3>${tb(['Должность','Фамилия и имя'],cr.map(x=>[esc(x[0]),esc(x[1])]))}`:''}
+  <div class="pd-sign"><span>Игрок A ____________________</span><span>Игрок B ____________________</span></div>
+  <div class="pd-sign"><span>Главный судья ____________________</span><span>Секретарь ____________________</span></div>`;
+}
+function printMatch(id){
+ const z=$('#printzone');if(!z||!MM(id))return;
+ z.innerHTML=`<div class="pd">${matchDoc(id)}<div class="pd-f">MATCHFLOW OS · ${esc(stamp(Date.now()))}</div></div>`;
+ document.body.classList.add('printing');
+ setTimeout(()=>{window.print();setTimeout(()=>{document.body.classList.remove('printing');z.innerHTML=''},600)},60);
+}
 function downloadDoc(kind){
  if(kind==='bracket'&&S.view!=='bracket'){go('bracket');return setTimeout(()=>downloadDoc('bracket'),350)}
  const t=T(),css=document.getElementById('app-css').outerHTML;
@@ -2536,7 +2607,7 @@ function vBoard(){
     <span class="num dim" style="font-size:11.5px" data-tick="${m.t0||0}">${elapsed(m)}</span>
     <span class="dim" style="font-size:11.5px">${labOf(id)}</span></div>
    ${side(m.a,m.sa,m.sb)}${side(m.b,m.sb,m.sa)}
-   <div class="row" style="gap:14px">${pips(m.sa)}<span class="dim" style="font-size:11px">партии</span>${pips(m.sb)}</div>
+   <div class="row" style="gap:8px;justify-content:center"><span class="dim" style="font-size:11px">${unitOf(t)} · <b class="num">${m.sa}:${m.sb}</b></span></div>
    <button class="btn ${ADMIN?'core':''}" data-m="${id}" type="button">${ADMIN?'Судейский планшет':'Подробности'}</button></div>`;
  });
  return boardHead(live)+
@@ -2873,7 +2944,7 @@ function vTours(){
      ${!t.pub?'<span class="chip bad">не опубликован</span>':''}</div>
     <div><div style="font-family:var(--disp);font-size:15px;font-weight:600">${esc(t.name)}</div>
      ${nameOnly?'<div class="dim" style="font-size:11.5px;margin-top:3px">детали появятся позже</div>'
-      :`<div class="dim" style="font-size:11.5px;margin-top:3px">${[t.sub,t.disc].filter(Boolean).map(esc).join(' · ')}</div>`}</div>
+      :`<div class="dim" style="font-size:11.5px;margin-top:3px">${[t.disc].filter(Boolean).map(esc).join(' · ')}</div>`}</div>
     ${nameOnly?'':`<div class="dim" style="font-size:12px">${[t.dates,t.venue].filter(Boolean).map(esc).join(' · ')||'даты уточняются'}</div>
      <div class="row wr" style="gap:6px">${showsSquad(t)?`<span class="chip">${ok} участников</span>`:''}${t.fee?`<span class="chip">${esc(t.fee)}</span>`:''}</div>`}
     ${t.status==='announced'&&t.video?`<a class="btn sm" href="${esc(safeUrl(t.video))}" target="_blank" rel="noopener">Видео-регламент</a>`:''}
@@ -2894,7 +2965,7 @@ function nextStep(t){
  const has=!!(t.br||t.gs);
  if(!has&&pend)return {n:2,title:'Разберите заявки — ждут: '+pend,text:'Список ниже: «Принять» или «Отклонить».',act:null};
  if(!has&&ok<3)return {n:2,title:'Нужно минимум 3 участника — сейчас '+ok,text:'Принимайте заявки или добавьте игроков вручную.',act:['addp','+ Добавить игрока']};
- if(!has)return {n:3,title:'Выберите формат и проведите жеребьёвку',text:'В составе '+ok+'. Олимпийка, двойное выбывание, группы или круговая — и сразу жребий.',act:['fmt','Формат и жеребьёвка']};
+ if(!has)return {n:3,title:'Задайте схему турнира и проведите жеребьёвку',text:'В составе '+ok+'. Олимпийка, до двух поражений, группы или круговая — и сразу жребий.',act:['fmt','Задать схему турнира']};
  if(t.status==='done')return {n:6,done:true,title:'Турнир закрыт',text:'Места распределены, протокол зафиксирован.',act:null};
  if(tourOver())return {n:6,title:'Все решающие встречи сыграны',text:'Закройте турнир — места распределятся сами.',act:['close','Закрыть турнир']};
  if(t.gs&&!t.br&&t.fmt!=='rr'&&groupsDone())return {n:3,title:'Группы сыграны',text:'Соберите сетку плей-офф из тех, кто вышел.',act:['playoff','Плей-офф из групп']};
@@ -2930,7 +3001,7 @@ function vTour(){
      ${t.status!=='planned'||ADMIN?`<span class="chip st">${esc(t.disc)}</span><span class="chip">${esc(fmtName(t))}</span><span class="chip">до ${t.race} побед</span>`:''}</div>
     <h1 class="h-page" style="margin:8px 0 6px">${esc(t.name)}</h1>
     ${t.status==='planned'&&!ADMIN?'<div class="mut" style="font-size:12.5px">Детали появятся, когда организатор откроет турнир</div>'
-     :`<div class="mut" style="font-size:12.5px">${[t.sub,(cl?cl.name:t.venue),t.dates].filter(Boolean).map(esc).join(' · ')}</div>`}
+     :`<div class="mut" style="font-size:12.5px">${[(cl?cl.name:t.venue),t.dates].filter(Boolean).map(esc).join(' · ')}</div>`}
     ${t.video?`<a class="btn sm" style="margin-top:10px" href="${esc(safeUrl(t.video))}" target="_blank" rel="noopener">Видео-регламент</a>`:''}
    </div>
    ${ADMIN?'<button class="btn sm" data-nav="cfg" type="button">Настроить</button>':''}
@@ -2958,7 +3029,7 @@ function vTour(){
     <div class="card-b"><div class="note">${regOpen(t)?(t.fee?'Взнос '+esc(t.fee):'Участие свободное')+(t.prize?' · призовой '+esc(t.prize):''):'Регистрация закрыта.'}</div>
      ${regOpen(t)&&!ADMIN?'<button class="btn pri" style="width:100%;margin-top:12px" data-act="reg" type="button">Подать заявку</button>':''}
      ${ADMIN?'<button class="btn" style="width:100%;margin-top:12px" data-act="addp" type="button">+ Добавить игрока</button>':''}</div></div>
-   ${ADMIN?`<div class="card"><div class="card-h"><span class="h-sec">Формат и жеребьёвка</span></div><div class="card-b">
+   ${ADMIN?`<div class="card"><div class="card-h"><span class="h-sec">Схема турнира и жеребьёвка</span></div><div class="card-b">
      <div class="note" style="margin-bottom:12px">Сейчас выбрано: <b>${esc(fmtName(t))}</b>. Можно менять до последнего — сетка пересоберётся.</div>
      <button class="btn core" style="width:100%" data-act="fmt" type="button" ${ok.length<3?'disabled':''}>Выбрать формат и провести жеребьёвку</button>
      <div class="row wr" style="gap:8px;margin-top:10px">
@@ -3343,7 +3414,7 @@ function vPlayer(){
   <button class="btn sm ghost" data-nav="rating" type="button">Рейтинг</button>
   <span class="sp"></span>${ADMIN?`<button class="btn sm" data-act="edit:${p.id}" type="button">Изменить</button>`:''}</div>
  <div class="hero" style="margin-bottom:14px"><div class="row wr" style="gap:18px">
-  <div class="av" style="width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font-family:var(--mono);font-size:21px;font-weight:700;background:${c}1f;color:${c};border:1px solid ${c}55">${esc(initials(p.name))}</div>
+  <div class="av" style="width:64px;height:64px;border-radius:18px;overflow:hidden;display:grid;place-items:center;font-family:var(--mono);font-size:21px;font-weight:700;background:${c}1f;color:${c};border:1px solid ${c}55">${p.photo?`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`:esc(initials(p.name))}</div>
   <div style="flex:1;min-width:220px"><h1 class="h-page">${esc(p.name)}</h1>
    <div class="row wr" style="gap:9px;margin-top:8px">${catBadge(p,16)}
     ${ev.core!=='HUMAN'?coreBadge(ev.core,11.5):''}
@@ -3467,6 +3538,20 @@ function vPlayer(){
      .map(r=>`<div class="row" style="justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,214,170,.05)"><span class="dim">${r[0]}</span><span>${esc(r[1])}</span></div>`).join('')}</div>
   </div></div></div>`;
 }
+/* сжать фото на клиенте: ужимаем до max px и в JPEG, чтобы не раздувать состояние турнира */
+function compressImg(file,max,q,cb){
+ try{
+  const r=new FileReader();
+  r.onload=()=>{const img=new Image();
+   img.onload=()=>{let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));
+    w=Math.max(1,Math.round(w*s));h=Math.max(1,Math.round(h*s));
+    const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+    cv.getContext('2d').drawImage(img,0,0,w,h);
+    try{cb(cv.toDataURL('image/jpeg',q))}catch(e){cb(null)}};
+   img.onerror=()=>cb(null);img.src=r.result};
+  r.onerror=()=>cb(null);r.readAsDataURL(file);
+ }catch(e){cb(null)}
+}
 function editForm(id){
  const p=P(id);if(!p)return;
  modal('Изменить игрока',`
@@ -3475,14 +3560,29 @@ function editForm(id){
    <div class="fld"><label>Клуб</label><input class="inp" id="e-club" value="${esc(p.club||'')}"></div></div>
   <div class="f2"><div class="fld"><label>Телефон или Telegram</label><input class="inp" id="e-cont" value="${esc(p.contact||'')}"></div>
    <div class="fld"><label>MATCHFLOW ID</label><input class="inp" id="e-mid" value="${esc(p.mid||'')}"></div></div>
-  <div class="fld"><label>Статус</label><select class="inp" id="e-cat">${CATS().map((c,i)=>`<option value="${i}" ${i===(p.cat|0)?'selected':''}>${esc(c.code)}</option>`).join('')}</select></div>`,
+  <div class="f2"><div class="fld"><label>Уровень (статус)</label><select class="inp" id="e-cat">${CATS().map((c,i)=>`<option value="${i}" ${i===(p.cat|0)?'selected':''}>${esc(c.code)}</option>`).join('')}</select></div>
+   <div class="fld"><label>Персонаж (трест)</label><select class="inp" id="e-persona"><option value="" ${!p.persona?'selected':''}>Авто — по ядру рейтинга</option>${PERSONAS.map(x=>`<option value="${esc(x)}" ${(p.persona||'')===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div>
+  <div class="fld"><label>Фото игрока (аватарка)</label>
+   <div class="row" style="gap:10px;align-items:center">
+    <span id="e-photo-prev" class="av" style="width:48px;height:48px;border-radius:12px;overflow:hidden;display:grid;place-items:center;font-family:var(--mono);font-weight:700;background:var(--surface-2);flex:none">${p.photo?`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`:esc(initials(p.name))}</span>
+    <input type="file" id="e-photo-file" accept="image/*" class="inp" style="flex:1;padding:7px">
+    <button class="btn sm" id="e-photo-del" type="button">Убрать</button></div></div>`,
   `<button class="btn" data-x="1" type="button">Отмена</button><button class="btn pri" id="e-go" type="button">Сохранить</button>`);
- setTimeout(()=>{const b=$('#e-go');if(b)b.onclick=()=>{
+ setTimeout(()=>{
+  let photo=p.photo||'';
+  const pf=$('#e-photo-file');if(pf)pf.onchange=()=>{const f=pf.files&&pf.files[0];if(!f)return;
+   compressImg(f,320,.72,d=>{if(!d)return toast('Не вышло обработать фото');photo=d;
+    const pv=$('#e-photo-prev');if(pv)pv.innerHTML=`<img src="${d}" style="width:100%;height:100%;object-fit:cover">`})};
+  const pdel=$('#e-photo-del');if(pdel)pdel.onclick=()=>{photo='';
+   const pv=$('#e-photo-prev');if(pv)pv.textContent=initials(($('#e-name').value||p.name));};
+  const b=$('#e-go');if(b)b.onclick=()=>{
    const n=($('#e-name').value||'').trim();if(n.length<3)return toast('Слишком короткое имя');
    const mid=($('#e-mid').value||'').trim();
    if(mid&&byMid(mid)&&byMid(mid).id!==p.id)return toast('Такой ID уже занят');
    p.name=n;p.city=$('#e-city').value.trim();p.club=$('#e-club').value.trim();
    p.contact=$('#e-cont').value.trim();p.cat=+$('#e-cat').value||0;p.mid=mid||p.mid;
+   p.persona=($('#e-persona')?$('#e-persona').value:p.persona||'')||'';
+   p.photo=photo||'';
    closeModal();toast('Сохранено');save();render()}},30);
 }
 
@@ -3505,7 +3605,7 @@ function vCfg(){
 
   <div class="card"><div class="card-h"><span class="h-sec">Карточка турнира</span></div><div class="card-b"><div class="grid" style="gap:12px">
    ${f('name','Название',t.name)}
-   <div class="f2">${f('sub','Подзаголовок',t.sub||'')}${f('disc','Дисциплина',t.disc)}</div>
+   <div class="fld"><label>Дисциплина</label><input class="inp" id="c-disc" value="${esc(t.disc||'')}" list="disc-list" placeholder="Вільна піраміда…"><datalist id="disc-list">${DISCIPLINES.map(d=>`<option value="${esc(d)}"></option>`).join('')}</datalist></div>
    <div class="f2">${f('stage','Этап квалификации',t.stage||'')}${f('dates','Даты',t.dates||'')}</div>
    <div class="fld"><label>Клуб · откуда берутся столы</label>
     <select class="inp" id="c-club"><option value="">— без клуба, просто номера столов —</option>
@@ -3517,8 +3617,13 @@ function vCfg(){
    <div class="fld"><label>Система розыгрыша</label>
     <select class="inp" id="c-fmt">${FMTS.map(x=>`<option value="${x.k}" ${t.fmt===x.k?'selected':''}>${esc(x.ru)}</option>`).join('')}</select></div>
    ${f('fmtName','Своё название системы (как пишете в протоколе)',t.fmtName||'')}
+   <div class="fld"><label>Как ведём счёт в матче</label>
+    <select class="inp" id="c-scoreby">
+     <option value="games" ${scoreBy(t)==='games'?'selected':''}>По партиям — напр. 5 : 0</option>
+     <option value="balls" ${scoreBy(t)==='balls'?'selected':''}>По шарам — напр. 24 : 6</option></select>
+    <div class="note" style="margin-top:8px">Судья вводит счёт двумя полями в окне матча. «По партиям» — до «партий до победы»; «по шарам» — свободный счёт, побеждает больший.</div></div>
    <div class="f2">${f('race','Партий до победы в матче',t.race,'number')}${cl?'':f('tables','Столов',t.tables,'number')}</div>
-   ${f('balls','Шаров до победы в партии (0 — счёт только по партиям)',ballsOf(t),'number')}
+   ${scoreBy(t)==='games'?`<label class="row" style="gap:9px;align-items:center;cursor:pointer"><input type="checkbox" id="c-ballframes" ${t.ballframes?'checked':''} style="width:18px;height:18px;accent-color:var(--amber-2)"><span>Попартийный счёт шаров — кнопка «+1 шар» в окне матча</span></label>${t.ballframes?f('balls','Шаров в партии для авто-подсчёта (на N-м партия закрывается сама)',(t.balls|0)||8,'number'):''}`:''}
    <div class="fld"><label>Положение о турнире (печатается в регламенте)</label>
     <textarea class="inp" id="c-regl" rows="4" style="resize:vertical">${esc(t.regl||'')}</textarea></div>
    ${f('video','Ссылка на видео-регламент',t.video||'')}
@@ -3550,11 +3655,12 @@ function vCfg(){
    <button class="btn" style="width:100%;margin-top:12px" data-act="savecats" type="button">Сохранить статусы</button></div></div>
 
   <div class="card"><div class="card-h"><span class="h-sec">Управление</span></div><div class="card-b"><div class="grid" style="gap:8px">
-   <button class="btn core" data-act="fmt" type="button">Формат и жеребьёвка</button>
+   <button class="btn core" data-act="fmt" type="button">Задать схему турнира</button>
    ${t.br?'<button class="btn" data-act="lots" type="button">Номера жребия вручную</button>':''}
    <button class="btn" data-act="stage" type="button">Следующий этап квалификации →</button>
    ${t.br||t.gs?'<button class="btn" data-act="rebuild" type="button">Сбросить сетку и группы</button>':''}
    <button class="btn" data-nav="clubs" type="button">Клубы и столы</button>
+   <button class="btn" data-act="attach" type="button">Прикрепить турнир к серии</button>
    <button class="btn" data-act="newtour" type="button">Создать ещё один турнир</button>
    <button class="btn" data-act="demo" type="button">Загрузить демо-набор (Харків)</button>
    <button class="btn bad" data-act="deltour" type="button">Удалить турнир</button></div></div></div>
@@ -3588,7 +3694,7 @@ function saveStreams(t){
 const numOr=(v,def)=>{const n=parseFloat(String(v).replace(',','.'));return isNaN(n)?def:n};
 function saveCfg(){
  const t=T(),g=id=>{const n=$('#c-'+id);return n?n.value.trim():''};
- t.name=g('name')||t.name;t.sub=g('sub');t.disc=g('disc')||t.disc;t.dates=g('dates');
+ t.name=g('name')||t.name;t.disc=g('disc')||t.disc;t.dates=g('dates');
  t.stage=g('stage');t.fmtName=g('fmtName');
  const fm=$('#c-fmt');if(fm&&fm.value)t.fmt=fm.value;
  const cb=$('#c-club');if(cb)t.club=cb.value||'';
@@ -3597,8 +3703,11 @@ function saveCfg(){
   t.tables=Math.max(1,Math.min(40,Math.round(numOr(g('tables'),t.tables))))}
  else{const c=clubOf(t);t.tables=(c.tables||[]).length||t.tables;t.venue=c.name+(c.city?' · '+c.city:'')}
  t.fee=g('fee');t.prize=g('prize');t.video=g('video');
+ const _sb=$('#c-scoreby');if(_sb)t.scoreBy=_sb.value==='balls'?'balls':'games';
+ const _bf=$('#c-ballframes');if(_bf)t.ballframes=!!_bf.checked;
  t.race=Math.max(1,Math.min(15,Math.round(numOr(g('race'),t.race))));
- t.balls=Math.max(0,Math.min(30,Math.round(numOr(g('balls'),ballsOf(t)))));
+ t.balls=Math.max(0,Math.min(30,Math.round(numOr(g('balls'),(t.balls|0)))));
+ if(t.ballframes&&!(t.balls>0))t.balls=8;
  if(MODE!=='server')ST.pin=g('pin')||ST.pin;
  toast('Сохранено');save();render();
 }
@@ -3641,7 +3750,7 @@ function routeOf(id,side){
 function openMatch(id){
  const t=T();
  if(!t||!MM(id))return;
- const m=MM(id),race=t.race,B=ballsOf(t),grp=isG(id);
+ const m=MM(id),race=t.race,B=ballsOf(t),grp=isG(id),balls=scoreBy(t)==='balls';
  const both=m.a&&m.b&&m.a!=='BYE'&&m.b!=='BYE';
  S.openM=id;
 
@@ -3661,15 +3770,14 @@ function openMatch(id){
   const geo=[p.country||'Україна',p.city].filter(Boolean).join(', ');
   const h=m.h&&m.h.to===pid?`<span class="chip" style="padding:1px 7px;font-size:10px;color:var(--amber-2);border-color:rgba(245,144,43,.4)">фора +${m.h.n}</span>`:'';
   return `<div class="mx-side ${lead?'lead':''}">
-   <div class="mx-av" style="background:${c}14;border:1px solid ${c}33">${silhouette(c,72)}</div>
+   <div class="mx-av" style="background:${c}14;border:1px solid ${c}33">${p.photo?`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`:silhouette(c,72)}</div>
    <div class="mx-name clk" data-p="${pid}">${esc(fam)}${rest?`<span class="second">${esc(rest)}</span>`:''}</div>
    <div class="mx-geo">🇺🇦 ${esc(geo)}</div>
    <div class="mx-ttl">${esc(titleOf(p))}</div>
    <div class="row" style="gap:7px;justify-content:center;flex-wrap:wrap">${catBadge(p,12)}${h}
     ${lotOf(pid)?`<span class="chip" style="padding:1px 7px;font-size:10px" title="номер жребия">жребий ${lotOf(pid)}</span>`:''}</div>
-   <div class="mx-lbl">партии</div>
+   <div class="mx-lbl">${balls?'шары':'партии'}</div>
    <div class="mx-score" style="${lead?'color:var(--amber-2)':''}">${m.st==='pending'?'—':sc}</div>
-   ${m.st!=='pending'?pips(sc):''}
    ${B&&m.st==='live'?`<div class="ballbox ${(key==='a'?m.ba:m.bb)>=B-1?'hot':''}">
      <div class="mx-lbl">шары в партии · до ${B}</div>
      <div class="ballnum">${key==='a'?(m.ba|0):(m.bb|0)}</div>
@@ -3680,7 +3788,7 @@ function openMatch(id){
      ${(key==='a'?m.fa:m.fb)?`<div class="dim" style="font-size:11px">фолов: ${key==='a'?m.fa:m.fb}</div>`:''}
     </div>`:''}
    ${ADMIN&&m.st==='live'?`<div class="row" style="gap:7px;justify-content:center;align-items:center;margin-top:2px">
-     <span class="dim" style="font-size:11px">${B?'поправить партии':'партии'}</span>
+     <span class="dim" style="font-size:11px">поправить ${balls?'шары':'партии'}</span>
      <button class="sbtn" data-sc="${key}|-1" type="button" aria-label="минус партия">−</button>
      <button class="sbtn" data-sc="${key}|1" type="button" aria-label="плюс партия">+</button></div>`:''}
    <div class="mx-rt dim">${RT(p)} <span style="opacity:.6">рейтинг</span></div>
@@ -3705,6 +3813,12 @@ function openMatch(id){
   <div class="mx-body">
    ${sideHtml(m.a,m.sa,m.sb,'a')}<div class="mx-vr"></div>${sideHtml(m.b,m.sb,m.sa,'b')}
   </div>
+  ${ADMIN&&m.st==='live'?`<div class="mx-enter">
+    <span class="mx-enter-lb">Счёт${balls?' · шары':''}</span>
+    <input class="lsc" id="ls-a" type="number" min="0" inputmode="numeric" value="${m.sa}" aria-label="счёт слева">
+    <i class="lsc-col">:</i>
+    <input class="lsc" id="ls-b" type="number" min="0" inputmode="numeric" value="${m.sb}" aria-label="счёт справа">
+    <button class="btn pri" id="ls-go" type="button">Записать</button></div>`:''}
   ${B&&m.st==='live'?`<div class="mx-hint">${ADMIN
      ?'Жмите <b>«+1 шар»</b> каждый раз, когда игрок забил. На '+B+'-м шаре партия засчитается сама. Ошиблись — <b>«↶ Отменить»</b> внизу.'
      :'Идёт партия '+((m.sa|0)+(m.sb|0)+1)+' · счёт обновляется сам'}</div>`:''}
@@ -3719,16 +3833,17 @@ function openMatch(id){
 
  let foot='<button class="btn" data-x="1" type="button">Закрыть</button>';
  if(ADMIN){
+  if(both&&m.st!=='pending')foot+=`<button class="btn" data-act="pmatch:${id}" type="button">🖨 Протокол</button>`;
   if(m.st==='done'&&!m.bye){
    foot+='<button class="btn" data-act="score" type="button">Изменить счёт</button>';
    foot+='<button class="btn" data-act="undo" type="button">Отменить результат</button>';
    foot+='<button class="btn bad" data-act="restart" type="button">Начать заново</button>';
   }else if(m.st==='live'){
-   const can=m.sa>=race||m.sb>=race;
+   const can=m.sa!==m.sb;                              /* завершать можно при любом счёте — хоть проходка */
    if(B)foot+=`<button class="btn" data-ball="x|undo" type="button" ${(m.log&&m.log.length)?'':'disabled'}>↶ Отменить последнее</button>`;
    foot+='<button class="btn" data-act="stop" type="button" title="Снять со стола">⏸ Остановить</button>';
    foot+='<button class="btn" data-act="restart" type="button">Начать заново</button>';
-   foot+=`<button class="btn ${can?'gold':''}" data-act="fin" type="button" ${can?'':'disabled'}>${can?'✓ Завершить матч':'Завершить можно при '+race+' партиях'}</button>`;
+   foot+=`<button class="btn ${can?'gold':''}" data-act="fin" type="button" ${can?'':'disabled'}>${can?'✓ Завершить матч':'Введите счёт — у победителя должно быть больше'}</button>`;
   }else if(m.st==='pending'){
    foot+='<button class="btn" data-act="pair" type="button">Соперники</button>';
    if(both)foot+=`<button class="btn core" data-call="${id}" type="button">На стол…</button>`;
@@ -3737,6 +3852,12 @@ function openMatch(id){
   }
  }
  $('#md-f').innerHTML=foot;
+ const _g=$('#ls-go');
+ if(_g){
+  const commit=()=>setLiveScore(id,parseInt($('#ls-a').value,10)||0,parseInt($('#ls-b').value,10)||0);
+  _g.onclick=commit;
+  ['ls-a','ls-b'].forEach(k=>{const el=$('#'+k);if(el)el.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();commit()}}});
+ }
  $('#modal').classList.add('on','match');$('#scrim').classList.add('on');
 }
 const closeDrawer=()=>closeModal();
@@ -3818,7 +3939,7 @@ document.addEventListener('click',e=>{
    if(m.st!=='pending'&&!m.bye)return openMatch(mid);
    return slotForm(mid,side)}
  if(t.dataset.sc){const parts=t.dataset.sc.split('|'),m=MM(S.openM),race=T().race;
-  if(parts[0]==='a')m.sa=Math.max(0,Math.min(race,m.sa+ +parts[1]));else m.sb=Math.max(0,Math.min(race,m.sb+ +parts[1]));
+  if(parts[0]==='a')m.sa=Math.max(0,Math.min(999,m.sa+ +parts[1]));else m.sb=Math.max(0,Math.min(999,m.sb+ +parts[1]));
   save();openMatch(S.openM);const sc=$('#main').scrollTop;render();$('#main').scrollTop=sc;return}
  if(t.dataset.ball&&ADMIN&&S.openM){const [side,kind]=t.dataset.ball.split('|');
   if(kind==='undo')ballUndo(S.openM);else ballAct(S.openM,side,kind);
@@ -3861,6 +3982,7 @@ function act(a){
  if(k==='st'){t.status=arg;feed('Статус турнира: '+tsOf(arg).ru);toast(tsOf(arg).ru);save();return render()}
  if(k==='pub'){t.pub=!t.pub;toast(t.pub?'Опубликован':'Скрыт');save();return render()}
  if(k==='newtour')return newTour();
+ if(k==='attach')return attachTourForm();
  if(k==='demo')return confirmBox('Загрузить демо-набор?','Текущие турниры, составы и сетки будут заменены демонстрационными данными: VENOM OPEN, DRY LEAF + CITADEL, категории Billiarder. База игроков тоже перезапишется.',()=>{
    try{ST=migrate(JSON.parse(document.getElementById('app-state').textContent));toast('Демо-набор загружен');save();go('tours')}
    catch(e){toast('Не удалось прочитать демо-набор')}});
@@ -3898,6 +4020,7 @@ function act(a){
    try{if(document.fullscreenElement)document.exitFullscreen();else el.requestFullscreen()}catch(e){}
    return}
  if(k==='print')return printDoc(arg);
+ if(k==='pmatch')return printMatch(arg||S.openM);
  if(k==='dl')return downloadDoc(arg);
  if(k==='dlcsv')return csvDoc(arg);
  if(k==='savecrew'){const c={};['chief','secretary','assistant','junior','operator'].forEach(x=>{
