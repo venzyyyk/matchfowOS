@@ -31,7 +31,10 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%}
+html{background:var(--ground)}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+#root{opacity:1;transition:opacity .18s ease-out}
+#root:empty{opacity:0}
 button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
 ::-webkit-scrollbar{width:9px;height:9px}
