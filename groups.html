@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MatchFlow OS · Групповой этап</title>
+<meta name="theme-color" content="#070607">
+<link rel="icon" type="image/webp" href="/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#070607; --ground-2:#0A0909; --surface:#100E0E; --surface-2:#171414; --surface-3:#201C1B;
+  --line:rgba(255,214,170,.10); --line-2:rgba(255,214,170,.20);
+  --ink:#F2ECE6; --ink-2:#AEA49C; --ink-3:#71675F;
+  --core:#FF7A1A; --core-2:#FFB067; --core-soft:rgba(255,122,26,.14);
+  --amber:#F5902B; --amber-2:#FFB86B; --amber-dim:rgba(245,144,43,.14);
+  --steel:#9BB4C7; --steel-dim:rgba(155,180,199,.13);
+  --gold:#E8C56A; --gold-dim:rgba(232,197,106,.13);
+  --ok:#3FCF8E; --ok-dim:rgba(63,207,142,.13);
+  --bad:#FF5757; --bad-dim:rgba(255,87,87,.13);
+  --r-m:10px; --r-l:16px;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Unbounded","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text","Segoe UI",system-ui,sans-serif;
+  --sh:0 18px 50px -24px rgba(0,0,0,.92);
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:rgba(255,214,170,.14);border-radius:9px}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:600;letter-spacing:-.02em}
+.h-page{font-size:22px;line-height:1.15}
+.h-sec{font-size:11.5px;font-family:var(--disp);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 18px 80px}
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--ground-2),var(--ground));position:sticky;top:0;z-index:10;flex-wrap:wrap}
+.logo{width:34px;height:34px;background:url(/logo.webp) center/contain no-repeat;flex:none}
+.wordmark{font-family:var(--disp);font-weight:300;letter-spacing:.02em;font-size:15px}
+.wordmark b{font-weight:800;color:var(--core)}
+.sp{flex:1}
+.mut{color:var(--ink-2)} .dim{color:var(--ink-3)}
+a.lnk{color:var(--steel);text-decoration:none;font-size:12.5px;border-bottom:1px dotted var(--line-2)}
+a.lnk:hover{color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);margin-bottom:16px}
+.card-h{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.card-b{padding:16px}
+.row{display:flex;align-items:center;gap:10px}.wr{flex-wrap:wrap}
+.grid{display:grid;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid var(--line-2);color:var(--ink-2);background:var(--surface-2);white-space:nowrap}
+.chip.live{color:var(--core);border-color:rgba(255,122,26,.36);background:var(--core-soft)}
+.chip.ok{color:var(--ok);border-color:rgba(63,207,142,.3);background:var(--ok-dim)}
+.chip.bad{color:var(--bad);border-color:rgba(255,87,87,.3);background:var(--bad-dim)}
+.chip.gold{color:var(--gold);border-color:rgba(232,197,106,.32);background:var(--gold-dim)}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 14px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);font-weight:600;font-size:12.5px;cursor:pointer;transition:.16s;white-space:nowrap}
+.btn:hover{background:var(--surface-3)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.pri{background:var(--amber);border-color:var(--amber);color:#1B0E02}
+.btn.pri:hover{background:var(--amber-2)}
+.btn.core{background:var(--core);border-color:var(--core);color:#1B0A02}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#191203}
+.btn.bad{color:var(--bad);border-color:rgba(255,87,87,.4)}
+.btn.ghost{background:transparent}
+.btn.sm{padding:5px 10px;font-size:11.5px}
+.inp{padding:9px 11px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);width:100%}
+select.inp{appearance:none}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:11.5px;color:var(--ink-3);font-weight:600}
+.note{font-size:12.5px;color:var(--ink-2);padding:11px 13px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--surface-2)}
+.empty{padding:40px 20px;text-align:center;color:var(--ink-3)}
+.gcols{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+table.t{width:100%;border-collapse:collapse;font-size:12.5px}
+table.t th{text-align:left;font-weight:600;color:var(--ink-3);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-bottom:1px solid var(--line)}
+table.t td{padding:7px 8px;border-bottom:1px solid rgba(255,214,170,.05)}
+tr.qual td{background:rgba(63,207,142,.07)}
+tr.qual td:first-child{box-shadow:inset 3px 0 0 var(--ok)}
+.pl{display:flex;align-items:center;gap:9px;min-width:0}
+.av{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:11px;flex:none}
+.pname{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtrow{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--surface-2);margin-bottom:7px}
+.mtrow.done{background:var(--surface)}
+.mtrow.onair{border-color:rgba(255,122,26,.5);box-shadow:0 0 0 1px rgba(255,122,26,.3)}
+.mt-side{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.mt-side.r{flex-direction:row-reverse;text-align:right}
+.mt-nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.mt-nm.win{color:var(--ok)}
+.sc{width:30px;height:30px;border-radius:8px;border:1px solid var(--line-2);background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:15px;flex:none}
+.scbox{display:flex;align-items:center;gap:5px;flex:none}
+.sbtn{width:26px;height:26px;border-radius:7px;border:1px solid var(--line-2);background:var(--surface-2);cursor:pointer;font-size:15px;line-height:1;display:grid;place-items:center}
+.sbtn:hover{background:var(--surface-3)}
+.vs{font-size:10px;color:var(--ink-3);flex:none}
+.prog{height:4px;border-radius:99px;background:rgba(255,214,170,.09);overflow:hidden;margin-top:4px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--steel),var(--amber));transition:width .4s}
+.sync{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-3)}
+.sync i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.sync.saving i{background:var(--amber)} .sync.ro i{background:var(--bad)} .sync.off i{background:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--surface-3);border:1px solid var(--line-2);border-radius:var(--r-m);padding:10px 16px;font-size:12.5px;font-weight:600;opacity:0;pointer-events:none;transition:.24s;z-index:60;box-shadow:var(--sh)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.scrim{position:fixed;inset:0;background:rgba(4,3,3,.66);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(460px,calc(100% - 28px));max-height:86dvh;overflow:auto;background:var(--ground-2);border:1px solid var(--line-2);border-radius:var(--r-l);z-index:50;opacity:0;pointer-events:none;transition:.2s;box-shadow:var(--sh)}
+.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal h3{padding:15px 18px;border-bottom:1px solid var(--line);font-size:15px}
+.modal .mb{padding:16px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seedlist{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:var(--r-m);padding:6px}
+.seedlist label{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:12.5px}
+.seedlist label:hover{background:var(--surface-2)}
+@media(max-width:560px){.gcols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo"></div><div class="wordmark">MATCHFLOW<b> OS</b></div>
+  <span class="chip">Групповой этап</span>
+  <span class="sp"></span>
+  <a class="lnk" href="/obs.html" target="_blank" rel="noopener">overlay для OBS ↗</a>
+  <span class="sync off" id="sync"><i></i><span id="sync-t">подключение…</span></span>
+  <button class="btn sm" id="judgeb" type="button">Судейская</button>
+</header>
+<div class="wrap" id="view"><div class="empty">Загрузка…</div></div>
+
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="modal" role="dialog"><h3 id="md-t"></h3><div class="mb" id="md-b"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="/lib/groups.js"></script>
+<script src="/lib/mf-api.js"></script>
+<script>
+'use strict';
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var G = window.MFGroups, Api = window.MFApi;
+
+/* ---------- состояние страницы ---------- */
+var ST = null;          /* всё состояние турнира */
+var REV = -1;           /* ревизия, от которой отталкиваемся */
+var PIN = sessionStorage.getItem('mfos-pin') || '';
+var ADMIN = false;      /* pin подтверждён */
+var stopPoll = null;
+var pushT = null;
+var SYNC = 'off';
+
+/* ---------- утиль ---------- */
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function toast(t){ var n=$('#toast'); n.textContent=t; n.classList.add('on'); clearTimeout(n._t); n._t=setTimeout(function(){n.classList.remove('on');},2400); }
+function P(id){ return (ST&&ST.players||[]).find(function(p){return p.id===id;})||null; }
+function short(name){ var pr=String(name||'').trim().split(/\s+/); return pr.length>1?pr[0]+' '+pr[1][0]+'.':name; }
+function initials(name){ var pr=String(name||'').trim().split(/\s+/); return ((pr[0]||'')[0]||'')+((pr[1]||'')[0]||''); }
+function cats(){ return (ST&&ST.cats)||[]; }
+function catOf(p){ var c=cats(); return c[(p&&p.cat)|0]||{c:'#9BB4C7'}; }
+/* утверждённые игроки текущего турнира: поддерживаем обе формы состояния */
+function approved(){
+  var ps=(ST&&ST.players)||[];
+  if(ST&&Array.isArray(ST.tours)){
+    var t=ST.tours.find(function(x){return x.id===ST.cur;})||ST.tours[0];
+    var entry={};
+    if(t&&Array.isArray(t.entries))t.entries.forEach(function(e){if(e.st==='ok')entry[e.p]=true;});
+    var list=ps.filter(function(p){return entry[p.id];});
+    if(list.length)return list;
+  }
+  var ok=ps.filter(function(p){return p.st==='ok';});
+  return ok.length?ok:ps.slice();
+}
+function ratingOf(p){ return (p&&(p.r||0))|0; }
+
+function setSync(v,txt){ SYNC=v; var n=$('#sync'); n.className='sync '+v; $('#sync-t').textContent=txt||({ok:'синхронно',saving:'сохраняю…',ro:'только просмотр',off:'нет связи'}[v]||v); }
+
+/* стадия групп внутри состояния */
+function stage(){ return ST && ST.groups ? ST.groups : null; }
+
+/* ---------- загрузка / синхронизация ---------- */
+async function boot(){
+  try{
+    var d=await Api.read(PIN);
+    apply(d, true);
+    if(PIN){ ADMIN=await Api.checkPin(PIN).catch(function(){return false;}); }
+    setSync(ADMIN?'ok':'ro', ADMIN?'синхронно':'только просмотр');
+    render();
+    startPoll();
+  }catch(e){
+    setSync('off','бэкенд не отвечает');
+    $('#view').innerHTML='<div class="card"><div class="empty">Не удалось связаться с сервером.<br><span class="dim">Проверь, что задан MONGODB_URI и /api/state отвечает. Подробности в README.</span></div></div>';
+  }
+}
+function apply(d, force){
+  if(!d||typeof d.rev!=='number')return;
+  if(!force && d.rev<=REV)return;
+  if(d.state){ ST=d.state; REV=d.rev; }
+  else if(typeof d.rev==='number'){ REV=d.rev; }
+}
+function startPoll(){
+  if(stopPoll)stopPoll();
+  stopPoll=Api.poll(function(d){
+    /* чужое изменение прилетело — обновляем, если сейчас не редактируем счёт руками */
+    apply(d,true);
+    if(ADMIN)ADMIN=true;
+    render();
+  },{ interval:2500, rev:REV, pin:PIN, onError:function(){ setSync('off','нет связи'); } });
+}
+
+/* отложенная запись: оптимистично меняем ST, через 700мс пушим */
+function save(){
+  if(!ADMIN){ toast('Нужен код судьи для изменений'); return; }
+  setSync('saving');
+  clearTimeout(pushT);
+  pushT=setTimeout(push,700);
+}
+async function push(){
+  if(stopPoll){ stopPoll(); stopPoll=null; }        /* не воюем сами с собой во время записи */
+  try{
+    var r=await Api.write(PIN, REV, ST);
+    if(r.ok){ REV=r.rev; setSync('ok'); }
+    else if(r.conflict){
+      /* кто-то записал раньше — берём свежее и переигрываем свою правку поверх нельзя,
+         поэтому мягко: подхватываем чужое и просим повторить, если затёрлось */
+      if(r.state){ ST=r.state; REV=r.rev; }
+      setSync('ok'); toast('Обновлено с сервера — проверь счёт'); render();
+    }else{
+      setSync('ro', r.reason==='pin'?'код отклонён':'только просмотр');
+      toast(r.reason==='rate'?('Слишком часто, подожди '+(r.retry||10)+'с'):'Нет прав на запись');
+    }
+  }catch(e){ setSync('off','нет связи'); toast('Сеть недоступна'); }
+  startPoll();
+}
+
+/* ---------- судейская ---------- */
+function judgeModal(){
+  if(ADMIN){ ADMIN=false; PIN=''; sessionStorage.removeItem('mfos-pin'); setSync('ro','только просмотр'); toast('Режим судьи выключен'); render(); return; }
+  modal('Вход в судейскую',
+    '<div class="note" style="margin-bottom:12px">Код судьи — тот же, что и в основной сетке.</div>'+
+    '<div class="fld"><label>Код судьи</label><input class="inp" id="pin" inputmode="numeric" placeholder="••••" autocomplete="off"></div>'+
+    '<div class="row" style="gap:8px;margin-top:14px;justify-content:flex-end"><button class="btn" data-x type="button">Отмена</button><button class="btn core" id="pin-go" type="button">Войти</button></div>');
+  setTimeout(function(){ var n=$('#pin'); if(n){ n.focus(); n.onkeydown=function(e){ if(e.key==='Enter')tryPin(); }; } },50);
+  $('#pin-go').onclick=tryPin;
+}
+async function tryPin(){
+  var v=($('#pin').value||'').trim();
+  if(!v)return;
+  var ok=await Api.checkPin(v).catch(function(){return false;});
+  if(!ok){ toast('Неверный код'); return; }
+  PIN=v; ADMIN=true; sessionStorage.setItem('mfos-pin',v);
+  closeModal(); setSync('ok','синхронно'); toast('Режим судьи включён'); render();
+}
+
+/* ---------- модалка ---------- */
+function modal(title,bodyHtml){ $('#md-t').textContent=title; $('#md-b').innerHTML=bodyHtml; $('#modal').classList.add('on'); $('#scrim').classList.add('on'); }
+function closeModal(){ $('#modal').classList.remove('on'); $('#scrim').classList.remove('on'); }
+
+/* ---------- создание этапа ---------- */
+function createModal(){
+  var pool=approved();
+  if(pool.length<3){ toast('Нужно хотя бы 3 подтверждённых игрока'); return; }
+  modal('Сформировать группы',
+    '<div class="note" style="margin-bottom:14px">'+pool.length+' игроков в составе. Раскидаю змейкой по рейтингу, чтобы группы были ровными. Потом состав любой группы можно поправить вручную.</div>'+
+    '<div class="f2" style="margin-bottom:12px">'+
+     '<div class="fld"><label>Человек в группе</label><select class="inp" id="o-size"><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option></select></div>'+
+     '<div class="fld"><label>Проходят дальше</label><select class="inp" id="o-adv"><option value="1">1 из группы</option><option value="2" selected>2 из группы</option><option value="3">3 из группы</option><option value="4">4 из группы</option></select></div>'+
+    '</div>'+
+    '<div class="fld" style="margin-bottom:14px"><label>Матч идёт</label><select class="inp" id="o-race"><option value="0" selected>до разницы (один сет)</option><option value="2">до 2 побед</option><option value="3">до 3 побед</option><option value="4">до 4 побед</option><option value="5">до 5 побед</option></select></div>'+
+    '<div class="row" style="gap:8px;justify-content:flex-end"><button class="btn" data-x type="button">Отмена</button><button class="btn pri" id="mk-go" type="button">Создать</button></div>');
+  $('#mk-go').onclick=function(){
+    var opts={ size:+$('#o-size').value, advance:+$('#o-adv').value, race:+$('#o-race').value, seedBy:ratingOf };
+    ST.groups=G.makeStage(pool.map(function(p){return p.id;}),opts);
+    closeModal(); save(); render(); toast('Группы сформированы');
+  };
+}
+function resetStage(){
+  modal('Сбросить групповой этап','<div class="note" style="margin-bottom:14px">Все группы, пары и счёт будут удалены. Игроки и их статусы останутся.</div>'+
+    '<div class="row" style="gap:8px;justify-content:flex-end"><button class="btn" data-x type="button">Отмена</button><button class="btn bad" id="rs-go" type="button">Сбросить</button></div>');
+  $('#rs-go').onclick=function(){ ST.groups=null; closeModal(); save(); render(); toast('Этап сброшен'); };
+}
+
+/* ---------- счёт матча ---------- */
+function bump(gid,mi,side,delta){
+  var s=stage(); var g=G.findGroup(s,gid); if(!g)return;
+  var m=g.matches[mi]; if(!m||m.done)return;
+  var cap=s.race>0?s.race:99;
+  if(side==='a')m.sa=Math.max(0,Math.min(cap,(m.sa|0)+delta)); else m.sb=Math.max(0,Math.min(cap,(m.sb|0)+delta));
+  save(); render();
+}
+function finishMatch(gid,mi){
+  var s=stage(); var g=G.findGroup(s,gid); if(!g)return;
+  var m=g.matches[mi]; if(!m)return;
+  if(!G.matchReady(s,m)){ toast(s.race>0?('Счёт до '+s.race):'Нужен разный счёт'); return; }
+  m.done=true; save(); render();
+}
+function reopenMatch(gid,mi){
+  var s=stage(); var g=G.findGroup(s,gid); if(!g)return;
+  var m=g.matches[mi]; if(!m)return; m.done=false; save(); render();
+}
+/* пометить матч «на табло» для overlay */
+function toAir(gid,mi){
+  var s=stage(); if(!s)return;
+  if(s.live&&s.live.g===gid&&s.live.i===mi){ s.live=null; toast('Снято с табло'); }
+  else { s.live={g:gid,i:mi}; toast('Выведено на табло OBS'); }
+  save(); render();
+}
+
+/* ---------- рендер ---------- */
+function pavatar(p){ var c=catOf(p).c; return '<span class="av" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+esc(initials(p.name))+'</span>'; }
+
+function render(){
+  $('#judgeb').textContent=ADMIN?'Выйти':'Судейская';
+  $('#judgeb').className='btn sm'+(ADMIN?' core':'');
+  var s=stage();
+  if(!s||!Array.isArray(s.groups)||!s.groups.length){
+    $('#view').innerHTML=
+      '<div class="card"><div class="card-h"><span class="h-sec">Групповой этап</span></div>'+
+      '<div class="card-b"><div class="empty" style="padding:48px 20px">'+
+      'Групповой этап ещё не создан.'+(ADMIN?'':'<br><span class="dim">Войди в судейскую, чтобы сформировать группы.</span>')+'</div>'+
+      (ADMIN?'<div class="row" style="justify-content:center"><button class="btn pri" id="mk" type="button">Сформировать группы</button></div>':'')+
+      '</div></div>';
+    if($('#mk'))$('#mk').onclick=createModal;
+    return;
+  }
+  var allDone=G.stageFinished(s);
+  var head=
+    '<div class="row wr" style="margin-bottom:16px;gap:12px">'+
+      '<div><div class="h-sec">Групповой этап</div><h1 class="h-page" style="margin-top:5px">'+s.groups.length+' групп · проходят по '+s.advance+'</h1></div>'+
+      '<span class="sp"></span>'+
+      (allDone?'<span class="chip ok"><span class="dot"></span>этап сыгран</span>':'<span class="chip live"><span class="dot"></span>идёт</span>')+
+      (ADMIN?'<button class="btn sm bad" id="reset" type="button">Сбросить этап</button>':'')+
+    '</div>';
+
+  var cols=s.groups.map(function(g){ return groupCard(s,g); }).join('');
+  var qual=allDone?qualBlock(s):'';
+  $('#view').innerHTML=head+'<div class="gcols">'+cols+'</div>'+qual;
+
+  if($('#reset'))$('#reset').onclick=resetStage;
+  bindActions();
+}
+
+function groupCard(s,g){
+  var st=G.standings(s,g), prog=G.groupProgress(g);
+  var rows=st.map(function(r){
+    var p=P(r.pid)||{name:'—'};
+    return '<tr class="'+(r.adv?'qual':'')+'">'+
+      '<td class="num dim" style="width:22px">'+(r.adv?'<span style="color:var(--ok)">▸</span>':'')+'</td>'+
+      '<td><span class="pl">'+pavatar(p)+'<span class="pname">'+esc(short(p.name))+'</span></span></td>'+
+      '<td class="num" style="text-align:center;font-weight:700">'+r.w+'</td>'+
+      '<td class="num dim" style="text-align:center">'+r.l+'</td>'+
+      '<td class="num dim" style="text-align:center">'+(r.diff>0?'+':'')+r.diff+'</td>'+
+    '</tr>';
+  }).join('');
+  var matches=g.matches.map(function(m,i){ return matchRow(s,g,m,i); }).join('');
+  return '<div class="card" style="margin-bottom:0">'+
+    '<div class="card-h"><span class="h-sec">'+esc(g.name)+'</span><span class="sp"></span>'+
+      '<span class="chip">'+g.players.length+' чел.</span>'+
+      '<span class="num dim" style="font-size:11px">'+prog.done+'/'+prog.total+'</span></div>'+
+    '<div class="card-b">'+
+      '<table class="t" style="margin-bottom:12px"><thead><tr><th></th><th>Игрок</th><th style="text-align:center">В</th><th style="text-align:center">П</th><th style="text-align:center">±</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<div class="prog" style="margin-bottom:12px"><i style="width:'+(prog.total?Math.round(prog.done/prog.total*100):0)+'%"></i></div>'+
+      '<div class="h-sec" style="margin-bottom:8px">Матчи</div>'+matches+
+    '</div></div>';
+}
+
+function matchRow(s,g,m,i){
+  var pa=P(m.a)||{name:'—'}, pb=P(m.b)||{name:'—'};
+  var w=G.matchWinner(s,m);
+  var onair=s.live&&s.live.g===g.id&&s.live.i===i;
+  var scoreA, scoreB;
+  if(ADMIN&&!m.done){
+    scoreA='<div class="scbox"><button class="sbtn" data-act="dec" data-g="'+g.id+'" data-i="'+i+'" data-s="a" type="button">−</button><span class="sc">'+(m.sa|0)+'</span><button class="sbtn" data-act="inc" data-g="'+g.id+'" data-i="'+i+'" data-s="a" type="button">+</button></div>';
+    scoreB='<div class="scbox"><button class="sbtn" data-act="dec" data-g="'+g.id+'" data-i="'+i+'" data-s="b" type="button">−</button><span class="sc">'+(m.sb|0)+'</span><button class="sbtn" data-act="inc" data-g="'+g.id+'" data-i="'+i+'" data-s="b" type="button">+</button></div>';
+  }else{
+    scoreA='<span class="sc">'+(m.done?(m.sa|0):'–')+'</span>';
+    scoreB='<span class="sc">'+(m.done?(m.sb|0):'–')+'</span>';
+  }
+  var ctrl='';
+  if(ADMIN){
+    ctrl='<div class="row" style="gap:6px;margin-top:7px;justify-content:flex-end">'+
+      '<button class="btn sm '+(onair?'core':'ghost')+'" data-act="air" data-g="'+g.id+'" data-i="'+i+'" type="button">'+(onair?'● на табло':'на табло')+'</button>'+
+      (m.done
+        ?'<button class="btn sm" data-act="reopen" data-g="'+g.id+'" data-i="'+i+'" type="button">вернуть</button>'
+        :'<button class="btn sm '+(G.matchReady(s,m)?'gold':'')+'" data-act="fin" data-g="'+g.id+'" data-i="'+i+'" type="button"'+(G.matchReady(s,m)?'':' disabled')+'>готово</button>')+
+    '</div>';
+  }
+  return '<div class="mtrow '+(m.done?'done':'')+' '+(onair?'onair':'')+'">'+
+    '<div class="mt-side"><span class="mt-nm '+(w===m.a?'win':'')+'">'+esc(short(pa.name))+'</span></div>'+
+    scoreA+'<span class="vs">:</span>'+scoreB+
+    '<div class="mt-side r"><span class="mt-nm '+(w===m.b?'win':'')+'">'+esc(short(pb.name))+'</span></div>'+
+  '</div>'+ctrl;
+}
+
+function qualBlock(s){
+  var q=G.qualifiers(s);
+  var items=q.map(function(x){ var p=P(x.pid)||{name:'—'};
+    return '<tr><td class="num dim">'+x.rank+'</td><td><span class="pl">'+pavatar(p)+'<span class="pname">'+esc(p.name)+'</span></span></td><td class="mut">'+esc(x.groupName)+'</td><td><span class="chip ok">прошёл</span></td></tr>';
+  }).join('');
+  return '<div class="card" style="margin-top:16px"><div class="card-h"><span class="h-sec">Прошли в плей-офф</span><span class="sp"></span><span class="chip gold">'+q.length+' игроков</span></div>'+
+    '<div class="card-b"><div class="note" style="margin-bottom:12px">Порядок — посев для сетки: сначала все первые места групп, затем вторые. Разводи их по верхней сетке в основном приложении.</div>'+
+    '<table class="t"><thead><tr><th>#</th><th>Игрок</th><th>Группа</th><th></th></tr></thead><tbody>'+items+'</tbody></table></div></div>';
+}
+
+/* делегирование кликов по матчам */
+function bindActions(){
+  $('#view').querySelectorAll('[data-act]').forEach(function(b){
+    b.onclick=function(){
+      var g=b.dataset.g, i=+b.dataset.i, a=b.dataset.act;
+      if(a==='inc')bump(g,i,b.dataset.s,1);
+      else if(a==='dec')bump(g,i,b.dataset.s,-1);
+      else if(a==='fin')finishMatch(g,i);
+      else if(a==='reopen')reopenMatch(g,i);
+      else if(a==='air')toAir(g,i);
+    };
+  });
+}
+
+/* ---------- глобальные обработчики ---------- */
+document.addEventListener('click',function(e){
+  var x=e.target.closest('[data-x]'); if(x){ closeModal(); return; }
+});
+$('#scrim').addEventListener('click',closeModal);
+$('#judgeb').addEventListener('click',judgeModal);
+document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeModal(); });
+
+boot();
+</script>
+</body>
+</html>
