@@ -257,6 +257,8 @@ const S={view:'tour',player:null,openM:null,hot:null,q:''};
 /* ---------- УТИЛИТЫ ---------- */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* лента: экранируем всё, оставляем только <b>/</b> как разметку — защита от stored-XSS через feed */
+const safeFeed=s=>esc(s).replace(/&lt;(\/?b)&gt;/g,'<$1>');
 const P=id=>ST.players.find(p=>p.id===id);
 const CATS=()=>ST.cats&&ST.cats.length?ST.cats:DEF_CATS;
 const catOf=p=>{const c=CATS();return c[Math.max(0,Math.min(c.length-1,p.cat|0))]};
@@ -516,7 +518,7 @@ function tbdText(id,side){
 }
 function feedHtml(n){
  if(!ST.feed.length)return '<div class="empty">Событий пока нет</div>';
- return ST.feed.slice(0,n||10).map(f=>`<div class="fi"><span class="tm">${esc(f.t)}</span><span class="tx">${f.txt}</span></div>`).join('');
+ return ST.feed.slice(0,n||10).map(f=>`<div class="fi"><span class="tm">${esc(f.t)}</span><span class="tx">${safeFeed(f.txt)}</span></div>`).join('');
 }
 function matchCard(id){
  const m=MM(id);
