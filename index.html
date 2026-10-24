@@ -546,6 +546,8 @@ ST=migrate(ST);
 /* ---------- УТИЛИТЫ ---------- */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* лента: экранируем всё, возвращаем только <b>/</b> как разметку — защита от stored-XSS через state.feed */
+const safeFeed=s=>esc(s).replace(/&lt;(\/?b)&gt;/g,'<$1>');
 const CATS=()=>ST.cats&&ST.cats.length?ST.cats:DEF_CATS;
 const catOf=p=>{const c=CATS();return c[Math.max(0,Math.min(c.length-1,(p&&p.cat)|0))]};
 const P=id=>ST.players.find(p=>p.id===id);
@@ -2805,12 +2807,17 @@ function pinForm(){
 async function tryPin(){
  const v=($('#pin').value||'').trim();
  if(!v)return;
- if(!BOOTED){                       /* иначе код проверится локально и судья войдёт «без ключа» */
+ /* ждём завершения boot: холодный Mongo поднимается дольше 5с, иначе вход уходит в локальную ветку без PIN */
+ if(!BOOTED){
   toast('Секунду, подключаюсь к серверу…');
-  for(let i=0;i<50&&!BOOTED;i++)await new Promise(r=>setTimeout(r,100));
+  for(let i=0;i<120&&!BOOTED;i++)await new Promise(r=>setTimeout(r,100));
+ }
+ if(!BOOTED){                       /* boot завис: определяем режим сами, чтобы не войти «без ключа» */
+  try{const p=await fetch('/api/state',{cache:'no-store'});if(p.ok){MODE='server';BOOTED=true}}catch(e){}
  }
  if(MODE==='server'){
   PIN=v;const r=await api('/api/state',{method:'POST',body:JSON.stringify({check:1})});
+  if(r.status===0){PIN='';return toast('Нет связи с сервером, попробуйте ещё раз')}
   if(r.status===429){PIN='';return toast('Слишком много попыток. Подождите '+Math.ceil(((r.body&&r.body.retry)||600)/60)+' мин')}
   if(!r.ok){PIN='';return toast('Неверный код')}
   sessionStorage.setItem('mfos-pin',v);
@@ -2820,7 +2827,7 @@ async function tryPin(){
  ADMIN=true;sessionStorage.setItem('mfos-adm','1');document.body.classList.add('adm');
  closeModal();toast('Режим судьи включён');render();
  if(MODE==='server'){REV=0;pull()}   /* судье сервер отдаёт полное состояние: с контактами */
- if(DIRTY){DIRTY=false;toast('Вошли — досохраняю изменения');save()}
+ if(DIRTY){DIRTY=false;toast('Вошли, досохраняю изменения');save()}
 }
 function confirmBox(title,text,fn){
  modal(title,`<div class="note">${esc(text)}</div>`,
@@ -2902,7 +2909,7 @@ function tbdText(id,side){
 function feedHtml(n){
  const f=T()?T().feed:[];
  if(!f.length)return '<div class="empty">Событий пока нет</div>';
- return f.slice(0,n||10).map(x=>`<div class="fi"><span class="tm">${esc(x.t)}</span><span class="tx">${x.txt}</span></div>`).join('');
+ return f.slice(0,n||10).map(x=>`<div class="fi"><span class="tm">${esc(x.t)}</span><span class="tx">${safeFeed(x.txt)}</span></div>`).join('');
 }
 function matchCard(id){
  const m=MM(id),r1=isSeat(id);
