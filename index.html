@@ -2659,7 +2659,10 @@ function setSync(v){SYNC=v;const n=$('#sync');if(!n)return;
 }
 function save(){
  if(MODE==='artifact'){setSync('saving');clearTimeout(pubT);pubT=setTimeout(doPublish,900);return}
- if(MODE==='server'){setSync('saving');clearTimeout(pubT);pubT=setTimeout(pushState,600);return}
+ if(MODE==='server'){
+  if(!ADMIN||!PIN){setSync('ok');return}   /* зритель не пишет в судейский /api/state: иначе 401 и ложный «код не подходит» */
+  setSync('saving');clearTimeout(pubT);pubT=setTimeout(pushState,600);return
+ }
  try{localStorage.setItem('mfos',JSON.stringify(ST))}catch(e){}
  setSync('local');
 }
@@ -2702,6 +2705,7 @@ function restoreDraft(){
 let SAVE_TRY=0,saveT=null;
 async function pushState(again){
  pubT=null;
+ if(MODE==='server'&&(!ADMIN||!PIN)){DIRTY=false;SAVE_TRY=0;clearTimeout(saveT);setSync('ok');return}   /* страховка: не-судья не пишет на сервер */
  const out=Object.assign({},ST);if(MODE==='server')delete out.pin;
  keepDraft();
  const r=await api('/api/state',{method:'POST',body:JSON.stringify({state:out,rev:REV})});
